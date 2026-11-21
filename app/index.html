@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IGNOU Doc Automation Hub - Smart Workspace</title>
+		<link rel="stylesheet" href="./css/index.css" />
+	</head>
+	<body>
+		<!-- Global Shared Application Navigation Header -->
+		<ignou-header active-page="home"></ignou-header>
+
+		<!-- Main 2-Section Clean Hub Workspace -->
+		<main class="dashboard-hub-layout">
+			<!-- ======================================================= -->
+			<!-- LEFT SECTION: Unified 2.5D Glass Info Panel             -->
+			<!-- ======================================================= -->
+			<div class="hub-left-section">
+				<div class="hub-unified-panel">
+					<!-- Part 1: High-Level Features Overview -->
+					<section class="panel-section" aria-labelledby="hubTitle">
+						<span class="hub-brand-badge">
+							<span class="live-pulse-dot" aria-hidden="true"><span class="pulse-ring"></span></span>
+							<span>SOCIS • Official Standards</span>
+						</span>
+						<h1 class="hub-main-title" id="hubTitle">IGNOU Document Automation</h1>
+						<p class="hub-tagline">
+							Fast, precision academic cover studio built specifically for IGNOU students. Generate clean, submission-ready assignment covers in seconds.
+						</p>
+
+						<ul class="hub-features-list">
+							<li class="hub-feature-item">
+								<span class="hub-feature-icon" aria-hidden="true">
+									<span class="icon-mask icon-printer"></span>
+								</span>
+								<div class="feature-text-group">
+									<span class="feature-title">1:1 Official A4 Print Accuracy</span>
+									<span class="feature-sub">Standard double-border official layouts matching university submission guidelines.</span>
+								</div>
+							</li>
+							<li class="hub-feature-item">
+								<span class="hub-feature-icon" aria-hidden="true">
+									<span class="icon-mask icon-curriculum"></span>
+								</span>
+								<div class="feature-text-group">
+									<span class="feature-title">Complete MCA_NEW Semester Curriculum</span>
+									<span class="feature-sub">All theoretical and practical lab courses pre-configured across Semesters 1 to 4.</span>
+								</div>
+							</li>
+							<li class="hub-feature-item">
+								<span class="hub-feature-icon" aria-hidden="true">
+									<span class="icon-mask icon-database-save"></span>
+								</span>
+								<div class="feature-text-group">
+									<span class="feature-title">Zero Re-typing • Local Auto-Save</span>
+									<span class="feature-sub">Enrolment number, name, and study centre details are saved privately in your browser.</span>
+								</div>
+							</li>
+							<li class="hub-feature-item">
+								<span class="hub-feature-icon" aria-hidden="true">
+									<span class="icon-mask icon-pen-tool"></span>
+								</span>
+								<div class="feature-text-group">
+									<span class="feature-title">Handwritten Pen Inks &amp; Signatures</span>
+									<span class="feature-sub">Realistic ballpoint inks (Royal Blue, Pilot Blue, Black) with transparent signature auto-crop.</span>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+					<!-- Divider -->
+					<div class="hub-panel-divider" aria-hidden="true"></div>
+
+					<!-- Part 2: Minimal Help Section -->
+					<section class="panel-section" aria-labelledby="helpTitle">
+						<h2 class="hub-help-title" id="helpTitle">
+							<span class="icon-mask icon-lightbulb" aria-hidden="true"></span>
+							<span>Quick Submission Guide</span>
+						</h2>
+						<ol class="hub-help-steps">
+							<li class="hub-help-step-item">
+								<span class="hub-help-step-num step-num-1">1</span>
+								<span>Select your current semester (e.g. Sem III) &amp; tick the courses you need covers for.</span>
+							</li>
+							<li class="hub-help-step-item">
+								<span class="hub-help-step-num step-num-2">2</span>
+								<span>Enter your Enrolment, Name, and Study Centre once — automatically remembered for future use.</span>
+							</li>
+							<li class="hub-help-step-item">
+								<span class="hub-help-step-num step-num-3">3</span>
+								<span>Click <strong>'Print All Selected Covers'</strong> to export unified, margin-free A4 PDF sheets directly.</span>
+							</li>
+						</ol>
+						<p class="hub-help-note">
+							<span>SOCIS / IGNOU Guidelines Compliant</span>
+							<span>Detailed handbook coming soon</span>
+						</p>
+					</section>
+				</div>
+			</div>
+
+			<!-- ======================================================= -->
+			<!-- RIGHT SECTION: Portrait Playing Cards Grid              -->
+			<!-- ======================================================= -->
+			<div class="hub-right-section" aria-label="Available Document Tools">
+				<!-- Tool Card 1: Assignment Front Page (Clickable Playing Card) -->
+				<a href="./ignou_assignment_front_page.html" class="portrait-tool-card" id="cardAssignmentFrontPage" title="Open Assignment Front Page Studio">
+					<div class="card-thumbnail-viewport" id="assignmentThumbnailSlot">
+						<!-- Live A4 Template rendered dynamically without rewrite -->
+					</div>
+					<div class="card-meta-bar">
+						<h2 class="card-title">Assignment Front Page</h2>
+					</div>
+				</a>
+
+				<!-- Tool Card 2: MCA Project Synopsis Kit (Upcoming) -->
+				<div class="portrait-tool-card card-upcoming" id="cardProjectSynopsis" title="MCA Project Kit (MCSP-232) - In Development">
+					<div class="card-thumbnail-viewport synopsis-thumbnail-preview">
+						<div class="proforma-mini-sheet">
+							<div class="mini-header">IGNOU / SOCIS (MCSP-232)</div>
+							<div class="mini-title">PROFORMA FOR APPROVAL</div>
+							<div class="mini-lines">
+								<div class="mini-line"></div>
+								<div class="mini-line"></div>
+								<div class="mini-line"></div>
+								<div class="mini-line"></div>
+								<div class="mini-line"></div>
+							</div>
+							<div class="mini-seal">ANNEXURE II</div>
+						</div>
+					</div>
+					<div class="card-meta-bar">
+						<h2 class="card-title">Project Synopsis</h2>
+						<span class="card-sub-badge">Soon</span>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Global Shared Application Footer -->
+		<ignou-footer></ignou-footer>
+
+		<!-- Module Scripts -->
+		<script type="module" src="./js/shared/header.component.js"></script>
+		<script type="module" src="./js/shared/footer.component.js"></script>
+		<script type="module" src="./js/dashboard/dashboard.js"></script>
+	</body>
+</html>

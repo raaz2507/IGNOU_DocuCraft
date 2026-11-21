@@ -1,0 +1,131 @@
+/* ============================================================= */
+/* LAYER: GLOBAL FLOATING 2.5D GLASS FOOTER (SRP ARCHITECTURE)   */
+/* Single Responsibility: Footer branding, credits & disclaimer   */
+/* ============================================================= */
+@layer components {
+	ignou-footer {
+		display: block;
+		width: 100%;
+		margin-top: auto;
+		padding: var(--space-xs) var(--space-xl) var(--space-md) var(--space-xl);
+		box-sizing: border-box;
+	}
+
+	.app-global-footer {
+		max-width: 1380px;
+		margin: 0 auto;
+		background: var(--glass-bg);
+		backdrop-filter: var(--glass-blur);
+		-webkit-backdrop-filter: var(--glass-blur);
+		border: 1px solid var(--glass-border);
+		border-radius: var(--radius-2xl);
+		box-shadow: var(--glass-25d-shadow);
+		padding: var(--space-sm) var(--space-2xl);
+		font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+		color: var(--text-muted);
+		font-size: var(--font-size-xs);
+		transition:
+			background var(--transition-smooth),
+			border-color var(--transition-smooth),
+			box-shadow var(--transition-smooth);
+
+		& .footer-inner {
+			max-width: 1380px;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: var(--space-lg);
+		}
+
+		& .footer-col-info {
+			max-width: 750px;
+
+			& .footer-disclaimer {
+				margin: 0 0 var(--space-xs) 0;
+				line-height: 1.45;
+			}
+
+			& .footer-copy {
+				margin: 0;
+				font-size: var(--font-size-xs);
+				opacity: 0.8;
+			}
+		}
+
+		& .footer-col-badges {
+			display: flex;
+			gap: var(--space-sm);
+			flex-wrap: wrap;
+
+			& .tech-badge {
+				background: var(--btn-secondary-bg);
+				border: 1px solid var(--btn-secondary-border);
+				padding: var(--space-xs) var(--space-md);
+				border-radius: var(--radius-sm);
+				font-size: var(--font-size-xs);
+				font-weight: var(--weight-semibold);
+				color: var(--text-muted);
+			}
+		}
+
+		/* Full-Length Dedicated Developer Credit Strip */
+		& .footer-credit-strip {
+			width: 100%;
+			text-align: center;
+			border-top: 1px solid var(--panel-divider);
+			padding-top: var(--space-xs);
+			margin-top: var(--space-xs);
+			font-size: var(--font-size-xs);
+			color: var(--text-muted);
+			letter-spacing: 0.3px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: var(--space-xs);
+
+			& strong {
+				color: var(--brand-primary);
+				font-weight: var(--weight-extrabold);
+			}
+
+			& .heart-pulse-emoji {
+				display: inline-block;
+				animation: heartPulseBeating 1.25s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+				transform-origin: center;
+				font-size: 13px;
+			}
+		}
+	}
+
+	@keyframes heartPulseBeating {
+		0% {
+			transform: scale(1);
+		}
+		14% {
+			transform: scale(1.3);
+		}
+		28% {
+			transform: scale(1);
+		}
+		42% {
+			transform: scale(1.22);
+		}
+		70% {
+			transform: scale(1);
+		}
+	}
+}
+
+/* Responsive Footer adjustments */
+@media screen and (max-width: 880px) {
+	ignou-footer {
+		padding: var(--space-md) var(--space-xs) var(--space-lg) var(--space-xs);
+	}
+
+	.app-global-footer .footer-inner {
+		flex-direction: column;
+		text-align: center;
+	}
+}

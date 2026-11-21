@@ -1,0 +1,720 @@
+/* ============================================================= */
+/* LAYER 3 (PART C): FRONT PAGE TEMPLATE DESIGNS (1 to 4)        */
+/* ============================================================= */
+@layer components {
+	/* ========================================================= */
+	/* TEMPLATE 1: CLASSIC IGNOU OFFICIAL (DOUBLE BORDER)        */
+	/* ========================================================= */
+	.tpl-classic {
+		padding: 10mm;
+
+		& .outer-border {
+			width: 100%;
+			height: 100%;
+			border: var(--sheet-outer-border);
+			padding: 3.5mm;
+			position: relative;
+		}
+
+		& .inner-border {
+			width: 100%;
+			height: 100%;
+			border: var(--sheet-inner-border);
+			padding: 10mm 14mm 10mm 14mm;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		& .header-logo-section {
+			text-align: center;
+			margin-top: 3mm;
+			margin-bottom: 6mm;
+
+			& img {
+				width: 285px;
+				max-width: 82%;
+				height: auto;
+				display: inline-block;
+			}
+		}
+
+		& .form-content {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+
+			& .student-profile-section {
+				align-self: flex-end;
+				width: 58%;
+				margin-top: 4mm;
+				margin-bottom: 11mm;
+			}
+
+			& .course-details-section {
+				width: 100%;
+				margin-bottom: 8mm;
+			}
+		}
+
+		& .form-row {
+			display: flex;
+			align-items: baseline;
+			margin-bottom: 6.8mm;
+			font-size: var(--current-label-font-size);
+			line-height: 1.15;
+			position: relative;
+
+			& .form-label {
+				font-weight: 700;
+				color: var(--sheet-label-color);
+				white-space: nowrap;
+				letter-spacing: var(--current-label-letter-spacing);
+				padding-right: 8px;
+				text-transform: uppercase;
+			}
+
+			& .line-wrapper {
+				flex: 1;
+				position: relative;
+				display: flex;
+				align-items: baseline;
+
+				& .dotted-line {
+					width: 100%;
+					border-bottom: var(--sheet-dotted-line);
+					height: 14px;
+					min-height: 14px;
+					margin-bottom: 1px;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 2.5px;
+					left: 6px;
+					font-size: 19px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+			}
+		}
+
+		& .continuation-row {
+			margin-bottom: 6.8mm;
+			display: flex;
+
+			& .line-wrapper {
+				flex: 1;
+				position: relative;
+				display: flex;
+				align-items: baseline;
+
+				& .continuation-dotted-line {
+					width: 100%;
+					border-bottom: var(--sheet-dotted-line);
+					height: 14px;
+					margin-bottom: 1px;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 2.5px;
+					left: 6px;
+					font-size: 19px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+			}
+		}
+
+		& .footer-section {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			padding-top: 4mm;
+			padding-bottom: 2mm;
+			font-size: var(--current-label-font-size);
+
+			& .footer-col-left {
+				display: flex;
+				align-items: baseline;
+				width: 40%;
+				position: relative;
+			}
+
+			& .footer-col-right {
+				display: flex;
+				align-items: baseline;
+				width: 48%;
+				position: relative;
+			}
+
+			& .form-label {
+				font-weight: 700;
+				color: var(--sheet-label-color);
+				white-space: nowrap;
+				letter-spacing: var(--current-label-letter-spacing);
+				padding-right: 8px;
+				text-transform: uppercase;
+			}
+
+			& .line-wrapper {
+				flex: 1;
+				position: relative;
+				display: flex;
+				align-items: baseline;
+
+				& .dotted-line {
+					width: 100%;
+					border-bottom: var(--sheet-dotted-line);
+					height: 14px;
+					min-height: 14px;
+					margin-bottom: 1px;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 2.5px;
+					left: 6px;
+					font-size: 19px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+
+	/* ========================================================= */
+	/* TEMPLATE 2: MODERN MINIMALIST GRID                        */
+	/* ========================================================= */
+	.tpl-modern {
+		padding: 12mm 14mm;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border: 2.2px solid #003366;
+
+		& .modern-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 2px solid #003366;
+			padding-bottom: 12px;
+			margin-bottom: 14px;
+
+			& .modern-logo {
+				width: 180px;
+				height: auto;
+			}
+
+			& .modern-title-group {
+				text-align: right;
+
+				& h1 {
+					margin: 0;
+					font-size: 16px;
+					color: #003366;
+					font-weight: 800;
+					letter-spacing: 0.8px;
+					text-transform: uppercase;
+				}
+				& p {
+					margin: 2px 0 0 0;
+					font-size: 11.5px;
+					color: #475569;
+					font-weight: 600;
+				}
+				& .modern-session-tag {
+					display: inline-block;
+					margin-top: 4px;
+					font-size: 10px;
+					font-weight: 700;
+					background: #003366;
+					color: #ffffff;
+					padding: 2px 8px;
+					border-radius: 4px;
+					letter-spacing: 0.5px;
+				}
+			}
+		}
+
+		& .modern-section {
+			margin-bottom: 14px;
+
+			& .modern-sec-heading {
+				font-size: 11.5px;
+				font-weight: 800;
+				text-transform: uppercase;
+				color: #003366;
+				letter-spacing: 0.8px;
+				border-bottom: 1.5px solid #cbd5e1;
+				padding-bottom: 3px;
+				margin-bottom: 8px;
+			}
+
+			& .modern-grid-2col {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 8px 14px;
+			}
+
+			& .modern-field-cell {
+				border: 1px solid #cbd5e1;
+				border-radius: 4px;
+				padding: 6px 10px;
+				position: relative;
+				min-height: 44px;
+				background: #fafafa;
+
+				&.cell-full {
+					grid-column: span 2;
+				}
+
+				& .modern-cell-label {
+					font-size: 9.5px;
+					font-weight: 700;
+					color: #64748b;
+					text-transform: uppercase;
+					letter-spacing: 0.5px;
+					display: block;
+				}
+
+				& .ink-text {
+					display: block;
+					font-size: 18px;
+					line-height: 1.2;
+					margin-top: 2px;
+				}
+			}
+		}
+
+		& .modern-decl-box {
+			font-size: 10.5px;
+			color: #475569;
+			background: #f8fafc;
+			border: 1px dashed #cbd5e1;
+			padding: 8px 12px;
+			border-radius: 4px;
+			margin-bottom: 14px;
+			line-height: 1.4;
+		}
+
+		& .modern-footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			border-top: 1.5px solid #003366;
+			padding-top: 10px;
+
+			& .modern-footer-item {
+				width: 44%;
+				position: relative;
+
+				& .modern-sig-label {
+					font-size: 10.5px;
+					font-weight: 700;
+					color: #1e293b;
+					text-transform: uppercase;
+					margin-bottom: 4px;
+					display: block;
+				}
+
+				& .modern-sig-line {
+					border-bottom: 1.5px solid #334155;
+					min-height: 38px;
+					position: relative;
+					display: flex;
+					align-items: flex-end;
+
+					& .ink-text {
+						font-size: 19px;
+						padding-bottom: 2px;
+					}
+				}
+			}
+		}
+	}
+
+	/* ========================================================= */
+	/* TEMPLATE 3: BILINGUAL UNIVERSITY GAZETTE (WITH MARKS TABLE)*/
+	/* ========================================================= */
+	.tpl-gazette {
+		padding: 10mm 12mm;
+		border: 3px double #111111;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		& .gazette-header {
+			text-align: center;
+			border-bottom: 2px solid #111111;
+			padding-bottom: 8px;
+			margin-bottom: 10px;
+
+			& .gazette-hindi-title {
+				font-family: "Tiro Devanagari Hindi", serif;
+				font-size: 17.5px;
+				font-weight: 700;
+				color: #111111;
+				margin: 0;
+				line-height: 1.25;
+			}
+
+			& .gazette-eng-title {
+				font-size: 14.5px;
+				font-weight: 800;
+				letter-spacing: 1.2px;
+				text-transform: uppercase;
+				margin: 2px 0 0 0;
+				color: #111111;
+			}
+
+			& .gazette-address {
+				font-size: 10px;
+				letter-spacing: 0.8px;
+				margin: 2px 0 6px 0;
+				color: #333333;
+			}
+
+			& .gazette-logo {
+				width: 140px;
+				height: auto;
+				display: block;
+				margin: 4px auto 6px auto;
+			}
+
+			& .gazette-banner {
+				display: inline-block;
+				border: 1.5px solid #111111;
+				padding: 3px 18px;
+				font-size: 11.5px;
+				font-weight: 800;
+				letter-spacing: 1.2px;
+				text-transform: uppercase;
+				background: #f3f4f6;
+			}
+		}
+
+		& .gazette-info-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 10px;
+
+			& td {
+				border: 1px solid #444444;
+				padding: 4px 8px;
+				font-size: 11.5px;
+				vertical-align: middle;
+
+				&.cell-label {
+					font-weight: 700;
+					width: 25%;
+					background: #f9fafb;
+					color: #111111;
+					text-transform: uppercase;
+					letter-spacing: 0.4px;
+				}
+
+				&.cell-value {
+					width: 25%;
+					position: relative;
+
+					& .ink-text {
+						font-size: 17.5px;
+						line-height: 1;
+					}
+				}
+			}
+		}
+
+		& .gazette-marks-section {
+			margin-bottom: 10px;
+
+			& .marks-heading {
+				font-size: 10.5px;
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 0.8px;
+				color: #111111;
+				margin-bottom: 4px;
+				text-align: center;
+			}
+
+			& .marks-table {
+				width: 100%;
+				border-collapse: collapse;
+
+				& th,
+				& td {
+					border: 1.2px solid #222222;
+					padding: 4px 6px;
+					text-align: center;
+					font-size: 10.5px;
+				}
+
+				& th {
+					background: #f3f4f6;
+					font-weight: 700;
+				}
+
+				& .evaluator-row td {
+					padding: 8px 6px;
+					font-weight: 600;
+
+					&.evaluator-remarks-cell {
+						text-align: left;
+						padding-left: 10px;
+					}
+
+					&.evaluator-sig-cell {
+						text-align: right;
+						padding-right: 10px;
+					}
+				}
+			}
+		}
+
+		& .gazette-footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			border-top: 1.5px solid #111111;
+			padding-top: 8px;
+
+			& .gazette-footer-col {
+				width: 44%;
+				position: relative;
+
+				& .col-label {
+					font-size: 10.5px;
+					font-weight: 700;
+					display: block;
+					margin-bottom: 4px;
+					text-transform: uppercase;
+				}
+
+				& .sig-dash-line {
+					border-bottom: 1.5px dotted #111111;
+					min-height: 38px;
+					position: relative;
+					display: flex;
+					align-items: flex-end;
+
+					& .ink-text {
+						font-size: 18px;
+						padding-bottom: 2px;
+					}
+				}
+			}
+		}
+	}
+
+	/* ========================================================= */
+	/* TEMPLATE 4: EXECUTIVE LAB PORTFOLIO (WITH ACCENT BAR)     */
+	/* ========================================================= */
+	.tpl-portfolio {
+		display: flex;
+		height: 100%;
+
+		& .portfolio-accent-bar {
+			width: 14mm;
+			background: #003366;
+			color: #ffffff;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20mm 0;
+			flex-shrink: 0;
+
+			& .accent-strip-text {
+				writing-mode: vertical-rl;
+				transform: rotate(180deg);
+				font-size: 11px;
+				font-weight: 800;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				opacity: 0.9;
+			}
+
+			& .accent-dots {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+
+				& span {
+					width: 6px;
+					height: 6px;
+					border-radius: 50%;
+					background: rgba(255, 255, 255, 0.6);
+				}
+			}
+		}
+
+		& .portfolio-content-area {
+			flex-grow: 1;
+			padding: 10mm 14mm;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			& .portfolio-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border-bottom: 2px solid #003366;
+				padding-bottom: 10px;
+				margin-bottom: 14px;
+
+				& .portfolio-logo {
+					width: 200px;
+					height: auto;
+				}
+
+				& .portfolio-dept-info {
+					text-align: right;
+
+					& .dept-name {
+						font-size: 11px;
+						font-weight: 800;
+						color: #003366;
+						text-transform: uppercase;
+						margin: 0;
+					}
+
+					& .lab-report-badge {
+						display: inline-block;
+						background: #e0f2fe;
+						color: #0369a1;
+						font-size: 9.5px;
+						font-weight: 700;
+						padding: 2px 8px;
+						border-radius: 4px;
+						margin-top: 4px;
+						text-transform: uppercase;
+						letter-spacing: 0.5px;
+					}
+				}
+			}
+
+			& .portfolio-card {
+				border: 1px solid #cbd5e1;
+				border-left: 3.5px solid #003366;
+				border-radius: 4px;
+				padding: 10px 14px;
+				margin-bottom: 12px;
+				background: #f8fafc;
+
+				& .portfolio-card-title {
+					font-size: 11px;
+					font-weight: 800;
+					color: #003366;
+					text-transform: uppercase;
+					letter-spacing: 0.5px;
+					margin-bottom: 8px;
+					display: block;
+				}
+
+				& .portfolio-row {
+					display: flex;
+					align-items: baseline;
+					margin-bottom: 6px;
+					font-size: 12px;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+
+					& .p-label {
+						width: 140px;
+						font-weight: 700;
+						color: #475569;
+						text-transform: uppercase;
+						font-size: 11px;
+						flex-shrink: 0;
+					}
+
+					& .p-val-wrapper {
+						flex: 1;
+						position: relative;
+
+						& .ink-text {
+							font-size: 18px;
+							line-height: 1;
+						}
+					}
+				}
+			}
+
+			& .portfolio-bottom-row {
+				display: grid;
+				grid-template-columns: 1.1fr 1fr;
+				gap: 14px;
+				border-top: 1.5px solid #003366;
+				padding-top: 10px;
+
+				& .portfolio-sig-col {
+					position: relative;
+
+					& .p-sig-title {
+						font-size: 10.5px;
+						font-weight: 700;
+						text-transform: uppercase;
+						color: #1e293b;
+						margin-bottom: 4px;
+						display: block;
+					}
+
+					& .p-sig-box {
+						border-bottom: 1.5px solid #334155;
+						min-height: 38px;
+						position: relative;
+						display: flex;
+						align-items: flex-end;
+
+						&:first-of-type {
+							margin-bottom: 8px;
+						}
+
+						& .ink-text {
+							font-size: 18px;
+							padding-bottom: 2px;
+						}
+					}
+				}
+
+				& .portfolio-stamp-col {
+					border: 1.5px dashed #64748b;
+					border-radius: 4px;
+					padding: 8px 10px;
+					background: #ffffff;
+					text-align: center;
+
+					& .stamp-header {
+						font-size: 9px;
+						font-weight: 800;
+						color: #475569;
+						text-transform: uppercase;
+						letter-spacing: 0.5px;
+					}
+
+					& .stamp-body {
+						height: 32px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						font-size: 9.5px;
+						color: #94a3b8;
+						font-style: italic;
+					}
+
+					& .stamp-footer {
+						font-size: 8.5px;
+						font-weight: 600;
+						color: #64748b;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,55 @@
+/* ============================================================= */
+/* LAYER: IGNOU PHYSICAL A4 PRINT SHEET (SRP ARCHITECTURE)       */
+/* Single Responsibility: 1:1 A4 Sheet, Inks & Signatures        */
+/* ============================================================= */
+@layer components {
+	/* Physical Printable Sheet (Dimensions Driven by Token) */
+	.page-sheet {
+		width: var(--page-width);
+		height: var(--page-height);
+		background: var(--sheet-bg);
+		position: relative;
+		box-shadow: var(--sheet-shadow);
+		flex-shrink: 0;
+		page-break-after: always;
+		break-after: page;
+		font-family: var(--current-template-font);
+		transform-origin: top center;
+		transform: scale(var(--preview-scale));
+		transition:
+			box-shadow 0.25s ease,
+			transform 0.2s ease;
+
+		&:last-child {
+			page-break-after: auto;
+			break-after: auto;
+		}
+
+		/* Shared Pen Ink Handwritten Text */
+		& .ink-text {
+			color: var(--current-ink-color);
+			font-family: var(--current-hand-font);
+			letter-spacing: 0.2px;
+			text-shadow: 0.2px 0.2px 0.5px rgba(0, 56, 168, 0.25);
+		}
+
+		/* Uploaded Signature Ink Image: Scales dynamically via multiplier */
+		& .ink-signature-img {
+			position: absolute;
+			bottom: 2px;
+			left: 8px;
+			height: calc(36px * var(--sig-scale));
+			max-height: calc(56px * var(--sig-scale));
+			max-width: calc(180px * var(--sig-scale));
+			width: auto;
+			object-fit: contain;
+			pointer-events: none;
+			display: none;
+			transform-origin: bottom left;
+		}
+
+		&.has-signature .ink-signature-img {
+			display: block;
+		}
+	}
+}

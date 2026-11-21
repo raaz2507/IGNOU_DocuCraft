@@ -1,0 +1,60 @@
+/* ============================================================= */
+/* LAYER 4: PRINT MEDIA STYLES                                   */
+/* ============================================================= */
+@layer print {
+	@media print {
+		body {
+			background: transparent !important;
+			padding: 0 !important;
+			margin: 0 !important;
+			display: block !important;
+		}
+
+		body::before {
+			display: none !important;
+		}
+
+		/* Hide global navigation, footer and controls during print */
+		ignou-header,
+		ignou-footer,
+		.control-panel,
+		.mobile-view-toggle-bar,
+		.mobile-page-pagination {
+			display: none !important;
+		}
+
+		.app-workspace {
+			display: block !important;
+			padding: 0 !important;
+			margin: 0 !important;
+		}
+
+		.pages-container {
+			gap: 0 !important;
+			display: block !important;
+			width: 100% !important;
+		}
+
+		.page-viewport-scaler {
+			height: auto !important;
+			margin: 0 !important;
+			overflow: visible !important;
+			display: block !important;
+		}
+
+		.page-sheet {
+			box-shadow: none !important;
+			margin: 0 !important;
+			transform: none !important;
+			width: var(--page-width) !important;
+			height: var(--page-height) !important;
+			page-break-after: always !important;
+			break-after: page !important;
+		}
+
+		.page-sheet:last-child {
+			page-break-after: auto !important;
+			break-after: auto !important;
+		}
+	}
+}

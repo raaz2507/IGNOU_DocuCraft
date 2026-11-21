@@ -1,0 +1,60 @@
+/* ============================================================= */
+/* LAYER: SHARED SVG MASK ICON SYSTEM (SRP & DRY ARCHITECTURE)   */
+/* Reusable across all pages, components, and tools              */
+/* ============================================================= */
+@layer components {
+	.icon-mask {
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		background-color: currentColor;
+		mask-size: contain;
+		-webkit-mask-size: contain;
+		mask-repeat: no-repeat;
+		-webkit-mask-repeat: no-repeat;
+		mask-position: center;
+		-webkit-mask-position: center;
+		flex-shrink: 0;
+		vertical-align: middle;
+	}
+
+	/* Specific Icon Masks mapped to SVG assets */
+	.icon-brand-logo {
+		mask-image: url("../../assets/icons/brand-book.svg");
+		-webkit-mask-image: url("../../assets/icons/brand-book.svg");
+		width: 20px;
+		height: 20px;
+	}
+
+	.icon-printer {
+		mask-image: url("../../assets/icons/printer.svg");
+		-webkit-mask-image: url("../../assets/icons/printer.svg");
+	}
+
+	.icon-curriculum {
+		mask-image: url("../../assets/icons/curriculum.svg");
+		-webkit-mask-image: url("../../assets/icons/curriculum.svg");
+	}
+
+	.icon-database-save {
+		mask-image: url("../../assets/icons/database-save.svg");
+		-webkit-mask-image: url("../../assets/icons/database-save.svg");
+	}
+
+	.icon-pen-tool {
+		mask-image: url("../../assets/icons/pen-tool.svg");
+		-webkit-mask-image: url("../../assets/icons/pen-tool.svg");
+	}
+
+	.icon-lightbulb {
+		mask-image: url("../../assets/icons/lightbulb.svg");
+		-webkit-mask-image: url("../../assets/icons/lightbulb.svg");
+	}
+
+	.icon-academic-cap {
+		mask-image: url("../../assets/icons/academic-cap.svg");
+		-webkit-mask-image: url("../../assets/icons/academic-cap.svg");
+		width: 14px;
+		height: 14px;
+	}
+}

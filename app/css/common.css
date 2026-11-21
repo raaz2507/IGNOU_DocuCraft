@@ -1,0 +1,14 @@
+/**
+ * Common Base Stylesheet: IGNOU Document Automation Hub
+ * Single Responsibility: Bundles all universally shared design tokens, reset,
+ * pure SVG mask icons, 2.5D tactile components, global header, footer, utilities, and print rules.
+ * Any current or future page can import this file to immediately get the complete design system.
+ */
+@import url("./modules/tokens.css");
+@import url("./modules/reset.css");
+@import url("./modules/icons.css");
+@import url("./modules/components.css");
+@import url("./modules/navbar.css");
+@import url("./modules/footer.css");
+@import url("./modules/utilities.css");
+@import url("./modules/print.css");

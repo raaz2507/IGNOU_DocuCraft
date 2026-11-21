@@ -1,0 +1,268 @@
+/* Professional Typography & Natural Handwritten Google Fonts (Validated) */
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@600;700&family=EB+Garamond:wght@500;600;700&family=Indie+Flower&family=Kalam:wght@400;700&family=Montserrat:wght@500;600;700&family=Patrick+Hand&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Tiro+Devanagari+Hindi&display=swap");
+
+/* ============================================================= */
+/* CSS LAYERS: Modern Cascade Management                         */
+/* ============================================================= */
+@layer reset, tokens, base, components, utilities, print;
+
+/* ============================================================= */
+/* LAYER 1: CSS TOKENS & DESIGN VARIABLES                        */
+/* ============================================================= */
+@layer tokens {
+	:root {
+		/* --- Design System: Spacing & Sizing Scale --- */
+		--space-2xs: 2px;
+		--space-xs: 4px;
+		--space-sm: 6px;
+		--space-md: 8px;
+		--space-base: 10px;
+		--space-lg: 12px;
+		--space-xl: 16px;
+		--space-2xl: 20px;
+		--space-3xl: 24px;
+		--space-4xl: 32px;
+
+		/* --- Design System: Border Radius Scale --- */
+		--radius-xs: 4px;
+		--radius-sm: 5px;
+		--radius-md: 6px;
+		--radius-lg: 8px;
+		--radius-xl: 10px;
+		--radius-2xl: 12px;
+		--radius-pill: 9999px;
+
+		/* --- Design System: Typography Font Sizes --- */
+		--font-size-2xs: 9.5px;
+		--font-size-xs: 10.5px;
+		--font-size-sm: 11.5px;
+		--font-size-base: 12.5px;
+		--font-size-md: 13.5px;
+		--font-size-lg: 15px;
+		--font-size-xl: 16px;
+		--font-size-2xl: 18px;
+		--font-size-3xl: 24px;
+
+		/* --- Design System: Font Weights --- */
+		--weight-normal: 400;
+		--weight-medium: 500;
+		--weight-semibold: 600;
+		--weight-bold: 700;
+		--weight-extrabold: 800;
+
+		/* --- Design System: Animation Transitions --- */
+		--transition-fast: 0.15s ease;
+		--transition-base: 0.2s ease;
+		--transition-smooth: 0.25s ease;
+
+		/* --- Design System: Elevation Box Shadows --- */
+		--shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+		--shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+		--shadow-panel: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+		/* --- Color Palette - Light Mode --- */
+		--bg-1: #f8fafc;
+		--bg-2: #e2e8f0;
+		--grid-line-color: rgba(0, 0, 0, 0.04);
+		--bg-workspace: #dfe3e8;
+		--panel-bg: #ffffff;
+		--panel-header-bg: #f8fafc;
+		--panel-border: #cbd5e1;
+		--text-main: #1e293b;
+		--text-muted: #64748b;
+		--text-inverse: #ffffff;
+
+		--brand-primary: #003366;
+		--brand-primary-hover: #002244;
+		--brand-accent: #e0f2fe;
+		--brand-accent-text: #0369a1;
+
+		/* --- Genuine Translucent Glassmorphic Tokens - Light Mode --- */
+		--glass-bg: rgba(255, 255, 255, 0.38);
+		--glass-bg-hover: rgba(255, 255, 255, 0.55);
+		--glass-border: rgba(255, 255, 255, 0.55);
+		--glass-border-hover: rgba(0, 51, 102, 0.38);
+		--glass-blur: blur(20px) saturate(190%);
+		--glass-shadow: 0 16px 36px rgba(0, 51, 102, 0.08);
+		--glass-shadow-hover: 0 24px 48px rgba(0, 51, 102, 0.16);
+		--glass-25d-shadow: 0 20px 42px -10px rgba(0, 51, 102, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04), inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.05);
+		--glass-25d-card-shadow: 0 24px 48px -12px rgba(0, 51, 102, 0.16), 0 4px 10px rgba(0, 0, 0, 0.05), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.9);
+		--glass-card-bg: rgba(255, 255, 255, 0.42);
+		--glass-thumbnail-bg: rgba(203, 213, 225, 0.3);
+		--panel-divider: rgba(203, 213, 225, 0.45);
+
+		/* 2.5D Tactile Button Tokens - Light Mode */
+		--btn-25d-bg: linear-gradient(180deg, #004b94 0%, #002d59 100%);
+		--btn-25d-shadow: 0 4px 12px rgba(0, 51, 102, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+		--btn-25d-shadow-hover: 0 6px 16px rgba(0, 51, 102, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+		--btn-25d-shadow-active: 0 2px 4px rgba(0, 51, 102, 0.2), inset 0 1.5px 2px rgba(0, 0, 0, 0.3);
+
+		/* --- Ambient Glass Light Sweep Gradient - Light Mode --- */
+		--sheen-gradient: linear-gradient(
+			105deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.02) 20%,
+			rgba(255, 255, 255, 0.22) 50%,
+			rgba(255, 255, 255, 0.02) 80%,
+			transparent 100%
+		);
+
+		/* --- Live Pulse Status Dot Tokens - Light Mode --- */
+		--pulse-color: #10b981;
+		--pulse-ring-border: #10b981;
+		--pulse-glow: rgba(16, 185, 129, 0.7);
+
+		/* --- Status Badges Tokens - Light Mode --- */
+		--badge-soon-bg: #fef3c7;
+		--badge-soon-text: #92400e;
+		--badge-soon-border: #fde68a;
+
+		/* --- Translucent Indicator & Nav Buttons - Light Mode --- */
+		--indicator-pill-bg: rgba(0, 51, 102, 0.48);
+		--indicator-pill-border: rgba(255, 255, 255, 0.75);
+		--indicator-pill-glow: rgba(0, 51, 102, 0.22);
+		--nav-btn-hover-bg: rgba(0, 51, 102, 0.12);
+		--nav-btn-hover-border: rgba(0, 51, 102, 0.35);
+		--nav-btn-active-bg: rgba(0, 51, 102, 0.22);
+
+		/* --- Modern CSS Intrinsic Fluid Spaces --- */
+		--container-fluid-pad: clamp(var(--space-sm), 3vw, var(--space-2xl));
+		--layout-gap: clamp(var(--space-md), 2.5vw, var(--space-3xl));
+
+		/* --- Step Circle Colorful Gradients --- */
+		--step-1-gradient: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+		--step-1-glow: rgba(14, 165, 233, 0.35);
+		--step-2-gradient: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+		--step-2-glow: rgba(168, 85, 247, 0.35);
+		--step-3-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+		--step-3-glow: rgba(16, 185, 129, 0.35);
+
+		--input-bg: #f8fafc;
+		--input-border: #cbd5e1;
+		--input-text: #1e293b;
+		--input-focus-border: #005599;
+		--input-focus-ring: rgba(0, 85, 153, 0.15);
+
+		--btn-secondary-bg: #f1f5f9;
+		--btn-secondary-border: #cbd5e1;
+		--btn-secondary-text: #334155;
+		--btn-secondary-hover: #e2e8f0;
+
+		--card-border: #cbd5e1;
+		--card-header-bg: #f8fafc;
+		--card-header-open-bg: #eef4fa;
+
+		/* --- Physical Printable Sheet Tokens --- */
+		--page-width: 210mm;
+		--page-height: 297mm;
+		--sheet-bg: #ffffff;
+		--sheet-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+		--sheet-outer-border: 2.8px solid #111111;
+		--sheet-inner-border: 1.2px solid #111111;
+		--sheet-dotted-line: 1.8px dotted #222222;
+		--sheet-label-color: #111111;
+
+		/* --- Dynamic State Tokens --- */
+		--current-ink-color: #0038a8;
+		--current-hand-font: "Kalam", cursive;
+		--current-template-font: "EB Garamond", "Source Serif 4", "Cambria", serif;
+		--current-label-letter-spacing: 0.9px;
+		--current-label-font-size: 15.5px;
+
+		/* --- Proportional Multipliers --- */
+		--sig-scale: 1;
+		--preview-scale: 1;
+	}
+
+	/* --- Dark Theme Overrides (Zero Component-Level Overrides Principle) --- */
+	[data-theme="dark"] {
+		--bg-1: #090d16;
+		--bg-2: #0e1526;
+		--grid-line-color: rgba(255, 255, 255, 0.04);
+		--bg-workspace: #0b0f19;
+		--panel-bg: #141c2e;
+		--panel-header-bg: #1a243a;
+		--panel-border: #29354d;
+		--text-main: #f1f5f9;
+		--text-muted: #94a3b8;
+		--text-inverse: #0b0f19;
+
+		--brand-primary: #38bdf8;
+		--brand-primary-hover: #0ea5e9;
+		--brand-accent: rgba(56, 189, 248, 0.15);
+		--brand-accent-text: #38bdf8;
+
+		/* --- Genuine Translucent Glassmorphic Tokens - Dark Mode --- */
+		--glass-bg: rgba(15, 23, 42, 0.42);
+		--glass-bg-hover: rgba(26, 36, 58, 0.6);
+		--glass-border: rgba(255, 255, 255, 0.12);
+		--glass-border-hover: rgba(56, 189, 248, 0.5);
+		--glass-blur: blur(20px) saturate(190%);
+		--glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+		--glass-shadow-hover: 0 24px 50px rgba(0, 0, 0, 0.7);
+		--glass-25d-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.65), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.35);
+		--glass-25d-card-shadow: 0 28px 56px -12px rgba(0, 0, 0, 0.75), 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.2);
+		--glass-card-bg: rgba(15, 23, 42, 0.48);
+		--glass-thumbnail-bg: rgba(30, 41, 59, 0.4);
+		--panel-divider: rgba(41, 53, 77, 0.5);
+
+		/* 2.5D Tactile Button Tokens - Dark Mode */
+		--btn-25d-bg: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+		--btn-25d-shadow: 0 4px 14px rgba(56, 189, 248, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+		--btn-25d-shadow-hover: 0 6px 18px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+		--btn-25d-shadow-active: 0 2px 4px rgba(56, 189, 248, 0.2), inset 0 1.5px 2px rgba(0, 0, 0, 0.35);
+
+		/* --- Ambient Glass Light Sweep Gradient - Dark Mode --- */
+		--sheen-gradient: linear-gradient(
+			105deg,
+			transparent 0%,
+			rgba(56, 189, 248, 0.02) 20%,
+			rgba(56, 189, 248, 0.15) 50%,
+			rgba(56, 189, 248, 0.02) 80%,
+			transparent 100%
+		);
+
+		/* --- Live Pulse Status Dot Tokens - Dark Mode --- */
+		--pulse-color: #34d399;
+		--pulse-ring-border: #34d399;
+		--pulse-glow: rgba(52, 211, 153, 0.75);
+
+		/* --- Status Badges Tokens - Dark Mode --- */
+		--badge-soon-bg: rgba(245, 158, 11, 0.22);
+		--badge-soon-text: #fcd34d;
+		--badge-soon-border: rgba(245, 158, 11, 0.4);
+
+		/* --- Translucent Indicator & Nav Buttons - Dark Mode --- */
+		--indicator-pill-bg: rgba(56, 189, 248, 0.42);
+		--indicator-pill-border: rgba(255, 255, 255, 0.35);
+		--indicator-pill-glow: rgba(56, 189, 248, 0.35);
+		--nav-btn-hover-bg: rgba(56, 189, 248, 0.16);
+		--nav-btn-hover-border: rgba(56, 189, 248, 0.5);
+		--nav-btn-active-bg: rgba(56, 189, 248, 0.28);
+
+		/* --- Step Circle Colorful Gradients - Dark Mode --- */
+		--step-1-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+		--step-1-glow: rgba(56, 189, 248, 0.45);
+		--step-2-gradient: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
+		--step-2-glow: rgba(192, 132, 252, 0.45);
+		--step-3-gradient: linear-gradient(135deg, #34d399 0%, #059669 100%);
+		--step-3-glow: rgba(52, 211, 153, 0.45);
+
+		--input-bg: #1e293b;
+		--input-border: #334155;
+		--input-text: #f8fafc;
+		--input-focus-border: #38bdf8;
+		--input-focus-ring: rgba(56, 189, 248, 0.2);
+
+		--btn-secondary-bg: #1e293b;
+		--btn-secondary-border: #334155;
+		--btn-secondary-text: #cbd5e1;
+		--btn-secondary-hover: #29354d;
+
+		--card-border: #29354d;
+		--card-header-bg: #1a243a;
+		--card-header-open-bg: #22304d;
+
+		--sheet-shadow: 0 10px 35px rgba(0, 0, 0, 0.65);
+	}
+}

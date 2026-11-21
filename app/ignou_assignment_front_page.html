@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IGNOU Assignment Front Page - Smart Studio</title>
+		<link rel="stylesheet" href="./css/ignou_assignment_front_page.css" />
+		<!-- Dynamic Print Page Size Rule (Updated via JS) -->
+		<style id="dynamicPrintStyle">
+			@page {
+				size: A4 portrait;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Global Shared Application Navigation Header -->
+		<ignou-header active-page="assignment"></ignou-header>
+
+		<!-- Main Workspace: Control Sidebar + Dynamic Canvas -->
+		<div class="app-workspace" id="appWorkspace" data-mobile-view="form">
+			<!-- Mobile Sticky View Toggle Bar (Only active on mobile screens) -->
+			<div class="mobile-view-toggle-bar" id="mobileViewToggleBar">
+				<button type="button" class="mobile-toggle-btn active" id="btnMobileForm" data-view="form">
+					✏️ Edit Form
+				</button>
+				<button type="button" class="mobile-toggle-btn" id="btnMobilePreview" data-view="preview">
+					👁️ Live Preview (<span id="mobileBadgeCounter">2</span>)
+				</button>
+			</div>
+			<!-- =================================================================== -->
+			<!-- SMART CONTROL PANEL (LEFT SIDEBAR)                                  -->
+			<!-- =================================================================== -->
+			<aside class="control-panel" id="controlPanel">
+			<div class="panel-header">
+				<h2>📑 Batch Cover Studio</h2>
+				<div class="header-actions">
+					<span class="badge-counter" id="badgeCounter">2 Pages Ready</span>
+				</div>
+			</div>
+
+			<!-- 1. Expandable / Collapsible Course Section -->
+			<div class="collapsible-card">
+				<div class="collapsible-header open" id="accordionHeader">
+					<span class="collapsible-title">📚 Course Selection (Batch Print)</span>
+					<span class="accordion-arrow">▲</span>
+				</div>
+
+				<div class="collapsible-body open" id="accordionBody">
+					<!-- Semester Dropdown List -->
+					<div class="field-row">
+						<label for="semDropdown">Select Semester View:</label>
+						<select id="semDropdown" class="form-select">
+							<option value="all">All Semesters (Divided by Sem)</option>
+							<option value="3" selected>Semester III (Current Lab Session)</option>
+							<option value="1">Semester I</option>
+							<option value="2">Semester II</option>
+							<option value="4">Semester IV</option>
+						</select>
+					</div>
+
+					<!-- Selection Helpers -->
+					<div class="action-mini-group">
+						<button class="mini-btn" id="btnSelectAll">✓ Select All</button>
+						<button class="mini-btn" id="btnInvert">⇄ Invert</button>
+						<button class="mini-btn" id="btnDeselectAll">✕ Select None</button>
+					</div>
+
+					<!-- Full Unconstrained Course Groups with Dividers -->
+					<div class="courses-full-container" id="coursesFullContainer">
+						<!-- Dynamically rendered with semester headers & dividers -->
+					</div>
+				</div>
+			</div>
+
+			<!-- 2. Front Page Design Template & Typography Setup -->
+			<div class="section-group">
+				<span class="section-label">🎨 Cover Design &amp; Print Setup</span>
+
+				<!-- 4 Distinct Design Templates Selector -->
+				<div class="field-row">
+					<label for="templateDesignSelect">Cover Page Design Template:</label>
+					<select id="templateDesignSelect" class="form-select">
+						<option value="classic" selected>1. Classic IGNOU Official (Standard Double Border)</option>
+						<option value="modern">2. Modern Minimalist Grid (Clean Card Layout)</option>
+						<option value="gazette">3. Bilingual University Gazette (With Marks Matrix Table)</option>
+						<option value="portfolio">4. Executive Lab Portfolio (Left Accent Bar &amp; Stamp)</option>
+					</select>
+				</div>
+
+				<div class="two-cols">
+					<div class="field-row">
+						<label for="handFontSelect">Handwritten Font:</label>
+						<select id="handFontSelect" class="form-select">
+							<option value="'Kalam', cursive" selected>Kalam (Natural Pen)</option>
+							<option value="'Caveat', cursive">Caveat (Smooth Ballpoint)</option>
+							<option value="'Patrick Hand', cursive">Patrick Hand (Neat Student)</option>
+							<option value="'Indie Flower', cursive">Indie Flower (Casual)</option>
+							<option value="'Segoe Print', cursive">Segoe Print (System)</option>
+						</select>
+					</div>
+					<div class="field-row">
+						<label for="templateFontSelect">Template Font:</label>
+						<select id="templateFontSelect" class="form-select">
+							<option value="academic-serif" selected>EB Garamond (Royal)</option>
+							<option value="times">Times New Roman (IGNOU)</option>
+							<option value="cinzel">Cinzel (University)</option>
+							<option value="modern-sans">Montserrat (Modern)</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Printable Paper Size Option -->
+				<div class="field-row">
+					<label for="pageSizeSelect">📄 Printable Paper Size:</label>
+					<select id="pageSizeSelect" class="form-select">
+						<option value="a4" selected>A4 Portrait (210 × 297 mm) - Official IGNOU</option>
+						<option value="letter">US Letter (8.5 × 11 in / 216 × 279 mm)</option>
+						<option value="legal">US Legal (8.5 × 14 in / 216 × 356 mm)</option>
+						<option value="a5">A5 Booklet (148 × 210 mm)</option>
+					</select>
+				</div>
+
+				<div class="field-row">
+					<label>Pen Ink Color:</label>
+					<div class="color-palette" id="colorPalette">
+						<div class="color-pill active" data-color="#0038a8">
+							<span class="color-dot dot-royal-blue"></span>
+							Royal Blue
+						</div>
+						<div class="color-pill" data-color="#0a47a4">
+							<span class="color-dot dot-pilot-blue"></span>
+							Pilot Blue
+						</div>
+						<div class="color-pill" data-color="#0b2545">
+							<span class="color-dot dot-navy-blue"></span>
+							Navy Blue
+						</div>
+						<div class="color-pill" data-color="#1a1a1a">
+							<span class="color-dot dot-black-ink"></span>
+							Black Ink
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 3. Student Credentials (Persistent in LocalStorage) -->
+			<div class="section-group">
+				<span class="section-label">👤 Student Information (Shared Across Pages)</span>
+				<div class="two-cols">
+					<div class="field-row">
+						<label for="inputEnrolment">Enrolment No.:</label>
+						<input type="text" id="inputEnrolment" class="form-input" placeholder="e.g. 2101234567" data-field="Enrolment" />
+					</div>
+					<div class="field-row">
+						<label for="inputName">Student Name:</label>
+						<input type="text" id="inputName" class="form-input" placeholder="e.g. Neha Khan" data-field="Name" />
+					</div>
+				</div>
+
+				<div class="field-row">
+					<label for="inputAddress1">Address (Line 1):</label>
+					<input type="text" id="inputAddress1" class="form-input" placeholder="e.g. H.No 124, Sector 15" data-field="Address1" />
+				</div>
+				<div class="field-row">
+					<label for="inputAddress2">Address (Line 2):</label>
+					<input type="text" id="inputAddress2" class="form-input" placeholder="e.g. New Delhi - 110089" data-field="Address2" />
+				</div>
+				<div class="field-row">
+					<label for="inputProgramme">Programme Title:</label>
+					<input type="text" id="inputProgramme" class="form-input" value="Master of Computer Applications (MCA_NEW)" data-field="Programme" />
+				</div>
+				<div class="field-row">
+					<label for="inputStudyCentre1">Study Centre (Name &amp; Code):</label>
+					<input type="text" id="inputStudyCentre1" class="form-input" placeholder="e.g. IGNOU Study Centre (Code: 07107)" data-field="StudyCentre1" />
+				</div>
+				<div class="field-row">
+					<label for="inputStudyCentre2">Study Centre (Address/City):</label>
+					<input type="text" id="inputStudyCentre2" class="form-input" placeholder="e.g. Delhi Regional Centre-II, Rajghat" data-field="StudyCentre2" />
+				</div>
+				<div class="two-cols">
+					<div class="field-row">
+						<label for="inputPhone">Phone No.:</label>
+						<input type="text" id="inputPhone" class="form-input" placeholder="Mobile Number" data-field="Phone" />
+					</div>
+					<div class="field-row">
+						<label for="inputEmail">Email ID:</label>
+						<input type="email" id="inputEmail" class="form-input" placeholder="Email Address" data-field="Email" />
+					</div>
+				</div>
+
+				<div class="field-row">
+					<label for="inputDate">Date of Submission:</label>
+					<div class="date-input-group">
+						<input type="text" id="inputDate" class="form-input date-field-input" placeholder="e.g. 19/11/2026" data-field="Date" />
+						<button type="button" class="mini-btn btn-today-date" id="btnTodayDate" title="Click to fill current date">📅 Today</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- 4. Dedicated Signature Section (Auto-Crop, Transparent WebP, Multiplier Scale) -->
+			<div class="section-group">
+				<span class="section-label">✍️ 4. Student Signature (Image / Blank)</span>
+				<div class="field-row">
+					<label for="sigFileInput">Upload Signature Image (Photo/Scan):</label>
+					<input type="file" id="sigFileInput" accept="image/*" class="form-input file-input" />
+					<span class="form-hint">*White/grey paper is auto-removed (transparent) and cropped to WebP. Leave empty to sign with pen.</span>
+				</div>
+
+				<!-- Signature Preview & Multiplier Scale Box -->
+				<div id="sigPreviewContainer" class="sig-preview-card">
+					<div class="sig-preview-header">
+						<span class="sig-preview-title">Signature Preview:</span>
+						<button type="button" id="btnRemoveSig" class="btn-remove-sig">🗑️ Remove</button>
+					</div>
+
+					<!-- Checkerboard background for transparency preview -->
+					<div class="sig-canvas-checkerboard">
+						<img id="sigPreviewImg" class="sig-preview-img" src="" alt="Signature Preview" />
+					</div>
+
+					<!-- Proportional Multiplier Scale Slider -->
+					<div class="sig-slider-box">
+						<div class="sig-slider-labels">
+							<span>Proportional Scale Multiplier:</span>
+							<span id="sigScaleValue" class="badge-scale">1.00× (100%)</span>
+						</div>
+						<input type="range" id="sigScaleSlider" class="sig-range-slider" min="0.5" max="2.0" step="0.05" value="1.0" />
+					</div>
+				</div>
+			</div>
+
+			<!-- Action Buttons -->
+			<div class="action-btn-group">
+				<button class="btn-print" id="btnPrint">🖨️ Print All Selected Covers (Batch PDF)</button>
+				<div class="two-cols">
+					<button class="btn-secondary" id="btnFillSample">✨ Fill Sample Data</button>
+					<button class="btn-secondary btn-clear" id="btnClear">🗑️ Clear All Fields</button>
+				</div>
+			</div>
+		</aside>
+
+		<!-- =================================================================== -->
+		<!-- 3D COVERFLOW PLAYING CARD DECK PREVIEW STAGE                        -->
+		<!-- =================================================================== -->
+		<section class="deck-3d-stage" id="deckStage" aria-label="3D Coverflow Preview">
+			<!-- Stage Header: Active Course Info & Status Pill -->
+			<div class="deck-stage-header">
+				<div class="deck-header-info">
+					<span class="deck-active-code" id="deckActiveCode">MCSL-228</span>
+					<span class="deck-active-title" id="deckActiveTitle">Web Technologies Lab</span>
+				</div>
+				<span class="deck-counter-badge" id="deckCounterBadge">Page 1 of 2</span>
+			</div>
+
+			<!-- 3D Perspective Viewport -->
+			<div class="deck-3d-viewport" id="deckViewport">
+				<button type="button" class="deck-arrow-btn deck-arrow-prev" id="btnDeckPrev" aria-label="Previous Cover">‹</button>
+				<button type="button" class="deck-arrow-btn deck-arrow-next" id="btnDeckNext" aria-label="Next Cover">›</button>
+
+				<!-- Fanned 3D Cards Container -->
+				<div class="deck-fanned-container" id="pagesContainer">
+					<!-- Individual A4 Sheets as 3D Cards rendered dynamically by FrontPageStudioApp -->
+				</div>
+			</div>
+
+			<!-- Stage Footer: Interactive Navigation Dots & Tactile Hint -->
+			<div class="deck-stage-footer">
+				<div class="deck-dots-container" id="deckDotsContainer"></div>
+				<span class="deck-hint-text">💡 Click side cards or use ◀ / ▶ arrow keys to fan through covers</span>
+			</div>
+		</section>
+		</div>
+
+		<!-- Global Shared Application Footer -->
+		<ignou-footer></ignou-footer>
+
+		<!-- =================================================================== -->
+		<!-- MODERN OOP JAVASCRIPT ARCHITECTURE (ES6+ CLASSES & COMPONENTS)     -->
+		<!-- =================================================================== -->
+		<script type="module" src="./js/shared/header.component.js"></script>
+		<script type="module" src="./js/shared/footer.component.js"></script>
+		<script type="module" src="./js/front_page/front_page_studio.js"></script>
+	</body>
+</html>
