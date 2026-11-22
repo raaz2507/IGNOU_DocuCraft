@@ -1,0 +1,259 @@
+/**
+ * Document 3: Certificate of Originality (Annexure X, Page 20)
+ * Single Responsibility: 1:1 Official IGNOU Layout with Full A4 Space Utilization.
+ * Strict Architecture: Token-based design, @layer components, zero !important.
+ */
+@layer components {
+	.tpl-doc-originality {
+		padding: 4.8mm;
+		box-sizing: border-box;
+		background: #ffffff;
+		font-family: "Times New Roman", Times, serif;
+		color: #000000;
+		font-size: 12.5pt;
+		line-height: 1.5;
+
+		/* Single Clean Outer Border Frame Matching Official Specification */
+		& .originality-border-frame {
+			width: 100%;
+			height: 100%;
+			border: 1.4px solid #000000;
+			padding: 10mm 15mm 10mm 15mm;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			box-sizing: border-box;
+		}
+
+		/* Global Handwriting Ink Settings: Clean Upright Legible Pen Weight */
+		& .ink-text {
+			font-family: var(--font-handwriting, "Patrick Hand", cursive, sans-serif);
+			font-weight: var(--weight-normal, 400);
+			color: var(--current-ink-color, #002288);
+			letter-spacing: 0.2px;
+		}
+
+		/* Header Section: Centered Bordered Title Box */
+		& .originality-hdr {
+			display: flex;
+			justify-content: center;
+			margin-top: 2mm;
+			margin-bottom: 8mm;
+			flex-shrink: 0;
+
+			& .originality-title-box {
+				border: 1.4px solid #000000;
+				padding: 3mm 12mm;
+				display: inline-block;
+
+				& .originality-doc-title {
+					font-size: 15pt;
+					font-weight: 800;
+					margin: 0;
+					letter-spacing: 1px;
+					text-align: center;
+					text-transform: uppercase;
+					color: #000000;
+				}
+			}
+		}
+
+		/* Main Certificate Body Paragraphs */
+		& .originality-body-content {
+			flex-shrink: 0;
+			margin-bottom: 6mm;
+
+			& .originality-para {
+				text-align: justify;
+				text-justify: inter-word;
+				font-size: 12.5pt;
+				line-height: 2.25;
+				margin: 0 0 8mm 0;
+
+				&.para-embodied {
+					margin-bottom: 0;
+				}
+			}
+
+			& .originality-fill-wrap {
+				display: inline-flex;
+				align-items: flex-end;
+				border-bottom: 1.5px dotted #000000;
+				vertical-align: baseline;
+				padding: 0 4px 2px 4px;
+				margin: 0 3px;
+				min-height: 22px;
+
+				& .ink-text {
+					font-size: 22px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+
+				&.title-fill-wrap {
+					min-width: 270px;
+				}
+
+				&.name-fill-wrap {
+					min-width: 230px;
+				}
+
+				&.enrol-fill-wrap {
+					min-width: 150px;
+				}
+			}
+		}
+
+		/* Clean 2-Column Institutional Bottom Section (Option B with Full Proportions) */
+		& .originality-footer-columns {
+			display: flex;
+			justify-content: space-between;
+			margin-top: auto;
+			padding-bottom: 2mm;
+			flex-shrink: 0;
+
+			& .originality-col {
+				width: 285px;
+				display: flex;
+				flex-direction: column;
+
+				/* Signature Block with Contained Positioning */
+				& .orig-sig-box {
+					margin-bottom: 5.5mm;
+					position: relative;
+					width: 100%;
+
+					& .orig-sig-img-pad {
+						position: relative;
+						height: 52px;
+						width: 100%;
+						display: flex;
+						align-items: flex-end;
+						justify-content: flex-start;
+						margin-bottom: 3px;
+
+						& img {
+							position: relative;
+							bottom: auto;
+							left: auto;
+							max-height: 50px;
+							max-width: 210px;
+							object-fit: contain;
+							pointer-events: none;
+							transform-origin: bottom left;
+
+							&.student-sig {
+								transform: scale(var(--sig-scale, 1.0));
+							}
+
+							&.guide-sig {
+								transform: scale(var(--guide-sig-scale, 1.0));
+							}
+						}
+					}
+
+					& .orig-sig-line {
+						width: 240px;
+						border-bottom: 1.5px dotted #000000;
+						margin-bottom: 2mm;
+					}
+
+					& .orig-sig-label {
+						font-size: 12pt;
+						font-weight: 700;
+						color: #000000;
+					}
+				}
+
+				/* Date Row with Clean Dotted Line */
+				& .orig-date-row {
+					display: flex;
+					align-items: baseline;
+					margin-bottom: 5.5mm;
+					font-size: 12pt;
+
+					& .orig-field-lbl {
+						font-weight: 700;
+						margin-right: 6px;
+					}
+
+					& .date-val-wrap {
+						min-width: 160px;
+						border-bottom: 1.5px dotted #000000;
+						padding-left: 4px;
+						padding-bottom: 2px;
+						min-height: 24px;
+						display: inline-flex;
+						align-items: flex-end;
+
+						& .ink-text {
+							font-size: 21px;
+							line-height: 1;
+						}
+					}
+				}
+
+				/* Name and Address Details Block */
+				& .orig-details-block {
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 5.5mm;
+
+					& .orig-block-title {
+						font-size: 12pt;
+						font-weight: 700;
+						line-height: 1.35;
+						margin-bottom: 3mm;
+						min-height: 32px;
+					}
+
+					& .orig-data-line {
+						min-height: 25px;
+						border-bottom: 1.5px dotted #000000;
+						margin-bottom: 2.8mm;
+						padding-left: 2px;
+						padding-bottom: 2px;
+						display: flex;
+						align-items: flex-end;
+
+						& .ink-text {
+							font-size: 20px;
+							line-height: 1.1;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+					}
+				}
+
+				/* Enrolment Row with Clean Dotted Line */
+				& .orig-enrol-row {
+					display: flex;
+					align-items: baseline;
+					font-size: 12pt;
+
+					& .orig-field-lbl {
+						font-weight: 700;
+						margin-right: 6px;
+						white-space: nowrap;
+					}
+
+					& .enrol-val-wrap {
+						min-width: 150px;
+						border-bottom: 1.5px dotted #000000;
+						padding-left: 4px;
+						padding-bottom: 2px;
+						min-height: 24px;
+						display: inline-flex;
+						align-items: flex-end;
+
+						& .ink-text {
+							font-size: 21px;
+							line-height: 1;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,310 @@
+<template id="tpl-doc-proforma">
+	<div class="page-viewport-scaler">
+		<article class="page-sheet tpl-doc-proforma">
+			<div class="proforma-border-frame">
+				<!-- Header: Official IGNOU Logo on Left + School Name Centered -->
+					<header class="proforma-hdr">
+						<div class="proforma-hdr-top">
+							<img src="./assets/IGNOU_logo.svg" alt="IGNOU Logo" class="proforma-emblem">
+							<div class="proforma-hdr-text">
+								<h1 class="val-SchoolName">SCHOOL OF COMPUTER AND INFORMATION SCIENCES</h1>
+								<h2>IGNOU, MAIDAN GARHI, NEW DELHI – 110 068</h2>
+							</div>
+						</div>
+
+						<div class="proforma-boxed-title">
+							II. PROFORMA FOR THE APPROVAL OF <span class="val-ProgrammeCode">MCA</span> PROJECT PROPOSAL (<span class="val-CourseCode">MCSP-232</span>)
+						</div>
+
+						<p class="proforma-hdr-note">
+							(<strong>Note:</strong> All entries of the proforma of approval should be filled up with appropriate and complete information.<br>
+							Incomplete proforma of approval in any respect will be summarily rejected.)
+						</p>
+					</header>
+
+					<main class="proforma-main-content">
+						<!-- Top Block: Left Box for Office Use Only + Right Details -->
+						<div class="proforma-top-layout">
+							<div class="top-left-cell">
+								<div class="proposal-no-box">
+									<div class="p-no-row">
+										<span class="p-no-lbl">Project Proposal No :</span>
+										<span class="p-no-dots">…………………</span>
+									</div>
+									<div class="p-no-sub">(for office use only)</div>
+								</div>
+								<div class="mobile-row">
+									<span class="m-lbl">Mobile No :</span>
+									<div class="m-dots-line">
+										<span class="dots-text">………………………………</span>
+										<span class="ink-text val-Phone"></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="top-right-cell">
+								<div class="right-field-row">
+									<span class="rf-lbl">Enrolment No.:</span>
+									<div class="rf-dots-wrap">
+										<span class="dots-text">………………………</span>
+										<span class="ink-text val-Enrolment"></span>
+									</div>
+								</div>
+								<div class="right-field-row">
+									<span class="rf-lbl">Study Centre:</span>
+									<div class="rf-dots-wrap">
+										<span class="dots-text">……………….……….</span>
+										<span class="ink-text val-StudyCentreCode"></span>
+									</div>
+								</div>
+								<div class="right-field-row rf-rc-row">
+									<span class="rf-lbl">Regional Centre:</span>
+									<div class="rf-dots-wrap rc-name-dots">
+										<span class="dots-text">……</span>
+										<span class="ink-text val-RegionalCentre"></span>
+									</div>
+									<span class="rf-lbl rc-code-lbl">RC Code:</span>
+									<div class="rf-dots-wrap rc-code-dots">
+										<span class="dots-text">……</span>
+										<span class="ink-text val-RegionalCentreCode"></span>
+									</div>
+								</div>
+								<div class="right-field-row">
+									<span class="rf-lbl">E-mail:</span>
+									<div class="rf-dots-wrap">
+										<span class="dots-text">………….………..…………...</span>
+										<span class="ink-text val-Email"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Numbered Questions List (1 to 7) -->
+						<div class="proforma-questions">
+							<!-- 1. Name and Address of the Student -->
+							<div class="q-row-group">
+								<div class="q-line-1">
+									<span class="q-num">1.</span>
+									<span class="q-label">Name and Address of the Student:</span>
+									<div class="q-fill-line">
+										<span class="dots-text">………………………………………………………….</span>
+										<span class="ink-text val-Name"></span>
+									</div>
+								</div>
+								<div class="q-line-cont">
+									<span class="dots-text">………………………………………………………………………………………………………………</span>
+									<span class="ink-text val-Address1"></span>
+								</div>
+								<div class="q-line-cont">
+									<span class="dots-text">………………………………………………………………………………………………………………</span>
+									<span class="ink-text val-Address2"></span>
+								</div>
+							</div>
+
+							<!-- 2. Title of the Project -->
+							<div class="q-row-group">
+								<div class="q-line-1">
+									<span class="q-num">2.</span>
+									<span class="q-label">Title of the Project***:</span>
+									<div class="q-fill-line">
+										<span class="dots-text">………..…………………………………………………….</span>
+										<span class="ink-text val-ProjectTitle"></span>
+									</div>
+								</div>
+							</div>
+
+							<!-- 3. Name and Address of the Guide (2 Address Lines) -->
+							<div class="q-row-group">
+								<div class="q-line-1">
+									<span class="q-num">3.</span>
+									<span class="q-label">Name and Address of the Guide:</span>
+									<div class="q-fill-line">
+										<span class="dots-text">…..………………………………………………………….</span>
+										<span class="ink-text val-GuideName"></span>
+									</div>
+								</div>
+								<div class="q-line-cont">
+									<span class="dots-text">………………………………………………………………………………………………………………</span>
+									<span class="ink-text val-GuideAddress1"></span>
+								</div>
+								<div class="q-line-cont">
+									<span class="dots-text">………………………………………………………………………………………………………………</span>
+									<span class="ink-text val-GuideAddress2"></span>
+								</div>
+							</div>
+
+							<!-- 4. Educational Qualification of the Guide with 5 Checkboxes -->
+							<div class="q-row-group q-qual-group">
+								<div class="q-qual-layout">
+									<div class="qual-left">
+										<div class="q-line-1">
+											<span class="q-num">4.</span>
+											<span class="q-label">Educational Qualification of the Guide:</span>
+										</div>
+										<div class="qual-sub-text">(Attach bio-data also)</div>
+										<div class="qual-note-text">(*in Computer Science / IT only)</div>
+									</div>
+
+									<div class="qual-right">
+										<div class="qual-checkbox-col">
+											<span class="cb-label">Ph.D*</span>
+											<div class="sq-check-box"><span class="ink-check check-degree-phd"></span></div>
+										</div>
+										<div class="qual-checkbox-col">
+											<span class="cb-label">M.Tech.*</span>
+											<div class="sq-check-box"><span class="ink-check check-degree-mtech"></span></div>
+										</div>
+										<div class="qual-checkbox-col">
+											<span class="cb-label">B.E*/B.Tech.*</span>
+											<div class="sq-check-box"><span class="ink-check check-degree-be_btech"></span></div>
+										</div>
+										<div class="qual-checkbox-col">
+											<span class="cb-label">MCA</span>
+											<div class="sq-check-box"><span class="ink-check check-degree-mca"></span></div>
+										</div>
+										<div class="qual-checkbox-col">
+											<span class="cb-label">M.Sc.*</span>
+											<div class="sq-check-box"><span class="ink-check check-degree-msc"></span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- 5. Working / Teaching experience of the Guide -->
+							<div class="q-row-group">
+								<div class="q-line-1">
+									<span class="q-num">5.</span>
+									<span class="q-label">Working / Teaching experience of the Guide**:</span>
+									<div class="q-fill-line">
+										<span class="dots-text">……………………………………………………</span>
+										<span class="ink-text val-GuideExperience"></span>
+									</div>
+								</div>
+								<div class="qual-footer-note">
+									(**<strong>Note:</strong> At any given point of time, a guide should not provide guidance for more than 5 MCA students of IGNOU)
+								</div>
+							</div>
+
+							<!-- 6. Software used in the Project (3 Dotted Lines) -->
+							<div class="q-row-group q-software-group">
+								<div class="q-line-1">
+									<span class="q-num">6.</span>
+									<span class="q-label">Software used in the Project*** :</span>
+									<div class="q-fill-line">
+										<span class="dots-text">…………………………………………………………..</span>
+										<span class="ink-text val-ProjectSoftware val-ProjectSoftware-1"></span>
+									</div>
+								</div>
+								<div class="q-line-cont">
+									<span class="dots-text">………………………………………………………………………………………………………………</span>
+									<span class="ink-text val-ProjectSoftware-2"></span>
+								</div>
+								<div class="q-line-cont">
+									<span class="dots-text">………………………………………………………………………………………………………………</span>
+									<span class="ink-text val-ProjectSoftware-3"></span>
+								</div>
+								<div class="qual-footer-note">
+									(*** Please refer to section VIII of these guidelines)
+								</div>
+							</div>
+
+							<!-- 7. Is this your first submission? -->
+							<div class="q-row-group q-first-sub">
+								<div class="q-first-layout">
+									<div class="first-left">
+										<span class="q-num">7.</span>
+										<span class="q-label">Is this your first submission?</span>
+									</div>
+									<div class="first-right">
+										<div class="first-cb-item">
+											<div class="sq-check-box"><span class="ink-check check-first-yes"></span></div>
+											<span class="first-cb-lbl">Yes</span>
+										</div>
+										<div class="first-cb-item">
+											<div class="sq-check-box"><span class="ink-check check-first-no"></span></div>
+											<span class="first-cb-lbl">No</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Signatures Section -->
+						<div class="proforma-sigs-row">
+							<div class="sig-half">
+								<div class="sig-title">Signature of the Student</div>
+								<div class="sig-pad-space">
+									<img class="ink-signature-img val-SignatureImg" src="" alt="Student Signature" style="display:none;">
+								</div>
+								<div class="sig-date-line">
+									<span>Date:</span>
+									<div class="sig-date-dots-wrap">
+										<span class="dots-text">…………………….</span>
+										<span class="ink-text val-SubmissionDate"></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="sig-half sig-right">
+								<div class="sig-title">Signature of the Guide</div>
+								<div class="sig-pad-space">
+									<img class="ink-signature-img val-GuideSignatureImg" src="" alt="Guide Signature" style="display:none;">
+								</div>
+								<div class="sig-date-line">
+									<span>Date:</span>
+									<div class="sig-date-dots-wrap">
+										<span class="dots-text">…………………….</span>
+										<span class="ink-text val-GuideDate"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Horizontal Divider -->
+						<div class="proforma-h-rule"></div>
+
+						<!-- Evaluator Section (For Office Use Only) -->
+						<div class="proforma-eval-section">
+							<div class="eval-top-row">
+								<span class="eval-sec-title">For Office Use Only</span>
+								<div class="eval-guide-name-row">
+									<span>Name:</span>
+									<div class="eval-name-dots">
+										<span class="dots-text">……………………………………………</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="eval-mid-row">
+								<div class="eval-approval-boxes">
+									<div class="eval-cb-item">
+										<div class="sq-check-box"></div>
+										<span>Approved</span>
+									</div>
+									<div class="eval-cb-item">
+										<div class="sq-check-box"></div>
+										<span>Not Approved</span>
+									</div>
+								</div>
+
+								<div class="eval-stamp-area">
+									<div class="stamp-dotted-line">…………………………………………….</div>
+									<div class="stamp-caption">
+										Signature, Designation, Stamp of the<br>
+										Project Proposal Evaluator
+									</div>
+									<div class="stamp-date">Date: …………………….</div>
+								</div>
+							</div>
+
+							<!-- Suggestions Box at bottom -->
+							<div class="proforma-suggestions-box">
+								<div class="sugg-title">Suggestions for reformulating the Project:</div>
+								<div class="sugg-content-blank"></div>
+							</div>
+						</div>
+					</main>
+				</div>
+		</article>
+	</div>
+</template>

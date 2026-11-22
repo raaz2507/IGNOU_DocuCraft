@@ -1,0 +1,237 @@
+/**
+ * Document 4: Professional Academic Project Cover Page (MCSP-232 & Generic Curriculum)
+ * Single Responsibility: Master's Thesis / Project Report Cover Page Layout.
+ * Architecture: 3-Zone Gestalt Hierarchy, classical serif typography, token-based, @layer components, zero !important.
+ */
+@layer components {
+	.tpl-doc-project-cover {
+		padding: 4.8mm;
+		box-sizing: border-box;
+		background: #ffffff;
+		font-family: "Times New Roman", Times, serif;
+		color: #000000;
+		font-size: 12pt;
+		line-height: 1.45;
+		text-align: center;
+
+		/* Single Clean Outer Border Frame Matching Official Specification */
+		& .cover-border-frame {
+			width: 100%;
+			height: 100%;
+			border: 1.4px solid #000000;
+			padding: 10mm 14mm 10mm 14mm;
+			display: flex;
+			flex-direction: column;
+			box-sizing: border-box;
+		}
+
+		/* Header Section: Graceful Arched University Title */
+		& .cover-hdr {
+			margin-top: 2mm;
+			margin-bottom: 2mm;
+			flex-shrink: 0;
+
+			& .cover-arch-wrap {
+				width: 100%;
+				max-width: 590px;
+				margin: 0 auto;
+
+				& .cover-arch-svg {
+					width: 100%;
+					height: auto;
+					display: block;
+
+					& .arch-text {
+						font-family: "Times New Roman", Times, serif;
+						font-weight: 800;
+						font-size: 19px;
+						fill: #000000;
+						letter-spacing: 2.2px;
+					}
+				}
+			}
+		}
+
+		/* Main Cover Body: 3 Distinct Academic Zones */
+		& .cover-body {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 3mm;
+			padding-bottom: 2mm;
+
+			/* ZONE 1: Course & Project Title */
+			& .cover-zone-hero {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+				margin-bottom: 2mm;
+
+				& .cover-course-code {
+					font-size: 16pt;
+					font-weight: 700;
+					letter-spacing: 1.8px;
+					color: #000000;
+					margin-bottom: 5mm;
+				}
+
+				& .cover-project-title-wrap {
+					max-width: 90%;
+					min-height: 48px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					& .cover-project-title {
+						font-size: 21pt;
+						font-weight: 800;
+						line-height: 1.35;
+						letter-spacing: 0.8px;
+						text-transform: uppercase;
+						color: #000000;
+						margin: 0;
+						word-break: break-word;
+					}
+				}
+			}
+
+			/* ZONE 2: Candidacy & Mentorship */
+			& .cover-zone-credentials {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+				margin: 2mm 0;
+
+				& .cover-by-lbl {
+					font-size: 13.5pt;
+					font-style: italic;
+					font-weight: 400;
+					color: #000000;
+					margin-bottom: 3.5mm;
+				}
+
+				& .cover-student-block {
+					margin-bottom: 6mm;
+
+					& .cover-student-name {
+						font-size: 16.5pt;
+						font-weight: 700;
+						color: #000000;
+						margin-bottom: 2mm;
+						letter-spacing: 0.3px;
+					}
+
+					& .cover-enrolment-row {
+						font-size: 14.5pt;
+						font-weight: 700;
+						color: #000000;
+
+						& .cover-field-lbl {
+							margin-right: 4px;
+						}
+					}
+				}
+
+				& .cover-guidance-block {
+					& .cover-guidance-lbl {
+						font-size: 14pt;
+						font-weight: 700;
+						color: #000000;
+					}
+
+					& .cover-guidance-of {
+						font-size: 13pt;
+						font-style: italic;
+						font-weight: 400;
+						margin: 1.2mm 0 2.5mm 0;
+						color: #000000;
+					}
+
+					& .cover-guide-name {
+						font-size: 16.5pt;
+						font-weight: 700;
+						color: #000000;
+						letter-spacing: 0.3px;
+					}
+				}
+			}
+
+			/* ZONE 3: Degree Conferral & Institutional Seal */
+			& .cover-zone-institutional {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+
+				& .cover-submission-statement {
+					max-width: 94%;
+					margin-bottom: 5mm;
+
+					& .statement-p1 {
+						font-size: 12.5pt;
+						font-weight: 700;
+						line-height: 1.5;
+						margin: 0 0 3mm 0;
+						color: #000000;
+					}
+
+					& .statement-degree {
+						font-size: 15pt;
+						font-weight: 800;
+						margin: 0 0 3mm 0;
+						letter-spacing: 0.3px;
+						color: #000000;
+					}
+
+					& .statement-year-row {
+						font-size: 14pt;
+						font-weight: 700;
+						margin: 0;
+						color: #000000;
+
+						& .statement-year-lbl {
+							margin-right: 4px;
+						}
+					}
+				}
+
+				& .cover-bottom-univ-block {
+					& .cover-logo-wrap {
+						margin-bottom: 2.5mm;
+
+						& .cover-ignou-logo {
+							width: 86px;
+							height: auto;
+							display: inline-block;
+						}
+					}
+
+					& .cover-univ-title {
+						font-size: 15.5pt;
+						font-weight: 800;
+						margin-bottom: 1.2mm;
+						letter-spacing: 0.4px;
+						color: #000000;
+					}
+
+					& .cover-univ-loc {
+						font-size: 13.5pt;
+						font-weight: 700;
+						margin-bottom: 1.2mm;
+						color: #000000;
+					}
+
+					& .cover-univ-pin {
+						font-size: 13.5pt;
+						font-weight: 700;
+						color: #000000;
+					}
+				}
+			}
+		}
+	}
+}

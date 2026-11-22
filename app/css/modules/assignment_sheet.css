@@ -31,6 +31,15 @@
 			font-family: var(--current-hand-font);
 			letter-spacing: 0.2px;
 			text-shadow: 0.2px 0.2px 0.5px rgba(0, 56, 168, 0.25);
+
+			/* Ghost / Placeholder Sample Data (Translucent & Feeka Placeholder Style) */
+			&.is-ghost-sample {
+				opacity: 0.38;
+				filter: grayscale(40%) contrast(85%);
+				font-style: italic;
+				user-select: none;
+				text-shadow: none;
+			}
 		}
 
 		/* Uploaded Signature Ink Image: Scales dynamically via multiplier */
@@ -53,3 +62,5 @@
 		}
 	}
 }
+
+

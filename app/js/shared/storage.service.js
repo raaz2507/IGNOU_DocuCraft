@@ -31,4 +31,39 @@ export class StorageService {
 			console.error(`StorageService remove error for key "${key}":`, e);
 		}
 	}
+
+	static getAllPrefixed() {
+		const result = {};
+		try {
+			for (let i = 0; i < localStorage.length; i++) {
+				const fullKey = localStorage.key(i);
+				if (fullKey && fullKey.startsWith(this.#PREFIX)) {
+					const shortKey = fullKey.slice(this.#PREFIX.length);
+					try {
+						result[shortKey] = JSON.parse(localStorage.getItem(fullKey));
+					} catch {
+						result[shortKey] = localStorage.getItem(fullKey);
+					}
+				}
+			}
+		} catch (e) {
+			console.error("StorageService getAllPrefixed error:", e);
+		}
+		return result;
+	}
+
+	static clearPrefixed() {
+		try {
+			const toRemove = [];
+			for (let i = 0; i < localStorage.length; i++) {
+				const fullKey = localStorage.key(i);
+				if (fullKey && fullKey.startsWith(this.#PREFIX)) {
+					toRemove.push(fullKey);
+				}
+			}
+			toRemove.forEach((k) => localStorage.removeItem(k));
+		} catch (e) {
+			console.error("StorageService clearPrefixed error:", e);
+		}
+	}
 }

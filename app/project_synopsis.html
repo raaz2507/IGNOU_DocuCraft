@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IGNOU Project Synopsis Kit - Smart Studio</title>
+		<link rel="stylesheet" href="./css/project_synopsis.css" />
+		<style id="dynamicPrintStyle">
+			@page {
+				size: A4 portrait;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Global Shared Application Navigation Header -->
+		<ignou-header active-page="project"></ignou-header>
+
+		<!-- Mobile Sticky View Toggle Bar -->
+		<div class="mobile-view-toggle-bar" id="mobileViewToggleBar">
+			<button type="button" class="mobile-sheet-toggle-btn" id="btnToggleMobileSheet" aria-label="Toggle Control Panel">
+				<span class="btn-icon">⚙️</span>
+				<span class="btn-text">प्रोजेक्ट कंट्रोल्स खोलें ⚙️</span>
+				<span class="btn-chevron" id="sheetChevron">▲</span>
+			</button>
+		</div>
+
+		<!-- Mobile Backdrop Scrim -->
+		<div class="mobile-sheet-backdrop" id="mobileSheetBackdrop"></div>
+
+		<!-- Main Workspace: Control Sidebar + Dynamic Canvas -->
+		<div class="app-workspace" id="appWorkspace">
+			<!-- =================================================================== -->
+			<!-- SMART CONTROL PANEL (LEFT SIDEBAR - 2.5D GLASS 2-TAB ARCHITECTURE)   -->
+			<!-- =================================================================== -->
+			<aside class="control-panel" id="controlPanel">
+				<div class="sheet-drag-handle" aria-hidden="true"></div>
+
+				<div class="panel-header">
+					<h2>🎓 Project Synopsis Kit</h2>
+					<div class="header-actions">
+						<span class="badge-counter" id="badgeCounter">4 Docs Selected</span>
+						<button type="button" class="mobile-sheet-close-btn" id="btnCloseMobileSheet" aria-label="Close settings">✕</button>
+					</div>
+				</div>
+
+				<div class="panel-tab-viewport">
+					<!-- ======================================================= -->
+					<!-- TAB PANE 1: PROGRAMME & DOCUMENT CHECKLIST              -->
+					<!-- ======================================================= -->
+					<div class="panel-tab-pane active" id="paneDocSelection" role="tabpanel" aria-labelledby="tabBtnDocSelection">
+						<!-- Programme Selection Dropdown & Document Checklist -->
+						<div class="section-group sec-docs-selector">
+							<span class="section-label">🎓 Programme &amp; Document Selection</span>
+							<div class="field-row">
+								<label for="selectProgramme">Select IGNOU Programme:</label>
+								<select id="selectProgramme" class="form-select">
+									<!-- Dynamically populated from PROJECT_PROGRAMMES -->
+								</select>
+							</div>
+
+							<!-- Document Selection Checkbox Group -->
+							<div class="collapsible-card">
+								<div class="collapsible-header open" id="accordionHeader">
+									<span class="collapsible-title">📑 Document Selection (Checklist)</span>
+									<span class="accordion-arrow">▲</span>
+								</div>
+
+								<div class="collapsible-body open" id="accordionBody">
+									<div class="doc-selection-actions">
+										<button type="button" class="mini-action-btn" id="btnSelectAllDocs">✓ Select All (4 Docs)</button>
+										<button type="button" class="mini-action-btn" id="btnDeselectAllDocs">✕ Select None</button>
+									</div>
+									<div class="project-docs-list" id="projectDocsList">
+										<!-- Dynamically rendered checklist -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ======================================================= -->
+					<!-- TAB PANE 2: PROJECT PARTICULAR DETAILS                  -->
+					<!-- ======================================================= -->
+					<div class="panel-tab-pane" id="paneProjectParticulars" role="tabpanel" aria-labelledby="tabBtnProjectParticulars">
+						<!-- Project Proposal Particulars (Official Annexure II Order) -->
+						<div class="section-group sec-project-details">
+							<span class="section-label">📝 Project Proposal Details (Annexure II)</span>
+
+							<!-- Q2: Title of the Project -->
+							<div class="field-row">
+								<label for="inputProjectTitle">2. Title of the Project***:</label>
+								<input type="text" id="inputProjectTitle" class="form-input" data-field="ProjectTitle" placeholder="e.g. AI-Powered Healthcare Diagnostic Portal" />
+							</div>
+
+							<!-- Q6: Software used in the Project -->
+							<div class="field-row">
+								<div class="field-header-row">
+									<label for="inputProjectSoftware">6. Software used in the Project*** :</label>
+									<button type="button" class="btn-guidelines-toggle" id="btnToggleSection8Guide" title="View Section VIII Guidelines">
+										<span class="btn-icon">ℹ️</span> Sec. VIII Guidelines
+									</button>
+								</div>
+								<input type="text" id="inputProjectSoftware" class="form-input" data-field="ProjectSoftware" placeholder="e.g. Python 3.12, Django, PostgreSQL, React" />
+								
+								<!-- Quick Tech Stack Chips from Official Section VIII -->
+								<div class="tech-stack-chips-group">
+									<span class="tech-chips-label">Quick Add (Section VIII):</span>
+									<div class="tech-chips-list">
+										<button type="button" class="tech-chip" data-tech="Python">Python</button>
+										<button type="button" class="tech-chip" data-tech="Django">Django</button>
+										<button type="button" class="tech-chip" data-tech="ReactJS">ReactJS</button>
+										<button type="button" class="tech-chip" data-tech="PostgreSQL">PostgreSQL</button>
+										<button type="button" class="tech-chip" data-tech="MySQL">MySQL</button>
+										<button type="button" class="tech-chip" data-tech="Flutter">Flutter</button>
+										<button type="button" class="tech-chip" data-tech="Java">Java</button>
+										<button type="button" class="tech-chip" data-tech="FastAPI">FastAPI</button>
+									</div>
+								</div>
+
+								<!-- Section VIII Collapsible Guidelines Info Box -->
+								<div class="section-guidelines-card" id="section8GuideCard" style="display:none;">
+									<div class="guidelines-card-hdr">
+										<strong>Section VIII: Software &amp; Broad Areas Summary</strong>
+										<button type="button" class="btn-close-card" id="btnCloseSection8Guide">✕</button>
+									</div>
+									<p class="guide-lead">Official IGNOU Handbook Permitted Categories (Page 18):</p>
+									<ul class="guide-cats-list">
+										<li><strong>Frontend/GUI:</strong> ReactJS, Flutter, Vue.js, Angular, HTML5, TypeScript, Ionic, etc.</li>
+										<li><strong>Backend/RDBMS:</strong> MySQL, PostgreSQL, Oracle, MongoDB, SQL Server, etc.</li>
+										<li><strong>Languages:</strong> Python, Java, C#, PHP, etc.</li>
+									</ul>
+									<div class="guide-warning-box">
+										⚠️ <strong>Strict Restrictions (IGNOU Rule):</strong> Projects developed using legacy packages like <em>FoxPro, Visual FoxPro, Dbase III plus, MS-Access</em> are strictly not allowed and will be rejected.
+									</div>
+								</div>
+							</div>
+
+							<!-- Q7: Is this your first submission? -->
+							<div class="field-row">
+								<label>7. Is this your first submission?</label>
+								<div class="first-sub-radios">
+									<label class="radio-pill-item">
+										<input type="radio" name="FirstSubmission" value="yes" checked />
+										<span>[✓] Yes (First Submission)</span>
+									</label>
+									<label class="radio-pill-item">
+										<input type="radio" name="FirstSubmission" value="no" />
+										<span>[ ] No (Resubmission)</span>
+									</label>
+								</div>
+							</div>
+
+							<!-- Submission Date (Year auto-derived) -->
+							<div class="field-row">
+								<div class="field-label-row">
+									<label for="inputSubmissionDate">Date of Submission:</label>
+									<button type="button" class="btn-quick-today" id="btnTodayDate" title="Fill current date">Today</button>
+								</div>
+								<div class="date-input-group">
+									<input type="text" id="inputSubmissionDate" class="form-input date-field-input" data-field="SubmissionDate" placeholder="DD/MM/YYYY" />
+									<button type="button" class="btn-calendar-trigger" id="btnCalSubmissionDate" title="Choose date from calendar" aria-label="Open Calendar">
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+											<line x1="16" y1="2" x2="16" y2="6"></line>
+											<line x1="8" y1="2" x2="8" y2="6"></line>
+											<line x1="3" y1="10" x2="21" y2="10"></line>
+										</svg>
+									</button>
+									<input type="date" id="pickerSubmissionDate" class="hidden-date-picker" tabindex="-1" aria-hidden="true" />
+								</div>
+								<span class="form-hint">*Year of submission is automatically derived from this date.</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- ======================================================= -->
+					<!-- TAB PANE 3: GUIDE PARTICULARS & DIGITAL SIGNATURE        -->
+					<!-- ======================================================= -->
+					<div class="panel-tab-pane" id="paneGuideInfo" role="tabpanel" aria-labelledby="tabBtnGuideInfo">
+						<!-- Guide Academic Credentials & Qualifications -->
+						<div class="section-group sec-guide-details">
+							<span class="section-label">👨‍🏫 Guide Particulars &amp; Qualifications</span>
+
+							<!-- Q3: Name and Address of the Guide (2 Address Lines) -->
+							<div class="field-row">
+								<label for="inputGuideName">3. Name of the Guide:</label>
+								<input type="text" id="inputGuideName" class="form-input" data-field="GuideName" placeholder="e.g. Dr. Rajesh Kumar Sharma" />
+							</div>
+							<div class="field-row">
+								<label for="inputGuideAddress1">Address of the Guide (Line 1):</label>
+								<input type="text" id="inputGuideAddress1" class="form-input" data-field="GuideAddress1" placeholder="e.g. Dept. of Computer Science, Faculty of Mathematical Sciences" />
+							</div>
+							<div class="field-row">
+								<label for="inputGuideAddress2">Address of the Guide (Line 2):</label>
+								<input type="text" id="inputGuideAddress2" class="form-input" data-field="GuideAddress2" placeholder="e.g. University of Delhi, North Campus, Delhi - 110007" />
+							</div>
+
+							<!-- Q4: Educational Qualification of the Guide (5 Official Checkboxes) -->
+							<div class="field-row">
+								<label>4. Educational Qualification of the Guide (*in CS/IT only):</label>
+								<div class="degree-checkboxes-grid" id="degreeCheckboxesGrid">
+									<label class="checkbox-pill-item">
+										<input type="checkbox" name="GuideDegree" value="phd" checked />
+										<span>Ph.D*</span>
+									</label>
+									<label class="checkbox-pill-item">
+										<input type="checkbox" name="GuideDegree" value="mtech" />
+										<span>M.Tech.*</span>
+									</label>
+									<label class="checkbox-pill-item">
+										<input type="checkbox" name="GuideDegree" value="be_btech" />
+										<span>B.E*/B.Tech.*</span>
+									</label>
+									<label class="checkbox-pill-item">
+										<input type="checkbox" name="GuideDegree" value="mca" />
+										<span>MCA</span>
+									</label>
+									<label class="checkbox-pill-item">
+										<input type="checkbox" name="GuideDegree" value="msc" />
+										<span>M.Sc.*</span>
+									</label>
+								</div>
+							</div>
+
+							<!-- Q5: Working / Teaching experience of the Guide -->
+							<div class="field-row">
+								<label for="inputGuideExperience">5. Working / Teaching experience of the Guide**:</label>
+								<textarea id="inputGuideExperience" class="form-input" data-field="GuideExperience" rows="2" placeholder="e.g. 14 Years teaching experience as Associate Professor in University of Delhi"></textarea>
+							</div>
+						</div>
+
+						<!-- Guide Digital Signature (Optional) -->
+						<div class="section-group sec-guide-signature">
+							<span class="section-label">✍️ Guide Digital Signature (Optional)</span>
+							<div class="field-row">
+								<label for="guideSigFileInput">Upload Guide Signature Image (Photo/Scan):</label>
+								<input type="file" id="guideSigFileInput" accept="image/*" class="form-input file-input" />
+								<span class="form-hint">*White paper is auto-removed (transparent). Leave blank if guide signs manually with pen.</span>
+							</div>
+
+							<div id="guideSigPreviewContainer" class="sig-preview-card" style="display:none;">
+								<div class="sig-preview-header">
+									<span class="sig-preview-title">Guide Signature Preview:</span>
+									<button type="button" id="btnRemoveGuideSig" class="btn-remove-sig">🗑️ Remove</button>
+								</div>
+								<div class="sig-canvas-checkerboard">
+									<img id="guideSigPreviewImg" class="sig-preview-img" src="" alt="Guide Signature Preview" />
+								</div>
+								<div class="sig-scale-control">
+									<div class="scale-label-row">
+										<label for="guideSigScaleSlider">Guide Signature Size:</label>
+										<span id="guideSigScaleValue" class="scale-value-badge">1.00× (100%)</span>
+									</div>
+									<input type="range" id="guideSigScaleSlider" min="0.5" max="2.0" step="0.05" value="1.0" class="scale-slider" />
+								</div>
+							</div>
+
+							<!-- Guide Signature Date -->
+							<div class="field-row" style="margin-top: 12px;">
+								<div class="field-label-row">
+									<label for="inputGuideDate">Date of Guide Signature:</label>
+									<button type="button" class="btn-quick-today" id="btnTodayGuideDate" title="Fill current date">Today</button>
+								</div>
+								<div class="date-input-group">
+									<input type="text" id="inputGuideDate" class="form-input date-field-input" data-field="GuideDate" placeholder="DD/MM/YYYY" />
+									<button type="button" class="btn-calendar-trigger" id="btnCalGuideDate" title="Choose date from calendar" aria-label="Open Calendar">
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+											<line x1="16" y1="2" x2="16" y2="6"></line>
+											<line x1="8" y1="2" x2="8" y2="6"></line>
+											<line x1="3" y1="10" x2="21" y2="10"></line>
+										</svg>
+									</button>
+									<input type="date" id="pickerGuideDate" class="hidden-date-picker" tabindex="-1" aria-hidden="true" />
+								</div>
+								<span class="form-hint">*Optional. If left empty, appears as dotted line.</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- ======================================================= -->
+					<!-- TAB PANE 4: SHARED STUDENT BIO & DIGITAL SIGNATURE       -->
+					<!-- ======================================================= -->
+					<div class="panel-tab-pane" id="paneStudentBio" role="tabpanel" aria-labelledby="tabBtnStudentBio">
+						<!-- 1. Personal Identity & Contact -->
+						<div class="section-group sec-student-identity">
+							<span class="section-label">👤 Student Personal Details &amp; Contact</span>
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputEnrolment">Enrolment No.:</label>
+									<input type="text" id="inputEnrolment" class="form-input" data-field="Enrolment" />
+								</div>
+								<div class="field-row">
+									<label for="inputName">Student Name:</label>
+									<input type="text" id="inputName" class="form-input" data-field="Name" />
+								</div>
+							</div>
+
+							<div class="field-row">
+								<label for="inputAddress1">Address (Line 1):</label>
+								<input type="text" id="inputAddress1" class="form-input" data-field="Address1" />
+							</div>
+							<div class="field-row">
+								<label for="inputAddress2">Address (Line 2):</label>
+								<input type="text" id="inputAddress2" class="form-input" data-field="Address2" />
+							</div>
+
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputPhone">Phone / Mobile No.:</label>
+									<input type="text" id="inputPhone" class="form-input" data-field="Phone" />
+								</div>
+								<div class="field-row">
+									<label for="inputEmail">Email ID:</label>
+									<input type="email" id="inputEmail" class="form-input" data-field="Email" />
+								</div>
+							</div>
+						</div>
+
+						<!-- 2. Study Centre & Regional Centre Information -->
+						<div class="section-group sec-student-centre">
+							<span class="section-label">🏫 Study Centre &amp; Regional Centre Details</span>
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputStudyCentreCode">Study Centre Code:</label>
+									<input type="text" id="inputStudyCentreCode" class="form-input" data-field="StudyCentreCode" />
+								</div>
+								<div class="field-row">
+									<label for="inputStudyCentreName">Study Centre Name:</label>
+									<input type="text" id="inputStudyCentreName" class="form-input" data-field="StudyCentreName" />
+								</div>
+							</div>
+
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputRegionalCentre">Regional Centre Name:</label>
+									<input type="text" id="inputRegionalCentre" class="form-input" data-field="RegionalCentre" placeholder="e.g. Delhi-3" />
+								</div>
+								<div class="field-row">
+									<label for="inputRegionalCentreCode">RC Code:</label>
+									<input type="text" id="inputRegionalCentreCode" class="form-input" data-field="RegionalCentreCode" placeholder="e.g. 38" />
+								</div>
+							</div>
+						</div>
+
+						<!-- Student Signature Upload Section -->
+						<div class="section-group sec-student-signature">
+							<span class="section-label">✍️ Student Digital Signature (Optional)</span>
+							<div class="field-row">
+								<label for="sigFileInput">Upload Signature Image (Photo/Scan):</label>
+								<input type="file" id="sigFileInput" accept="image/*" class="form-input file-input" />
+								<span class="form-hint">*White paper is auto-removed (transparent). Leave blank to sign manually with pen.</span>
+							</div>
+
+							<div id="sigPreviewContainer" class="sig-preview-card" style="display:none;">
+								<div class="sig-preview-header">
+									<span class="sig-preview-title">Signature Preview:</span>
+									<button type="button" id="btnRemoveSig" class="btn-remove-sig">🗑️ Remove</button>
+								</div>
+								<div class="sig-canvas-checkerboard">
+									<img id="sigPreviewImg" class="sig-preview-img" src="" alt="Signature Preview" />
+								</div>
+								<div class="sig-slider-box">
+									<div class="sig-slider-labels">
+										<span>Proportional Scale Multiplier:</span>
+										<span id="sigScaleValue" class="badge-scale">1.00× (100%)</span>
+									</div>
+									<input type="range" id="sigScaleSlider" class="sig-range-slider" min="0.5" max="2.0" step="0.05" value="1.0" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Bottom Docked Navigation Tabs (4-Tab Architecture) -->
+				<nav class="panel-segmented-nav" aria-label="Control Panel Navigation">
+					<button type="button" class="panel-tab-btn active" id="tabBtnDocSelection" data-tab="paneDocSelection">
+						<span class="tab-icon">📑</span>
+						<span class="tab-label">दस्तावेज़</span>
+					</button>
+					<button type="button" class="panel-tab-btn" id="tabBtnProjectParticulars" data-tab="paneProjectParticulars">
+						<span class="tab-icon">💡</span>
+						<span class="tab-label">प्रोजेक्ट</span>
+					</button>
+					<button type="button" class="panel-tab-btn" id="tabBtnGuideInfo" data-tab="paneGuideInfo">
+						<span class="tab-icon">👨‍🏫</span>
+						<span class="tab-label">गाइड</span>
+					</button>
+					<button type="button" class="panel-tab-btn" id="tabBtnStudentBio" data-tab="paneStudentBio">
+						<span class="tab-icon">👤</span>
+						<span class="tab-label">छात्र</span>
+					</button>
+				</nav>
+			</aside>
+
+			<!-- =================================================================== -->
+			<!-- STAGE COLUMN: ACTION BAR + LIVE DOCUMENT SHEETS STAGE               -->
+			<!-- =================================================================== -->
+			<div class="deck-stage-column" id="deckStageColumn">
+				<section class="stage-action-bar" id="stageActionBar" aria-label="Studio Actions">
+					<button type="button" class="btn-print-batch" id="btnPrint">
+						<span class="btn-icon">🖨️</span>
+						<span class="btn-label desktop-label">Print All Selected Documents (Batch PDF)</span>
+						<span class="btn-label mobile-label">Print Selected</span>
+					</button>
+					<div class="stage-action-subgroup">
+						<button type="button" class="btn-sample-toggle" id="btnToggleSample" aria-pressed="false" title="Toggle sample guide data">
+							<span class="sample-icon">✨</span>
+							<span class="sample-label desktop-label">सैंपल गाइड</span>
+							<span class="sample-label mobile-label">सैंपल</span>
+							<span class="sample-switch-pill" aria-hidden="true"><span class="sample-switch-knob"></span></span>
+						</button>
+						<button type="button" class="btn-clear-fields" id="btnClear" title="Clear project &amp; guide inputs">
+							<span class="clear-icon">🗑️</span>
+							<span class="clear-label desktop-label">Clear Project Fields</span>
+							<span class="clear-label mobile-label">Clear</span>
+						</button>
+					</div>
+				</section>
+
+				<!-- 3D Perspective & 1:1 Sheet Stage Viewport -->
+				<section class="deck-3d-stage" id="deckStage" data-deck-mode="sheet" aria-label="Project Documents Preview Stage">
+					<!-- Stage Header: Active Document Info & Status Pill + View Switcher & Fullscreen Trigger -->
+					<div class="deck-stage-header">
+						<div class="deck-header-info">
+							<span class="deck-active-code" id="deckActiveCode">MCSP-232</span>
+							<span class="deck-active-title" id="deckActiveTitle">Project Proposal Approval Proforma</span>
+						</div>
+
+						<div class="deck-stage-header-actions">
+							<!-- Dual-Mode Stage Switcher: 3D Deck vs 1:1 Flat Sheet -->
+							<div class="deck-view-segmented-switch" role="group" aria-label="Deck View Mode">
+								<button type="button" class="deck-mode-btn" id="btnModeDeck" data-mode="deck" title="3D Deck">
+									<span class="mode-icon">🎴</span>
+									<span class="mode-text">3D डेक</span>
+								</button>
+								<button type="button" class="deck-mode-btn active" id="btnModeSheet" data-mode="sheet" title="1:1 Sheet">
+									<span class="mode-icon">📄</span>
+									<span class="mode-text">1:1 शीट</span>
+								</button>
+							</div>
+
+							<!-- Fullscreen Lightbox Trigger Button -->
+							<button type="button" class="btn-lightbox-trigger" id="btnTriggerLightbox" title="Fullscreen (Full View)">
+								<span class="trigger-icon">⛶</span>
+								<span class="trigger-text">फुलस्क्रीन</span>
+							</button>
+
+							<span class="deck-counter-badge" id="deckCounterBadge">Doc 1 of 1</span>
+						</div>
+					</div>
+
+					<!-- Viewport with Navigation Arrows -->
+					<div class="deck-3d-viewport" id="deckViewport">
+						<button type="button" class="deck-arrow-btn deck-arrow-prev" id="btnDeckPrev" aria-label="Previous Document">‹</button>
+						<button type="button" class="deck-arrow-btn deck-arrow-next" id="btnDeckNext" aria-label="Next Document">›</button>
+
+						<!-- Cards Container: Fanned 3D in deck mode, Vertical scroll in sheet mode -->
+						<div class="deck-fanned-container" id="projectPagesContainer">
+							<!-- Dynamically populated preview sheets -->
+						</div>
+					</div>
+
+					<!-- Stage Navigation Dots Footer -->
+					<div class="deck-stage-footer" id="deckStageFooter">
+						<div class="deck-dots-container" id="deckDotsContainer"></div>
+						<span class="deck-hint-text" data-i18n="deck.hintText">💡 Click side cards or use ◀ / ▶ arrow keys to fan through covers</span>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<!-- =================================================================== -->
+		<!-- FULLSCREEN A4 INSPECT LIGHTBOX MODAL OVERLAY (PDF READER STYLE)     -->
+		<!-- =================================================================== -->
+		<div class="stage-lightbox-modal" id="stageLightboxModal" role="dialog" aria-modal="true" aria-label="Document Fullscreen Inspector" hidden>
+			<div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+
+			<!-- Floating Top-Right Exit Button -->
+			<button type="button" class="lightbox-float-close-btn" id="btnCloseLightbox" aria-label="Close Lightbox (Esc)">
+				<span class="close-icon">✕</span>
+				<span class="close-tip">Esc</span>
+			</button>
+
+			<!-- Fullscreen Canvas Viewport (Pannable & Zoomable via Mouse Wheel / Touch Pinch) -->
+			<div class="lightbox-viewport" id="lightboxViewport">
+				<div class="lightbox-sheet-host" id="lightboxSheetHost">
+					<!-- Dynamically populated with active A4 sheet -->
+				</div>
+			</div>
+
+			<!-- Floating Bottom PDF Navigation Bar (2.5D Translucent Glass Capsule) -->
+			<nav class="lightbox-bottom-navbar" id="lightboxBottomNavbar" aria-label="PDF Lightbox Controls">
+				<!-- Document Info Badge -->
+				<div class="lb-nav-info">
+					<span class="lb-nav-code" id="lightboxActiveCode">MCSP-232</span>
+					<span class="lb-nav-title" id="lightboxActiveTitle">Project Proposal Approval Proforma</span>
+				</div>
+
+				<div class="lb-nav-divider"></div>
+
+				<!-- Page Navigation -->
+				<div class="lb-nav-paging">
+					<button type="button" class="lb-nav-btn" id="btnLightboxPrev" aria-label="Previous Document" title="Previous Document (◀)">‹</button>
+					<span class="lb-nav-badge" id="lightboxPageBadge">Doc 1 of 1</span>
+					<button type="button" class="lb-nav-btn" id="btnLightboxNext" aria-label="Next Document" title="Next Document (▶)">›</button>
+				</div>
+
+				<div class="lb-nav-divider"></div>
+
+				<!-- Zoom Controls (Mouse Wheel / Touch Pinch / Buttons) -->
+				<div class="lb-nav-zoom">
+					<button type="button" class="lb-nav-btn lb-btn-zoom" id="btnLightboxZoomOut" aria-label="Zoom Out" title="Zoom Out (Mouse Wheel Down)">−</button>
+					<button type="button" class="lb-zoom-level-btn" id="btnLightboxZoomReset" title="Click to reset zoom (100%)">
+						<span id="lightboxZoomPercent">100%</span>
+					</button>
+					<button type="button" class="lb-nav-btn lb-btn-zoom" id="btnLightboxZoomIn" aria-label="Zoom In" title="Zoom In (Mouse Wheel Up)">+</button>
+				</div>
+			</nav>
+		</div>
+
+		<!-- Global Shared Application Footer -->
+		<ignou-footer></ignou-footer>
+
+		<!-- Shared Web Components Scripts -->
+		<script type="module" src="./js/shared/header.component.js"></script>
+		<script type="module" src="./js/shared/footer.component.js"></script>
+		<!-- Project Synopsis Studio App Script -->
+		<script type="module" src="./js/project_synopsis/project_synopsis_studio.js"></script>
+	</body>
+</html>

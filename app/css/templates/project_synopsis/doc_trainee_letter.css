@@ -1,0 +1,203 @@
+/**
+ * Document 2: Project Trainee Request Letter (MCSP-232, Page 19)
+ * Single Responsibility: 1:1 Official IGNOU Institutional Letterhead & Certificate Layout.
+ */
+@layer components {
+	.tpl-doc-trainee-letter {
+		padding: 4.8mm;
+		box-sizing: border-box;
+		background: #ffffff;
+		font-family: "Times New Roman", Times, serif;
+		color: #000000;
+		font-size: 11pt;
+		line-height: 1.45;
+
+		/* Single Clean Outer Border Frame Matching Official Proforma Frame */
+		& .trainee-border-frame {
+			width: 100%;
+			height: 100%;
+			border: 1.4px solid #000000;
+			padding: 8mm 12mm 10mm 12mm;
+			display: flex;
+			flex-direction: column;
+			box-sizing: border-box;
+		}
+
+		/* Global Handwriting Ink Settings: Clean Upright Legible Pen Weight */
+		& .ink-text {
+			font-family: var(--font-handwriting, "Patrick Hand", cursive, sans-serif);
+			font-weight: var(--weight-normal, 400);
+			color: var(--current-ink-color, #002288);
+			letter-spacing: 0.2px;
+		}
+
+		/* Header Section: Centered IGNOU Emblem & University Info */
+		& .trainee-hdr {
+			text-align: center;
+			margin-bottom: 5mm;
+			flex-shrink: 0;
+
+			& .trainee-emblem-wrap {
+				display: flex;
+				justify-content: center;
+				margin-bottom: 2mm;
+
+				& .trainee-emblem {
+					width: 52px;
+					height: auto;
+				}
+			}
+
+			& .trainee-univ-name {
+				font-size: 15pt;
+				font-weight: 800;
+				margin: 0 0 1.5mm 0;
+				letter-spacing: 0.3px;
+				color: #000000;
+			}
+
+			& .trainee-address {
+				font-size: 11pt;
+				font-weight: 700;
+				margin: 0 0 1.2mm 0;
+			}
+
+			& .trainee-school {
+				font-size: 11pt;
+				font-weight: 700;
+				margin: 0 0 1.2mm 0;
+			}
+
+			& .trainee-phone {
+				font-size: 8.5pt;
+				font-weight: 600;
+				letter-spacing: 0.2px;
+			}
+		}
+
+		/* Document Title */
+		& .trainee-title-wrap {
+			text-align: center;
+			margin: 3mm 0 4mm 0;
+			flex-shrink: 0;
+
+			& .trainee-doc-title {
+				font-size: 12pt;
+				font-weight: 800;
+				margin: 0;
+				letter-spacing: 0.2px;
+			}
+		}
+
+		/* Date Row (Right-Aligned) */
+		& .trainee-date-row {
+			display: flex;
+			justify-content: flex-end;
+			align-items: baseline;
+			margin-bottom: 6mm;
+			font-size: 11pt;
+			font-weight: 700;
+			flex-shrink: 0;
+
+			& .date-lbl {
+				margin-right: 4px;
+			}
+
+			& .date-dots-wrap {
+				position: relative;
+				display: inline-block;
+
+				& .dots-line {
+					letter-spacing: 1.2px;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 1px;
+					left: 4px;
+					font-size: 20px;
+					line-height: 1;
+				}
+			}
+		}
+
+		/* Main Certificate Body Content */
+		& .trainee-body-content {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			min-height: 0;
+
+			& .trainee-para {
+				text-align: justify;
+				text-justify: inter-word;
+				font-size: 11pt;
+				line-height: 1.62;
+				margin: 0 0 4.5mm 0;
+
+				&.closing-para {
+					margin-top: 2mm;
+					margin-bottom: 0;
+				}
+			}
+
+			& .trainee-fill-wrap {
+				position: relative;
+				display: inline-block;
+				vertical-align: baseline;
+
+				& .dots-line {
+					letter-spacing: 1.2px;
+					color: #000000;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 1px;
+					left: 4px;
+					font-size: 20px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+
+				&.name-wrap {
+					min-width: 200px;
+				}
+
+				&.enrol-wrap {
+					min-width: 120px;
+				}
+			}
+		}
+
+		/* Bottom Authority Signature Block (Right Aligned) */
+		& .trainee-authority-footer {
+			display: flex;
+			justify-content: flex-end;
+			margin-top: 6mm;
+			margin-bottom: 2mm;
+			flex-shrink: 0;
+
+			& .authority-sign-area {
+				width: 280px;
+				text-align: left;
+				font-size: 10pt;
+
+				& .authority-stamp-space {
+					height: 38px;
+					margin-bottom: 2mm;
+				}
+
+				& .authority-title {
+					font-weight: 700;
+					margin-bottom: 1.5px;
+				}
+
+				& .authority-sub {
+					font-weight: 700;
+					line-height: 1.25;
+				}
+			}
+		}
+	}
+}

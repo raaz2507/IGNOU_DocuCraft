@@ -2,47 +2,163 @@
 /* LAYER 3 (PART A): SIDEBAR CONTROL PANEL & CONTROLS (TOKENIZED)*/
 /* ============================================================= */
 @layer components {
-	/* 1. Sidebar Control Panel (Modern Intrinsic Fluid Sizing) */
+	/* 1. Sidebar Control Panel (2.5D Translucent Glassmorphic 2-Tab Architecture) */
 	.control-panel {
 		width: min(440px, 100%);
 		box-sizing: border-box;
-		background: var(--panel-bg);
+		background: var(--glass-card-bg);
+		backdrop-filter: var(--glass-blur);
+		-webkit-backdrop-filter: var(--glass-blur);
 		border-radius: var(--radius-2xl);
-		box-shadow: var(--shadow-panel);
-		border: 1px solid var(--panel-border);
-		padding: clamp(var(--space-md), 3vw, var(--space-2xl));
+		box-shadow: var(--glass-25d-shadow);
+		border: 1px solid var(--glass-border);
+		padding: var(--space-md) var(--space-lg);
 		font-family: "Segoe UI", Calibri, Arial, sans-serif;
 		position: sticky;
-		top: var(--space-2xl);
-		max-height: 94vh;
-		overflow-y: auto;
+		top: calc(var(--space-xs) + 100px);
+		height: calc(100vh - 180px);
+		max-height: calc(100vh - 150px);
+		min-height: 580px;
+		display: flex;
+		flex-direction: column;
 		z-index: 100;
 		transition:
 			background var(--transition-smooth),
-			border-color var(--transition-smooth);
+			border-color var(--transition-smooth),
+			box-shadow var(--transition-smooth);
 
 		/* Nested Panel Header */
 		& .panel-header {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			border-bottom: 2px solid var(--brand-primary);
-			padding-bottom: var(--space-md);
-			margin-bottom: var(--space-xl);
+			border-bottom: 1px solid var(--panel-divider);
+			padding-bottom: var(--space-xs);
+			margin-bottom: var(--space-sm);
+			flex-shrink: 0;
 
 			& h2 {
 				margin: 0;
-				font-size: var(--font-size-xl);
+				font-size: var(--font-size-lg);
+				font-weight: var(--weight-extrabold);
 				color: var(--brand-primary);
 				display: flex;
 				align-items: center;
-				gap: var(--space-sm);
+				gap: var(--space-xs);
 			}
 
 			& .header-actions {
 				display: flex;
 				align-items: center;
+				gap: var(--space-xs);
+			}
+		}
+
+		/* Sheet Drag Handle & Mobile Close Button (Hidden on Desktop) */
+		& .sheet-drag-handle {
+			display: none;
+		}
+
+		& .mobile-sheet-close-btn {
+			display: none;
+		}
+
+		/* 2. Scrollable Tab Viewport */
+		& .panel-tab-viewport {
+			flex: 1;
+			overflow-y: auto;
+			padding-right: var(--space-xs);
+			min-height: 0;
+			scrollbar-width: thin;
+			scrollbar-color: var(--glass-border) transparent;
+
+			&::-webkit-scrollbar {
+				width: 5px;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background: var(--glass-border);
+				border-radius: var(--radius-pill);
+			}
+		}
+
+		& .panel-tab-pane {
+			display: none;
+			animation: fadeInTabPane 0.22s ease-out;
+
+			&.active {
+				display: flex;
+				flex-direction: column;
 				gap: var(--space-md);
+			}
+		}
+
+		@keyframes fadeInTabPane {
+			from {
+				opacity: 0;
+				transform: translateY(4px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* 4. Bottom Docked 2.5D Segmented Navigation Tabs */
+		& .panel-segmented-nav {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: var(--space-xs);
+			padding-top: var(--space-sm);
+			border-top: 1px solid var(--panel-divider);
+			margin-top: auto;
+			flex-shrink: 0;
+
+			& .panel-tab-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: var(--space-xs);
+				padding: var(--space-xs) var(--space-md);
+				border-radius: var(--radius-pill);
+				border: 1px solid var(--glass-border);
+				background: var(--glass-bg);
+				color: var(--text-muted);
+				font-size: var(--font-size-xs);
+				font-weight: var(--weight-bold);
+				font-family: inherit;
+				cursor: pointer;
+				transition:
+					transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+					background 0.2s ease,
+					color 0.2s ease,
+					box-shadow 0.2s ease,
+					border-color 0.2s ease;
+				white-space: nowrap;
+				user-select: none;
+
+				&:hover {
+					color: var(--text-main);
+					background: var(--glass-bg-hover);
+					transform: translateY(-2px);
+				}
+
+				&.active {
+					background: var(--btn-25d-bg);
+					color: var(--text-inverse);
+					border-color: rgba(255, 255, 255, 0.4);
+					box-shadow: var(--btn-25d-shadow);
+					transform: translateY(-1px);
+				}
+
+				&:active {
+					transform: translateY(1px);
+					box-shadow: var(--btn-25d-shadow-active);
+				}
+
+				& .tab-icon {
+					font-size: var(--font-size-sm);
+				}
 			}
 		}
 
@@ -508,62 +624,95 @@
 		}
 	}
 
-	/* Action Buttons Group */
-	.action-btn-group {
+	/* Mobile Sheet Backdrop (Hidden on Desktop) */
+	.mobile-sheet-backdrop {
+		display: none;
+	}
+}
+
+/* ============================================================= */
+/* RESPONSIVE: APPLE BOTTOM SHEET MODAL (MOBILE SCREENS <= 880px) */
+/* ============================================================= */
+@media screen and (max-width: 880px) {
+	.mobile-sheet-backdrop {
+		display: block;
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 15, 40, 0.50);
+		backdrop-filter: blur(5px);
+		-webkit-backdrop-filter: blur(5px);
+		z-index: 1040;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+	}
+
+	.mobile-sheet-backdrop.active {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.control-panel {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: auto;
+		width: 100%;
+		max-width: 100%;
+		height: 85vh;
+		max-height: 88vh;
+		min-height: 0;
+		border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+		border-bottom: none;
+		box-shadow: 0 -12px 48px rgba(0, 10, 30, 0.45);
+		z-index: 1050;
+		transform: translateY(105%);
+		transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+		padding: var(--space-sm) var(--space-lg) var(--space-md) var(--space-lg);
+		background: var(--panel-bg);
+	}
+
+	[data-theme="dark"] .control-panel {
+		background: var(--panel-bg);
+	}
+
+	.control-panel.mobile-sheet-open {
+		transform: translateY(0);
+	}
+
+	.control-panel .sheet-drag-handle {
+		display: block;
+		width: 44px;
+		height: 4.5px;
+		border-radius: var(--radius-pill);
+		background: var(--text-muted);
+		opacity: 0.4;
+		margin: 0 auto var(--space-xs) auto;
+	}
+
+	.control-panel .mobile-sheet-close-btn {
 		display: flex;
-		flex-direction: column;
-		gap: var(--space-md);
-		margin-top: var(--space-xl);
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 50%;
+		background: var(--glass-bg);
+		border: 1px solid var(--glass-border);
+		color: var(--text-muted);
+		font-size: var(--font-size-xs);
+		font-weight: var(--weight-bold);
+		cursor: pointer;
+		transition: all var(--transition-fast);
 
-		& .btn-print {
-			background: var(--brand-primary);
-			color: var(--text-inverse);
-			border: none;
-			padding: var(--space-sm) var(--space-xl);
-			border-radius: var(--radius-md);
-			font-size: var(--font-size-md);
-			font-weight: var(--weight-bold);
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: var(--space-sm);
-			transition:
-				opacity var(--transition-base),
-				transform 0.1s;
-
-			&:hover {
-				opacity: 0.92;
-			}
-			&:active {
-				transform: scale(0.99);
-			}
+		&:hover {
+			background: var(--glass-bg-hover);
+			color: var(--text-main);
 		}
+	}
 
-		& .btn-secondary {
-			background: var(--btn-secondary-bg);
-			color: var(--btn-secondary-text);
-			border: 1px solid var(--btn-secondary-border);
-			padding: var(--space-md) var(--space-base);
-			border-radius: var(--radius-sm);
-			font-size: var(--font-size-sm);
-			font-weight: var(--weight-semibold);
-			cursor: pointer;
-			transition: background var(--transition-fast);
-
-			&:hover {
-				background: var(--btn-secondary-hover);
-			}
-
-			&.btn-clear {
-				color: #ef4444;
-				background: rgba(239, 68, 68, 0.1);
-				border-color: rgba(239, 68, 68, 0.25);
-
-				&:hover {
-					background: rgba(239, 68, 68, 0.18);
-				}
-			}
-		}
+	body.mobile-sheet-locked {
+		overflow: hidden;
 	}
 }

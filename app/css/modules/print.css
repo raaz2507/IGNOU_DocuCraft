@@ -1,5 +1,6 @@
 /* ============================================================= */
 /* LAYER 4: PRINT MEDIA STYLES                                   */
+/* Single Responsibility: Master layout rules for physical print */
 /* ============================================================= */
 @layer print {
 	@media print {
@@ -14,13 +15,24 @@
 			display: none !important;
 		}
 
-		/* Hide global navigation, footer and controls during print */
+		/* Hide global navigation, footer, sidebars, action bars, and modal controls during print */
 		ignou-header,
 		ignou-footer,
 		.control-panel,
+		.stage-action-bar,
+		.deck-stage-header,
+		.deck-arrow-btn,
+		.deck-stage-footer,
+		.stage-lightbox-modal,
 		.mobile-view-toggle-bar,
-		.mobile-page-pagination {
+		.mobile-page-pagination,
+		.mobile-sheet-backdrop {
 			display: none !important;
+		}
+
+		/* Hide watermark sample ghost guides during physical printing */
+		.ink-text.is-ghost-sample {
+			visibility: hidden !important;
 		}
 
 		.app-workspace {
@@ -29,10 +41,25 @@
 			margin: 0 !important;
 		}
 
+		/* Flatten 3D perspective deck into sequential printable sheets */
+		.deck-3d-stage,
+		.deck-3d-viewport,
+		.deck-fanned-container,
 		.pages-container {
 			gap: 0 !important;
 			display: block !important;
+			position: static !important;
 			width: 100% !important;
+			height: auto !important;
+			perspective: none !important;
+			transform: none !important;
+			transform-style: flat !important;
+			overflow: visible !important;
+			background: transparent !important;
+			border: none !important;
+			box-shadow: none !important;
+			padding: 0 !important;
+			margin: 0 !important;
 		}
 
 		.page-viewport-scaler {
@@ -42,9 +69,30 @@
 			display: block !important;
 		}
 
+		.deck-card-item {
+			display: block !important;
+			position: static !important;
+			width: auto !important;
+			height: auto !important;
+			transform: none !important;
+			opacity: 1 !important;
+			filter: none !important;
+			box-shadow: none !important;
+			overflow: visible !important;
+			border-radius: 0 !important;
+			background: transparent !important;
+			page-break-after: always !important;
+			break-after: page !important;
+		}
+
+		.deck-card-item:last-child {
+			page-break-after: auto !important;
+			break-after: auto !important;
+		}
+
 		.page-sheet {
 			box-shadow: none !important;
-			margin: 0 !important;
+			margin: 0 auto !important;
 			transform: none !important;
 			width: var(--page-width) !important;
 			height: var(--page-height) !important;

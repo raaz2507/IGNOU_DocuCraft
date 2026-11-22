@@ -1,0 +1,198 @@
+/**
+ * Template 1: Classic IGNOU Official (Double Border)
+ * Single Responsibility: Visual styling for the traditional double-border IGNOU assignment cover.
+ */
+@layer components {
+	.tpl-classic {
+		padding: 10mm;
+
+		& .outer-border {
+			width: 100%;
+			height: 100%;
+			border: var(--sheet-outer-border);
+			padding: 3mm;
+			position: relative;
+			box-sizing: border-box;
+		}
+
+		& .inner-border {
+			width: 100%;
+			height: 100%;
+			border: var(--sheet-inner-border);
+			padding: 6mm 14mm 6mm 14mm;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			box-sizing: border-box;
+		}
+
+		& .header-logo-section {
+			text-align: center;
+			margin-top: 1mm;
+			margin-bottom: 3mm;
+
+			& img {
+				width: 270px;
+				max-width: 85%;
+				height: auto;
+				display: inline-block;
+			}
+		}
+
+		& .form-content {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			& .student-profile-section {
+				align-self: flex-end;
+				width: 62%;
+				margin-top: 1mm;
+				margin-bottom: 3mm;
+			}
+
+			& .course-details-section {
+				width: 100%;
+				margin-bottom: 3mm;
+			}
+		}
+
+		& .form-row {
+			display: flex;
+			align-items: baseline;
+			margin-bottom: 7mm;
+			font-size: var(--current-label-font-size);
+			line-height: 1.2;
+			position: relative;
+
+			& .form-label {
+				font-weight: 700;
+				color: var(--sheet-label-color);
+				white-space: nowrap;
+				letter-spacing: var(--current-label-letter-spacing);
+				padding-right: 8px;
+				text-transform: uppercase;
+			}
+
+			& .line-wrapper {
+				flex: 1;
+				position: relative;
+				display: flex;
+				align-items: baseline;
+
+				& .dotted-line {
+					width: 100%;
+					border-bottom: var(--sheet-dotted-line);
+					height: 14px;
+					min-height: 14px;
+					margin-bottom: 1px;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 2.5px;
+					left: 6px;
+					font-size: 20px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+			}
+		}
+
+		& .continuation-row {
+			margin-bottom: 7mm;
+			display: flex;
+
+			& .line-wrapper {
+				flex: 1;
+				position: relative;
+				display: flex;
+				align-items: baseline;
+
+				& .continuation-dotted-line {
+					width: 100%;
+					border-bottom: var(--sheet-dotted-line);
+					height: 14px;
+					margin-bottom: 1px;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 2.5px;
+					left: 6px;
+					font-size: 20px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+			}
+		}
+
+		& .footer-section {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			padding-top: 3mm;
+			padding-bottom: 1mm;
+			font-size: var(--current-label-font-size);
+
+			& .footer-col-left {
+				display: flex;
+				align-items: baseline;
+				width: 40%;
+				position: relative;
+			}
+
+			& .footer-col-right {
+				display: flex;
+				align-items: baseline;
+				width: 48%;
+				position: relative;
+			}
+
+			& .form-label {
+				font-weight: 700;
+				color: var(--sheet-label-color);
+				white-space: nowrap;
+				letter-spacing: var(--current-label-letter-spacing);
+				padding-right: 8px;
+				text-transform: uppercase;
+			}
+
+			& .line-wrapper {
+				flex: 1;
+				position: relative;
+				display: flex;
+				align-items: baseline;
+
+				& .dotted-line {
+					width: 100%;
+					border-bottom: var(--sheet-dotted-line);
+					height: 14px;
+					min-height: 14px;
+					margin-bottom: 1px;
+				}
+
+				& .ink-text {
+					position: absolute;
+					bottom: 2.5px;
+					left: 6px;
+					font-size: 20px;
+					line-height: 1;
+					white-space: nowrap;
+				}
+
+				& .ink-signature-img {
+					position: absolute;
+					bottom: 2px;
+					left: 6px;
+					max-height: 42px;
+					max-width: 160px;
+					object-fit: contain;
+					transform-origin: bottom left;
+					transform: scale(var(--sig-scale, 1));
+				}
+			}
+		}
+	}
+}

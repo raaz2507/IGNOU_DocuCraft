@@ -1,6 +1,8 @@
 /**
  * Master Stylesheet: IGNOU Document Automation Hub (index.html)
- * Single Responsibility: Imports common shared design foundation and home dashboard layout.
+ * Single Responsibility: Imports common shared design foundation and home hub layout.
  */
 @import url("./common.css");
-@import url("./modules/dashboard.css");
+@import url("./modules/assignment_sheet.css");
+@import url("./modules/templates.css");
+@import url("./modules/home.css");

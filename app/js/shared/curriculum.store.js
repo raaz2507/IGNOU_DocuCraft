@@ -1,46 +1,69 @@
 /**
  * CurriculumStore
- * Manages official IGNOU Curriculum data loaded dynamically from JSON.
- * Single Responsibility: Course data loading, caching, and querying.
+ * Manages official IGNOU Curriculum data loaded from synchronous JS modules.
+ * Single Responsibility: Course data loading, caching, and querying by locale.
  */
+import { MCA_COURSES_EN } from "../../data/mca_courses.en.js";
+import { MCA_COURSES_HI } from "../../data/mca_courses.hi.js";
+
 export class CurriculumStore {
 	static #curriculumData = null;
+	static #currentLocale = "en";
 
 	/**
-	 * Initializes the store by fetching the JSON curriculum file.
-	 * Acts as Single Source of Truth (SSOT).
-	 * @param {string} dataPath - Relative URL to the JSON file
+	 * Formats raw course data structure into semKey lookup map.
+	 * @private
 	 */
-	static async init(dataPath = "./data/mca_courses.json") {
-		if (this.#curriculumData) return;
-
-		try {
-			const res = await fetch(dataPath);
-			if (!res.ok) {
-				throw new Error(`HTTP error while fetching courses! status: ${res.status}`);
-			}
-			const data = await res.json();
-			const formatted = {};
-
-			if (Array.isArray(data.semesters)) {
-				data.semesters.forEach((sem) => {
-					formatted[sem.sem] = {
-						title: sem.title,
-						courses: sem.courses.map((c) => ({
-							code: c.code,
-							title: c.title,
-							assign: c.assignment_no,
-							assignment_no: c.assignment_no,
-						})),
-					};
-				});
-			}
-
-			this.#curriculumData = formatted;
-		} catch (err) {
-			console.error("CurriculumStore initialization failed:", err);
-			this.#curriculumData = {};
+	static #formatData(source) {
+		const formatted = {};
+		if (Array.isArray(source.semesters)) {
+			source.semesters.forEach((sem) => {
+				formatted[sem.sem] = {
+					title: sem.title,
+					courses: sem.courses.map((c) => ({
+						code: c.code,
+						title: c.title,
+						assign: c.assignment_no,
+						assignment_no: c.assignment_no,
+					})),
+				};
+			});
 		}
+		return formatted;
+	}
+
+	/**
+	 * Initializes or re-keys the store by locale without network roundtrips.
+	 * Acts as Single Source of Truth (SSOT).
+	 * @param {string} locale - 'en' or 'hi'
+	 */
+	static init(locale = "en") {
+		this.#currentLocale = locale === "hi" ? "hi" : "en";
+		const source = this.#currentLocale === "hi" ? MCA_COURSES_HI : MCA_COURSES_EN;
+		this.#curriculumData = this.#formatData(source);
+	}
+
+	/**
+	 * Switch locale dynamically and update cached courses.
+	 * @param {string} locale - 'en' or 'hi'
+	 */
+	static setLocale(locale) {
+		this.init(locale);
+	}
+
+	/**
+	 * Returns current active locale.
+	 * @returns {string}
+	 */
+	static get locale() {
+		return this.#currentLocale;
+	}
+
+	/**
+	 * Returns raw curriculum metadata (programme, university) for active locale.
+	 */
+	static getMetadata() {
+		return this.#currentLocale === "hi" ? MCA_COURSES_HI : MCA_COURSES_EN;
 	}
 
 	/**
@@ -48,7 +71,7 @@ export class CurriculumStore {
 	 * @returns {Array<{code: string, title: string, assign: string, sem: string}>}
 	 */
 	static getAllCourses() {
-		if (!this.#curriculumData) return [];
+		if (!this.#curriculumData) this.init();
 		const list = [];
 		Object.keys(this.#curriculumData).forEach((semKey) => {
 			this.#curriculumData[semKey].courses.forEach((c) => {
@@ -64,7 +87,7 @@ export class CurriculumStore {
 	 * @returns {{title: string, courses: Array}|null}
 	 */
 	static getSemester(semKey) {
-		if (!this.#curriculumData) return null;
+		if (!this.#curriculumData) this.init();
 		return this.#curriculumData[semKey] || null;
 	}
 }

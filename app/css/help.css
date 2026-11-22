@@ -1,0 +1,6 @@
+/**
+ * Master Stylesheet: IGNOU Document Automation Hub (help.html)
+ * Single Responsibility: Bundles common shared foundation and help page module styles.
+ */
+@import url("./common.css");
+@import url("./modules/help.css");

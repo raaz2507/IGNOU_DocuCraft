@@ -1,0 +1,186 @@
+/**
+ * Template 2: Modern Minimalist Grid
+ * Single Responsibility: Visual styling for the contemporary structured-grid IGNOU assignment cover.
+ * Strict Parity: Contains ONLY the exact 12 fields from Classic.
+ */
+@layer components {
+	.tpl-modern {
+		padding: 10mm 15mm 10mm 15mm;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border: 2px solid #003366;
+		background: #ffffff;
+		box-sizing: border-box;
+
+		/* Header Section */
+		& .modern-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 2px solid #003366;
+			padding-bottom: 10px;
+			margin-bottom: 12px;
+
+			& .modern-logo {
+				width: 210px;
+				max-width: 45%;
+				height: auto;
+				display: block;
+			}
+
+			& .modern-title-group {
+				text-align: right;
+
+				& h1 {
+					margin: 0;
+					font-size: 16px;
+					color: #003366;
+					font-weight: 800;
+					letter-spacing: 0.6px;
+					text-transform: uppercase;
+					line-height: 1.25;
+				}
+
+				& p {
+					margin: 3px 0 0 0;
+					font-size: 12.5px;
+					color: #475569;
+					font-weight: 700;
+					letter-spacing: 0.4px;
+					text-transform: uppercase;
+				}
+			}
+		}
+
+		/* Main Form Body */
+		& .modern-body {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding: 2px 0;
+		}
+
+		/* Section Containers */
+		& .modern-section {
+			margin-bottom: 8px;
+
+			& .modern-sec-heading {
+				font-size: 12.5px;
+				font-weight: 800;
+				text-transform: uppercase;
+				color: #003366;
+				letter-spacing: 0.8px;
+				border-bottom: 2px solid #003366;
+				padding-bottom: 4px;
+				margin-bottom: 8px;
+			}
+
+			& .modern-grid-2col {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 7px 12px;
+			}
+
+			& .modern-field-cell {
+				border: 1.2px solid #cbd5e1;
+				border-radius: 4px;
+				padding: 6px 12px;
+				position: relative;
+				min-height: 48px;
+				background: #f8fafc;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+
+				&.cell-full {
+					grid-column: span 2;
+				}
+
+				&.cell-2rows {
+					min-height: 72px;
+					padding-bottom: 4px;
+
+					& .modern-row-line {
+						width: 100%;
+						min-height: 24px;
+						display: flex;
+						align-items: baseline;
+						border-bottom: 1px dashed #cbd5e1;
+
+						&:last-child {
+							border-bottom: none;
+						}
+					}
+				}
+
+				& .modern-cell-label {
+					font-size: 11px;
+					font-weight: 700;
+					color: #334155;
+					text-transform: uppercase;
+					letter-spacing: 0.6px;
+					display: block;
+					line-height: 1.2;
+					margin-bottom: 2px;
+				}
+
+				& .ink-text {
+					display: block;
+					font-size: 21px;
+					line-height: 1.2;
+					min-height: 24px;
+					color: var(--current-ink-color);
+				}
+			}
+		}
+
+		/* Footer Signatures & Date */
+		& .modern-footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			border-top: 2px solid #003366;
+			padding-top: 10px;
+			margin-top: 8px;
+
+			& .modern-footer-item {
+				width: 44%;
+				position: relative;
+
+				& .modern-sig-label {
+					font-size: 12px;
+					font-weight: 700;
+					color: #1e293b;
+					text-transform: uppercase;
+					letter-spacing: 0.6px;
+					margin-bottom: 4px;
+					display: block;
+				}
+
+				& .modern-sig-line {
+					border-bottom: 1.5px solid #334155;
+					min-height: 42px;
+					position: relative;
+					display: flex;
+					align-items: flex-end;
+
+					& .ink-text {
+						font-size: 21.5px;
+						padding-bottom: 2px;
+						color: var(--current-ink-color);
+					}
+
+					& .ink-signature-img {
+						max-height: 40px;
+						max-width: 150px;
+						object-fit: contain;
+						transform-origin: bottom left;
+						transform: scale(var(--sig-scale, 1));
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,537 @@
+/**
+ * Master Stylesheet: IGNOU Project Synopsis Kit Studio
+ * Single Responsibility: Imports common shared foundation, studio sidebar/action bar, and project document templates.
+ */
+@import url("./common.css");
+@import url("./modules/sidebar.css");
+@import url("./modules/stage_action_bar.css");
+@import url("./modules/coverflow_deck.css");
+@import url("./modules/deck_pagination.css");
+@import url("./modules/lightbox_modal.css");
+@import url("./modules/assignment_sheet.css");
+@import url("./modules/project_templates.css");
+
+@layer components {
+	/* Document Checklist Selector Styling */
+	.checkbox-item-row {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-base, 10px);
+		padding: var(--space-md, 8px) var(--space-base, 10px);
+		border: 1px solid var(--panel-border, #e2e8f0);
+		border-radius: var(--radius-md, 6px);
+		margin-bottom: var(--space-sm, 6px);
+		background: #f8fafc;
+		cursor: pointer;
+		transition: background var(--transition-fast, 0.15s ease), border-color var(--transition-fast, 0.15s ease);
+	}
+
+	.checkbox-item-row:hover {
+		background: #f1f5f9;
+		border-color: #cbd5e1;
+	}
+
+	.checkbox-item-row .custom-checkbox {
+		margin-top: 3px;
+		width: 16px;
+		height: 16px;
+		accent-color: var(--brand-primary, #003366);
+		cursor: pointer;
+	}
+
+	.checkbox-text-group {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.checkbox-main-title {
+		font-size: var(--font-size-base, 12px);
+		font-weight: var(--weight-bold, 700);
+		color: #0f172a;
+	}
+
+	.checkbox-sub-title {
+		font-size: var(--font-size-xs, 10.5px);
+		color: var(--text-muted, #64748b);
+	}
+
+	.doc-selection-actions {
+		display: flex;
+		gap: var(--space-md, 8px);
+		margin-bottom: var(--space-base, 10px);
+	}
+
+	.doc-selection-actions .mini-action-btn {
+		background: #e2e8f0;
+		border: 1px solid #cbd5e1;
+		padding: var(--space-xs, 4px) var(--space-base, 10px);
+		border-radius: var(--radius-xs, 4px);
+		font-size: 11px;
+		font-weight: var(--weight-semibold, 600);
+		cursor: pointer;
+		color: #334155;
+		transition: background var(--transition-fast, 0.15s ease);
+	}
+
+	.doc-selection-actions .mini-action-btn:hover {
+		background: #cbd5e1;
+	}
+
+	/* Checkbox & Radio Pill Selectors */
+	.degree-checkboxes-grid,
+	.degree-radios-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-md, 8px);
+		margin-top: var(--space-sm, 6px);
+	}
+
+	.first-sub-radios {
+		display: flex;
+		gap: var(--space-xl, 16px);
+		margin-top: var(--space-sm, 6px);
+	}
+
+	.checkbox-pill-item,
+	.radio-pill-item {
+		display: flex;
+		align-items: center;
+		gap: var(--space-md, 8px);
+		background: #ffffff;
+		border: 1px solid var(--panel-border, #cbd5e1);
+		border-radius: var(--radius-md, 6px);
+		padding: var(--space-sm, 6px) var(--space-base, 10px);
+		font-size: 11.5px;
+		font-weight: var(--weight-semibold, 600);
+		cursor: pointer;
+		color: #0f172a;
+		transition: background var(--transition-fast, 0.15s ease), border-color var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
+	}
+
+	.checkbox-pill-item:hover,
+	.radio-pill-item:hover {
+		background: #f8fafc;
+		border-color: var(--brand-primary, #003366);
+	}
+
+	.checkbox-pill-item input[type="checkbox"],
+	.radio-pill-item input[type="radio"] {
+		accent-color: var(--brand-primary, #003366);
+		cursor: pointer;
+		width: 15px;
+		height: 15px;
+	}
+
+	/* Two Column & Input Groups Spacing Improvements */
+	.control-panel .two-cols {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-xl, 16px);
+		margin-bottom: var(--space-md, 8px);
+	}
+
+	.control-panel .field-row {
+		margin-bottom: var(--space-lg, 12px);
+	}
+
+	.field-label-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: var(--space-xs, 4px);
+
+		& label {
+			margin-bottom: 0;
+		}
+	}
+
+	.btn-quick-today {
+		background: none;
+		border: none;
+		padding: 0 4px;
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--brand-primary, #003366);
+		cursor: pointer;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		opacity: 0.85;
+		transition: opacity var(--transition-fast, 0.15s ease), color var(--transition-fast, 0.15s ease);
+
+		&:hover {
+			opacity: 1;
+			color: #001a33;
+		}
+	}
+
+	.date-input-group {
+		position: relative;
+		display: flex;
+		align-items: center;
+		width: 100%;
+
+		& .date-field-input {
+			width: 100%;
+			padding-right: 32px;
+		}
+
+		& .btn-calendar-trigger {
+			position: absolute;
+			right: 4px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 26px;
+			height: 26px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: transparent;
+			border: none;
+			border-radius: var(--radius-sm, 4px);
+			color: #64748b;
+			cursor: pointer;
+			padding: 0;
+			transition: color var(--transition-fast, 0.15s ease), background var(--transition-fast, 0.15s ease);
+
+			&:hover {
+				color: var(--brand-primary, #003366);
+				background: rgba(0, 51, 102, 0.08);
+			}
+		}
+
+		& .hidden-date-picker {
+			position: absolute;
+			opacity: 0;
+			width: 1px;
+			height: 1px;
+			pointer-events: none;
+			border: none;
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+		}
+	}
+
+	/* Section VIII Software Guidelines & Tech Stack Chips */
+	.field-header-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--space-xs, 4px);
+	}
+
+	.btn-guidelines-toggle {
+		background: var(--brand-accent, #e0f2fe);
+		color: var(--brand-accent-text, #0369a1);
+		border: 1px solid rgba(3, 105, 161, 0.25);
+		border-radius: var(--radius-sm, 5px);
+		padding: 2px 7px;
+		font-size: var(--font-size-2xs, 9.5px);
+		font-weight: var(--weight-bold, 700);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 3px;
+		transition: background var(--transition-fast, 0.15s ease);
+	}
+
+	.btn-guidelines-toggle:hover {
+		background: #bae6fd;
+	}
+
+	.tech-stack-chips-group {
+		margin-top: var(--space-xs, 4px);
+	}
+
+	.tech-chips-label {
+		display: block;
+		font-size: 10px;
+		font-weight: var(--weight-semibold, 600);
+		color: var(--text-muted, #64748b);
+		margin-bottom: var(--space-2xs, 2px);
+	}
+
+	.tech-chips-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xs, 4px);
+	}
+
+	.tech-chip {
+		background: #ffffff;
+		border: 1px solid var(--panel-border, #cbd5e1);
+		border-radius: var(--radius-pill, 9999px);
+		padding: 2px 8px;
+		font-size: 10.5px;
+		font-weight: var(--weight-semibold, 600);
+		color: var(--text-main, #1e293b);
+		cursor: pointer;
+		transition: all var(--transition-fast, 0.15s ease);
+	}
+
+	.tech-chip:hover {
+		background: var(--brand-primary, #003366);
+		color: #ffffff;
+		border-color: var(--brand-primary, #003366);
+	}
+
+	.section-guidelines-card {
+		margin-top: var(--space-sm, 6px);
+		background: #ffffff;
+		border: 1px solid #bfdbfe;
+		border-radius: var(--radius-md, 6px);
+		padding: var(--space-md, 8px) var(--space-base, 10px);
+		box-shadow: var(--shadow-subtle);
+		font-size: 11px;
+		line-height: 1.4;
+	}
+
+	.guidelines-card-hdr {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: #1e40af;
+		margin-bottom: var(--space-xs, 4px);
+		font-size: 11.5px;
+	}
+
+	.btn-close-card {
+		background: transparent;
+		border: none;
+		font-size: 11px;
+		cursor: pointer;
+		color: var(--text-muted, #64748b);
+		padding: 2px 4px;
+	}
+
+	.guide-lead {
+		margin: 0 0 var(--space-xs, 4px) 0;
+		color: var(--text-main, #1e293b);
+		font-weight: var(--weight-semibold, 600);
+	}
+
+	.guide-cats-list {
+		margin: 0 0 var(--space-sm, 6px) 0;
+		padding-left: var(--space-xl, 16px);
+		color: #334155;
+	}
+
+	.guide-cats-list li {
+		margin-bottom: 2px;
+	}
+
+	.guide-warning-box {
+		background: #fffbeb;
+		border-left: 3px solid #f59e0b;
+		padding: var(--space-xs, 4px) var(--space-sm, 6px);
+		border-radius: 0 var(--radius-xs, 4px) var(--radius-xs, 4px) 0;
+		font-size: 10px;
+		color: #92400e;
+	}
+
+	/* ========================================================================= */
+	/* TRANSLUCENT COLORED SECTION GROUPS (DISTINCT MODERN GLASSMORPHIC VISUALS) */
+	/* ========================================================================= */
+	.control-panel .section-group {
+		padding: 14px 16px;
+		border-radius: var(--radius-2xl, 12px);
+		margin-bottom: var(--space-xl, 16px);
+		border: 1px solid transparent;
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		transition: transform var(--transition-fast, 0.15s ease), box-shadow var(--transition-fast, 0.15s ease);
+	}
+
+	.control-panel .section-group:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+	}
+
+	.control-panel .section-group .section-label {
+		font-size: var(--font-size-base, 12px);
+		font-weight: var(--weight-extrabold, 800);
+		letter-spacing: 0.6px;
+		text-transform: uppercase;
+		margin-bottom: var(--space-lg, 12px);
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm, 6px);
+	}
+
+	/* 1. Programme & Document Selector: Soft Translucent Blue / Indigo */
+	.control-panel .sec-docs-selector {
+		background: rgba(238, 242, 255, 0.72);
+		border-color: rgba(199, 210, 254, 0.9);
+		box-shadow: 0 2px 6px rgba(99, 102, 241, 0.06);
+	}
+	.control-panel .sec-docs-selector .section-label {
+		color: #3730a3;
+	}
+	.control-panel .sec-docs-selector .collapsible-card {
+		background: rgba(255, 255, 255, 0.75);
+		border-color: rgba(199, 210, 254, 0.9);
+		margin-bottom: 0;
+	}
+	.control-panel .sec-docs-selector .collapsible-header {
+		background: rgba(238, 242, 255, 0.85);
+	}
+	.control-panel .sec-docs-selector .collapsible-header.open {
+		background: rgba(224, 231, 255, 0.9);
+		border-bottom-color: rgba(199, 210, 254, 0.9);
+	}
+	.control-panel .sec-docs-selector .checkbox-item-row {
+		background: rgba(255, 255, 255, 0.85);
+	}
+
+	/* 2. Project Proposal Details: Soft Translucent Emerald / Mint */
+	.control-panel .sec-project-details {
+		background: rgba(236, 253, 245, 0.72);
+		border-color: rgba(167, 243, 208, 0.9);
+		box-shadow: 0 2px 6px rgba(16, 185, 129, 0.06);
+	}
+	.control-panel .sec-project-details .section-label {
+		color: #065f46;
+	}
+
+	/* 3. Guide Academic Particulars: Soft Translucent Violet / Lavender */
+	.control-panel .sec-guide-details {
+		background: rgba(245, 243, 255, 0.72);
+		border-color: rgba(221, 214, 254, 0.9);
+		box-shadow: 0 2px 6px rgba(139, 92, 246, 0.06);
+	}
+	.control-panel .sec-guide-details .section-label {
+		color: #5b21b6;
+	}
+
+	/* 4. Guide Digital Signature: Soft Translucent Purple / Fuchsia */
+	.control-panel .sec-guide-signature {
+		background: rgba(250, 245, 255, 0.78);
+		border-color: rgba(233, 213, 255, 0.95);
+		box-shadow: 0 2px 6px rgba(139, 92, 246, 0.06);
+	}
+	.control-panel .sec-guide-signature .section-label {
+		color: #6d28d9;
+	}
+
+	/* 5. Company / Training Organization: Soft Translucent Warm Amber / Orange */
+	.control-panel .sec-org-details {
+		background: rgba(255, 251, 235, 0.78);
+		border-color: rgba(253, 230, 138, 0.95);
+		box-shadow: 0 2px 6px rgba(245, 158, 11, 0.06);
+	}
+	.control-panel .sec-org-details .section-label {
+		color: #92400e;
+	}
+
+	/* 6. Student Credentials (Shared Bio): Soft Translucent Teal / Cyan */
+	.control-panel .sec-student-bio {
+		background: rgba(240, 253, 250, 0.72);
+		border-color: rgba(153, 246, 228, 0.9);
+		box-shadow: 0 2px 6px rgba(20, 184, 166, 0.06);
+	}
+	.control-panel .sec-student-bio .section-label {
+		color: #115e59;
+	}
+
+	/* 7. Student Digital Signature: Soft Translucent Coral / Rose */
+	.control-panel .sec-student-signature {
+		background: rgba(255, 241, 242, 0.75);
+		border-color: rgba(254, 205, 211, 0.9);
+		box-shadow: 0 2px 6px rgba(244, 63, 94, 0.06);
+	}
+	.control-panel .sec-student-signature .section-label {
+		color: #9f1239;
+	}
+
+	/* 4-Tab Bottom Segmented Navigation Overrides */
+	.control-panel .panel-segmented-nav {
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-xs, 4px);
+		padding: var(--space-sm, 6px) var(--space-xs, 4px);
+	}
+
+	.control-panel .panel-segmented-nav .panel-tab-btn {
+		padding: var(--space-sm, 6px) var(--space-2xs, 2px);
+		font-size: 11px;
+		gap: var(--space-2xs, 2px);
+		flex-direction: column;
+		border-radius: var(--radius-lg, 8px);
+	}
+
+	.control-panel .panel-segmented-nav .panel-tab-btn .tab-icon {
+		font-size: 14px;
+		line-height: 1;
+	}
+
+	.control-panel .panel-segmented-nav .panel-tab-btn .tab-label {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 10px;
+		font-weight: var(--weight-bold, 700);
+		letter-spacing: 0.2px;
+	}
+
+	/* Stage Preview Cards */
+	.project-preview-card {
+		margin-bottom: var(--space-3xl, 24px);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.doc-card-badge {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		max-width: 794px;
+		background: var(--brand-primary, #003366);
+		color: #ffffff;
+		font-size: 12px;
+		font-weight: var(--weight-bold, 700);
+		padding: var(--space-sm, 6px) var(--space-xl, 14px);
+		border-radius: var(--radius-md, 6px) var(--radius-md, 6px) 0 0;
+		box-sizing: border-box;
+		letter-spacing: 0.5px;
+	}
+
+	.doc-card-badge .badge-code {
+		background: rgba(255, 255, 255, 0.2);
+		padding: 2px 8px;
+		border-radius: var(--radius-xs, 4px);
+		font-size: 11px;
+	}
+
+	.empty-selection-placeholder {
+		text-align: center;
+		padding: 60px 20px;
+		color: var(--text-muted, #64748b);
+	}
+
+	.empty-selection-placeholder .empty-icon {
+		font-size: 48px;
+		display: block;
+		margin-bottom: 12px;
+	}
+}
+
+@layer print {
+	.doc-card-badge {
+		display: none;
+	}
+	.project-preview-card {
+		margin: 0;
+		page-break-after: always;
+		break-after: page;
+	}
+}
+
+/* Hide Global Footer on Mobile in Studio workspace */
+@media screen and (max-width: 880px) {
+	ignou-footer {
+		display: none;
+	}
+}
+

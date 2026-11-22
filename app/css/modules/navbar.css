@@ -8,7 +8,7 @@
 		display: block;
 		width: 100%;
 		position: sticky;
-		top: var(--space-md);
+		top: var(--space-xs);
 		z-index: 1000;
 		padding: 0 var(--space-xl);
 		box-sizing: border-box;
@@ -21,8 +21,9 @@
 		backdrop-filter: var(--glass-blur);
 		-webkit-backdrop-filter: var(--glass-blur);
 		border: 1px solid var(--glass-border);
-		border-radius: var(--radius-2xl);
-		box-shadow: var(--glass-25d-shadow);
+		border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+		border-bottom: 1px solid var(--panel-divider);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 		font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
 		transition:
 			background var(--transition-smooth),
@@ -33,7 +34,7 @@
 		& .header-inner {
 			max-width: 1380px;
 			margin: 0 auto;
-			padding: var(--space-sm) var(--space-2xl);
+			padding: var(--space-xs) var(--space-2xl);
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -89,59 +90,132 @@
 			}
 		}
 
-		/* Right Actions Zone (i18n + Theme) */
+		/* Right Actions Zone (i18n + 2-Section Segmented Theme Switcher) */
 		& .header-right-actions {
 			display: flex;
 			align-items: center;
-			gap: var(--space-sm);
+			gap: var(--space-md);
 			justify-content: flex-end;
 
-			& .global-action-btn {
-				display: flex;
+			/* 2.5D Tactile Language & Data Switch Buttons */
+			& .lang-pill-btn,
+			& .data-pill-btn {
+				display: inline-flex;
 				align-items: center;
-				gap: var(--space-sm);
-				background: var(--btn-secondary-bg);
-				border: 1px solid var(--btn-secondary-border);
-				color: var(--text-main);
-				padding: var(--space-sm) var(--space-base);
-				border-radius: var(--radius-md);
-				font-size: var(--font-size-base);
-				font-weight: var(--weight-semibold);
+				gap: var(--space-xs);
+				background: var(--glass-card-bg);
+				backdrop-filter: var(--glass-blur);
+				-webkit-backdrop-filter: var(--glass-blur);
+				border: 1px solid var(--glass-border);
+				color: var(--brand-primary);
+				padding: 5px var(--space-md);
+				border-radius: var(--radius-pill);
+				font-size: var(--font-size-xs);
+				font-weight: var(--weight-bold);
 				cursor: pointer;
-				transition: all var(--transition-base);
+				box-shadow: 0 3px 8px rgba(0, 51, 102, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+				transition:
+					transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+					box-shadow 0.2s ease,
+					background 0.2s ease,
+					color 0.2s ease;
+				user-select: none;
 				white-space: nowrap;
 
 				&:hover {
-					background: var(--btn-secondary-hover);
+					background: var(--brand-primary);
+					color: #ffffff;
+					transform: translateY(-2px);
+					box-shadow: 0 6px 14px rgba(0, 51, 102, 0.25);
+				}
+
+				&:active {
+					transform: translateY(1px);
+					box-shadow: 0 2px 4px rgba(0, 51, 102, 0.15);
 				}
 
 				& .action-icon {
-					font-size: var(--font-size-md);
+					font-size: 13px;
 				}
 
 				& .action-text {
+					font-size: 12px;
 					font-weight: var(--weight-bold);
 				}
 			}
 
-			& .lang-pill-btn {
-				background: var(--brand-accent);
-				color: var(--brand-accent-text);
-				border-color: rgba(3, 105, 161, 0.2);
+			/* 2.5D Segmented Theme Switcher Capsule (1 piece, 2 sections: Light/Dark + Auto) */
+			& .theme-segmented-capsule {
+				display: inline-flex;
+				align-items: center;
+				background: var(--glass-bg);
+				backdrop-filter: var(--glass-blur);
+				-webkit-backdrop-filter: var(--glass-blur);
+				border: 1px solid var(--glass-border);
+				border-radius: var(--radius-pill);
+				padding: 2px 3px;
+				box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+				gap: 2px;
+				user-select: none;
+			}
+
+			& .theme-seg-section {
+				display: inline-flex;
+				align-items: center;
+				gap: 2px;
+			}
+
+			& .theme-seg-divider {
+				width: 1px;
+				height: 16px;
+				background: var(--panel-divider);
+				margin: 0 2px;
+				flex-shrink: 0;
+			}
+
+			& .theme-seg-btn {
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				border: none;
+				background: transparent;
+				color: var(--text-muted);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				padding: 0;
+				transition:
+					transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+					background 0.2s ease,
+					color 0.2s ease,
+					box-shadow 0.2s ease;
 
 				&:hover {
+					color: var(--text-main);
+					background: var(--glass-bg-hover);
+					transform: scale(1.1);
+				}
+
+				&.active {
 					background: var(--brand-primary);
-					color: var(--text-inverse);
+					color: #ffffff;
+					box-shadow: 0 2px 8px rgba(0, 51, 102, 0.35);
+					transform: scale(1.05);
+				}
+
+				&:active {
+					transform: scale(0.94);
 				}
 			}
 		}
 	}
 
-	/* 2. Dedicated Floating Navigation Bar (Matches Header Width with 2.5D Tactile Tabs) */
+	/* 2. Dedicated Navigation Bar (Seamlessly Connected Directly Below Header) */
 	.app-floating-nav-bar {
 		width: 100%;
 		max-width: 1380px;
-		margin: var(--space-xs) auto 0 auto;
+		margin: 0 auto;
 
 		& .nav-bar-inner {
 			width: 100%;
@@ -149,7 +223,8 @@
 			backdrop-filter: var(--glass-blur);
 			-webkit-backdrop-filter: var(--glass-blur);
 			border: 1px solid var(--glass-border);
-			border-radius: var(--radius-2xl);
+			border-top: none;
+			border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 			box-shadow: var(--glass-25d-shadow);
 			padding: var(--space-xs) var(--space-xl);
 			display: flex;

@@ -57,4 +57,26 @@
 		width: 14px;
 		height: 14px;
 	}
+
+	/* Theme Switcher Icons (Imported from external SVG) */
+	.icon-theme-light {
+		mask-image: url("../../assets/icons/theme-light.svg");
+		-webkit-mask-image: url("../../assets/icons/theme-light.svg");
+		width: 15px;
+		height: 15px;
+	}
+
+	.icon-theme-dark {
+		mask-image: url("../../assets/icons/theme-dark.svg");
+		-webkit-mask-image: url("../../assets/icons/theme-dark.svg");
+		width: 15px;
+		height: 15px;
+	}
+
+	.icon-theme-auto {
+		mask-image: url("../../assets/icons/theme-auto.svg");
+		-webkit-mask-image: url("../../assets/icons/theme-auto.svg");
+		width: 15px;
+		height: 15px;
+	}
 }

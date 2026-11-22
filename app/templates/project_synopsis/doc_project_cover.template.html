@@ -1,0 +1,77 @@
+<template id="tpl-doc-project-cover">
+	<div class="page-viewport-scaler">
+		<article class="page-sheet tpl-doc-project-cover">
+			<div class="cover-border-frame">
+				<!-- Top Header: Arched University Title -->
+				<header class="cover-hdr">
+					<div class="cover-arch-wrap">
+						<svg viewBox="0 0 640 54" class="cover-arch-svg" aria-label="Indira Gandhi National Open University">
+							<path id="coverArchCurve" d="M 20,46 Q 320,6 620,46" fill="transparent" />
+							<text class="arch-text" text-anchor="middle">
+								<textPath href="#coverArchCurve" startOffset="50%">
+									INDIRA GANDHI NATIONAL OPEN UNIVERSITY
+								</textPath>
+							</text>
+						</svg>
+					</div>
+				</header>
+
+				<!-- Main Cover Page Body (3 Classical Academic Zones) -->
+				<main class="cover-body">
+					<!-- ZONE 1: Course & Project Title -->
+					<div class="cover-zone-hero">
+						<div class="cover-course-code val-CourseCodeSpaced">MCSP - 232</div>
+						<div class="cover-project-title-wrap">
+							<h1 class="cover-project-title val-ProjectTitle">TITLE OF THE PROJECT</h1>
+						</div>
+					</div>
+
+					<!-- ZONE 2: Candidacy & Mentorship -->
+					<div class="cover-zone-credentials">
+						<div class="cover-by-lbl">by</div>
+						<div class="cover-student-block">
+							<div class="cover-student-name val-Name">Student’s Full Name</div>
+							<div class="cover-enrolment-row">
+								<span class="cover-field-lbl">Enrolment No:</span>
+								<span class="val-Enrolment"></span>
+							</div>
+						</div>
+
+						<div class="cover-guidance-block">
+							<div class="cover-guidance-lbl">Under Guidance</div>
+							<div class="cover-guidance-of">of</div>
+							<div class="cover-guide-name val-GuideName">Project Guide’s Full Name</div>
+						</div>
+					</div>
+
+					<!-- ZONE 3: Degree Conferral & Institutional Seal -->
+					<div class="cover-zone-institutional">
+						<div class="cover-submission-statement">
+							<p class="statement-p1">
+								Submitted to the <span class="val-SchoolTitleCase">School of Computer and Information Sciences</span>,<br />
+								IGNOU in partial fulfilment of the requirements for the award of<br />
+								the degree
+							</p>
+							<p class="statement-degree val-ProgrammeWithShortCode">
+								Master of Computer Applications (MCA)
+							</p>
+							<p class="statement-year-row">
+								<span class="statement-year-lbl">Year of Submission</span>
+								<span class="val-SubmissionYear"></span>
+							</p>
+						</div>
+
+						<div class="cover-bottom-univ-block">
+							<div class="cover-logo-wrap">
+								<img src="./assets/IGNOU_logo.svg" alt="IGNOU Emblem" class="cover-ignou-logo" />
+							</div>
+							<div class="cover-univ-title">Indira Gandhi National Open University</div>
+							<div class="cover-univ-loc">Maidan Garhi</div>
+							<div class="cover-univ-pin">New Delhi – 110068</div>
+						</div>
+					</div>
+				</main>
+			</div>
+		</article>
+	</div>
+</template>

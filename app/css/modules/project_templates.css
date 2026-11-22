@@ -1,0 +1,11 @@
+/**
+ * Project Synopsis Document Styles (Domain Bundle)
+ * Phase 2: Annexure II - Project Proposal Approval Proforma (1:1 Official IGNOU Layout)
+ * Phase 3: Document 2 - Project Trainee Request Letter (MCSP-232, Page 19)
+ * Phase 4: Document 3 - Annexure X (Certificate of Originality, Page 20)
+ * Phase 4: Document 4 - Annexure XI (Sample Cover Page of Project Report, Page 21)
+ */
+@import url("../templates/project_synopsis/doc_proforma.css");
+@import url("../templates/project_synopsis/doc_trainee_letter.css");
+@import url("../templates/project_synopsis/doc_originality.css");
+@import url("../templates/project_synopsis/doc_project_cover.css");

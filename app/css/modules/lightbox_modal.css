@@ -1,0 +1,263 @@
+/* ============================================================= */
+/* LAYER: LIGHTBOX MODAL MODULE                                  */
+/* Single Responsibility: Fullscreen A4 PDF Viewer & Controls   */
+/* ============================================================= */
+@layer components {
+	/* 6. Fullscreen A4 Inspect Lightbox (PDF Reader Style with Floating Bottom Navbar) */
+	.stage-lightbox-modal {
+		position: fixed;
+		inset: 0;
+		z-index: 2000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+		box-sizing: border-box;
+	}
+
+	.stage-lightbox-modal[hidden] {
+		display: none !important;
+	}
+
+	.stage-lightbox-modal .lightbox-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 10, 24, 0.86);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+	}
+
+	/* Top Floating Close Button (High Contrast Crisp Glass Capsule) */
+	.lightbox-float-close-btn {
+		position: fixed;
+		top: var(--space-lg);
+		right: var(--space-lg);
+		z-index: 2030;
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2xs);
+		background: rgba(20, 30, 48, 0.78);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		border-radius: var(--radius-pill);
+		padding: 7px var(--space-md);
+		color: #ffffff;
+		font-family: inherit;
+		cursor: pointer;
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, border-color 0.2s ease;
+		user-select: none;
+
+		& .close-icon {
+			font-size: 14px;
+			font-weight: var(--weight-bold);
+			color: #ffffff;
+			line-height: 1;
+		}
+
+		& .close-tip {
+			font-size: 11px;
+			font-weight: var(--weight-bold);
+			color: #ffffff;
+			background: rgba(255, 255, 255, 0.22);
+			padding: 2px 7px;
+			border-radius: var(--radius-xs);
+			line-height: 1.1;
+			letter-spacing: 0.3px;
+		}
+
+		&:hover {
+			background: #e53935;
+			border-color: #e53935;
+			color: #ffffff;
+			transform: scale(1.06);
+
+			& .close-tip {
+				background: rgba(255, 255, 255, 0.28);
+				color: #ffffff;
+			}
+		}
+
+		&:active {
+			transform: scale(0.96);
+		}
+	}
+
+	/* Fullscreen Zoomable Viewport */
+	.lightbox-viewport {
+		position: absolute;
+		inset: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: grab;
+		user-select: none;
+		touch-action: none;
+
+		&:active {
+			cursor: grabbing;
+		}
+	}
+
+	.lightbox-sheet-host {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+
+		& .page-sheet {
+			transform-origin: center center;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+			border-radius: var(--radius-sm);
+			transition: transform 0.08s ease-out;
+			will-change: transform;
+		}
+	}
+
+	/* Floating Bottom PDF Navigation Bar (2.5D Translucent Glass Capsule) */
+	.lightbox-bottom-navbar {
+		position: fixed;
+		bottom: var(--space-lg);
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 2030;
+		background: var(--glass-card-bg);
+		backdrop-filter: var(--glass-blur);
+		-webkit-backdrop-filter: var(--glass-blur);
+		border: 1px solid var(--glass-border);
+		border-radius: var(--radius-pill);
+		box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5);
+		padding: 6px var(--space-lg);
+		display: flex;
+		align-items: center;
+		gap: var(--space-md);
+		user-select: none;
+		white-space: nowrap;
+	}
+
+	[data-theme="dark"] .lightbox-bottom-navbar {
+		background: rgba(15, 23, 42, 0.88);
+	}
+
+	.lb-nav-info {
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
+		max-width: 280px;
+	}
+
+	.lb-nav-code {
+		font-size: var(--font-size-xs);
+		font-weight: var(--weight-extrabold);
+		color: var(--brand-primary);
+	}
+
+	.lb-nav-title {
+		font-size: 11px;
+		color: var(--text-muted);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.lb-nav-divider {
+		width: 1px;
+		height: 18px;
+		background: var(--panel-divider);
+		flex-shrink: 0;
+	}
+
+	.lb-nav-paging,
+	.lb-nav-zoom {
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
+	}
+
+	.lb-nav-btn {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		background: var(--glass-bg);
+		border: 1px solid var(--glass-border);
+		color: var(--brand-primary);
+		font-size: 16px;
+		font-weight: var(--weight-bold);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+
+		&:hover {
+			background: var(--glass-bg-hover);
+			transform: scale(1.12);
+		}
+
+		&:active {
+			transform: scale(0.92);
+		}
+	}
+
+	.lb-nav-badge {
+		font-size: var(--font-size-xs);
+		font-weight: var(--weight-bold);
+		padding: 2px 10px;
+		border-radius: var(--radius-pill);
+		background: var(--brand-accent);
+		color: var(--brand-accent-text);
+		border: 1px solid rgba(0, 102, 204, 0.2);
+	}
+
+	.lb-zoom-level-btn {
+		background: transparent;
+		border: none;
+		font-size: var(--font-size-xs);
+		font-weight: var(--weight-bold);
+		color: var(--text-main);
+		padding: 2px 8px;
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+		transition: background var(--transition-fast);
+
+		&:hover {
+			background: var(--glass-bg-hover);
+		}
+	}
+
+	body.lightbox-locked {
+		overflow: hidden;
+	}
+}
+
+/* Responsive: Lightbox on Mobile */
+@media screen and (max-width: 880px) {
+	.lightbox-bottom-navbar {
+		width: calc(100% - 24px);
+		max-width: 420px;
+		justify-content: space-between;
+		padding: 4px var(--space-sm);
+		gap: var(--space-xs);
+		bottom: var(--space-sm);
+	}
+
+	.lb-nav-title {
+		display: none;
+	}
+
+	.lightbox-float-close-btn {
+		top: var(--space-sm);
+		right: var(--space-sm);
+		padding: 4px 10px;
+	}
+}
+
+

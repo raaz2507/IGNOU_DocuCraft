@@ -1,0 +1,92 @@
+<template id="tpl-gazette">
+	<div class="page-viewport-scaler">
+		<article class="page-sheet tpl-gazette">
+			<!-- Official Bilingual Header -->
+			<header class="gazette-header">
+				<h2 class="gazette-hindi-title">इन्दिरा गांधी राष्ट्रीय मुक्त विश्वविद्यालय</h2>
+				<h1 class="gazette-eng-title">Indira Gandhi National Open University</h1>
+				<img src="./assets/IGNOU_logo.svg" alt="IGNOU Logo" class="gazette-logo">
+				<div class="gazette-sheet-title">Assignment Submission Sheet</div>
+			</header>
+
+			<main class="gazette-body">
+				<!-- Student & Course Particulars Matrix (Strictly 1:1 with Classic) -->
+				<table class="gazette-info-table">
+					<tr>
+						<td class="cell-label">Enrolment Number</td>
+						<td class="cell-value"><span class="ink-text val-Enrolment"></span></td>
+						<td class="cell-label">Student Name</td>
+						<td class="cell-value"><span class="ink-text val-Name"></span></td>
+					</tr>
+					<tr>
+						<td class="cell-label">Programme Code</td>
+						<td class="cell-value"><span class="ink-text val-ProgrammeCode"></span></td>
+						<td class="cell-label">Programme Title</td>
+						<td class="cell-value"><span class="ink-text val-Programme"></span></td>
+					</tr>
+					<tr>
+						<td class="cell-label">Course Code</td>
+						<td class="cell-value"><span class="ink-text val-CourseCode"></span></td>
+						<td class="cell-label">Assignment Number</td>
+						<td class="cell-value"><span class="ink-text val-AssignmentNo"></span></td>
+					</tr>
+					<tr>
+						<td class="cell-label">Course Title</td>
+						<td class="cell-value" colspan="3"><span class="ink-text val-CourseTitle"></span></td>
+					</tr>
+					<tr>
+						<td class="cell-label">Study Centre Code</td>
+						<td class="cell-value"><span class="ink-text val-StudyCentreCode"></span></td>
+						<td class="cell-label">Study Centre Name</td>
+						<td class="cell-value"><span class="ink-text val-StudyCentreName"></span></td>
+					</tr>
+					<tr>
+						<td class="cell-label">Study Centre Address</td>
+						<td class="cell-value cell-2rows" colspan="3">
+							<div class="gazette-row-line">
+								<span class="ink-text val-StudyCentreAddress1"></span>
+							</div>
+							<div class="gazette-row-line">
+								<span class="ink-text val-StudyCentreAddress2"></span>
+							</div>
+						</td>
+					</tr>
+					<!-- Residential Address: Single unified label with 2 full rows -->
+					<tr>
+						<td class="cell-label">Residential Address</td>
+						<td class="cell-value cell-2rows" colspan="3">
+							<div class="gazette-row-line">
+								<span class="ink-text val-Address1"></span>
+							</div>
+							<div class="gazette-row-line">
+								<span class="ink-text val-Address2"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cell-label">Mobile Phone</td>
+						<td class="cell-value"><span class="ink-text val-Phone"></span></td>
+						<td class="cell-label">Email ID</td>
+						<td class="cell-value"><span class="ink-text val-Email"></span></td>
+					</tr>
+				</table>
+			</main>
+
+			<!-- Footer: Date & Signature (Strictly 1:1 with Classic) -->
+			<footer class="gazette-footer">
+				<div class="gazette-footer-col">
+					<span class="col-label">Date of Submission:</span>
+					<div class="sig-dash-line">
+						<span class="ink-text val-Date"></span>
+					</div>
+				</div>
+				<div class="gazette-footer-col">
+					<span class="col-label">Signature of the Student:</span>
+					<div class="sig-dash-line">
+						<img class="ink-signature-img val-SignatureImg" src="" alt="Signature" style="display:none;">
+					</div>
+				</div>
+			</footer>
+		</article>
+	</div>
+</template>

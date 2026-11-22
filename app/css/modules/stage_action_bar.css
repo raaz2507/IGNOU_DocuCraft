@@ -1,0 +1,222 @@
+/* ============================================================= */
+/* LAYER: STAGE ACTION BAR MODULE                                */
+/* Single Responsibility: Batch print, sample guide toggle, clear*/
+/* ============================================================= */
+@layer components {
+	/* Top Stage Action Bar (2.5D Glass Card) */
+	.stage-action-bar {
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-md);
+		background: var(--glass-card-bg);
+		backdrop-filter: var(--glass-blur);
+		-webkit-backdrop-filter: var(--glass-blur);
+		border: 1px solid var(--glass-border);
+		border-radius: var(--radius-xl);
+		box-shadow: var(--glass-25d-shadow);
+		padding: var(--space-sm) var(--space-lg);
+		transition: background var(--transition-smooth), border-color var(--transition-smooth);
+	}
+
+	.stage-action-bar .btn-print-batch {
+		background: var(--btn-25d-bg);
+		border: 1px solid rgba(255, 255, 255, 0.4);
+		color: var(--text-inverse);
+		padding: var(--space-sm) var(--space-xl);
+		border-radius: var(--radius-pill);
+		font-size: var(--font-size-sm);
+		font-weight: var(--weight-bold);
+		cursor: pointer;
+		box-shadow: var(--btn-25d-shadow);
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+		white-space: nowrap;
+	}
+
+	.stage-action-bar .btn-print-batch:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--btn-25d-shadow-hover);
+	}
+
+	.stage-action-bar .btn-print-batch:active {
+		transform: translateY(1px);
+		box-shadow: var(--btn-25d-shadow-active);
+	}
+
+	.stage-action-subgroup {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-sm);
+	}
+
+	/* Sample Guide Toggle Button (Modern iOS-style switch) */
+	.btn-sample-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		background: var(--glass-bg);
+		border: 1px solid var(--glass-border);
+		color: var(--text-main);
+		padding: 6px var(--space-md);
+		border-radius: var(--radius-pill);
+		font-size: var(--font-size-xs);
+		font-weight: var(--weight-semibold);
+		font-family: inherit;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		user-select: none;
+		white-space: nowrap;
+	}
+
+	.btn-sample-toggle:hover {
+		background: var(--glass-bg-hover);
+		border-color: var(--glass-border-hover);
+	}
+
+	.btn-sample-toggle .sample-switch-pill {
+		width: 32px;
+		height: 18px;
+		border-radius: var(--radius-pill);
+		background: rgba(140, 150, 165, 0.35);
+		border: 1px solid var(--glass-border);
+		position: relative;
+		display: inline-block;
+		transition: background 0.25s ease, border-color 0.25s ease;
+	}
+
+	.btn-sample-toggle .sample-switch-knob {
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: #ffffff;
+		position: absolute;
+		top: 1px;
+		left: 1px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+		transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.btn-sample-toggle.active {
+		background: rgba(0, 102, 204, 0.12);
+		border-color: var(--brand-primary);
+		color: var(--brand-primary);
+		font-weight: var(--weight-bold);
+	}
+
+	.btn-sample-toggle.active .sample-switch-pill {
+		background: var(--brand-primary);
+		border-color: var(--brand-primary);
+	}
+
+	.btn-sample-toggle.active .sample-switch-knob {
+		transform: translateX(14px);
+	}
+
+	/* Clear button */
+	.btn-clear-fields {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2xs);
+		background: var(--glass-bg);
+		border: 1px solid var(--glass-border);
+		color: var(--text-muted);
+		padding: 6px var(--space-md);
+		border-radius: var(--radius-pill);
+		font-size: var(--font-size-xs);
+		font-weight: var(--weight-semibold);
+		font-family: inherit;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		white-space: nowrap;
+	}
+
+	.btn-clear-fields:hover {
+		background: var(--glass-bg-hover);
+		color: #e53935;
+		border-color: rgba(229, 57, 53, 0.35);
+	}
+
+	.mobile-label {
+		display: none;
+	}
+}
+
+/* Responsive: Stage Action Bar (3 Buttons in 1 Row on Mobile) */
+@media screen and (max-width: 880px) {
+	.desktop-label {
+		display: none;
+	}
+
+	.mobile-label {
+		display: inline;
+	}
+
+	.stage-action-bar {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-sm);
+		padding: var(--space-xs) var(--space-md);
+		border-radius: var(--radius-pill);
+	}
+
+	.stage-action-bar .btn-print-batch {
+		width: auto;
+		flex: 1.15;
+		padding: var(--space-sm) var(--space-md);
+		font-size: var(--font-size-sm);
+		justify-content: center;
+		white-space: nowrap;
+		min-width: 0;
+		gap: var(--space-2xs);
+	}
+
+	.stage-action-subgroup {
+		width: auto;
+		flex: 1.85;
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
+		min-width: 0;
+	}
+
+	.btn-sample-toggle {
+		flex: 1.15;
+		padding: var(--space-xs) var(--space-sm);
+		font-size: var(--font-size-xs);
+		justify-content: center;
+		gap: var(--space-2xs);
+		min-width: 0;
+	}
+
+	.btn-sample-toggle .sample-switch-pill {
+		width: 24px;
+		height: 14px;
+	}
+
+	.btn-sample-toggle .sample-switch-knob {
+		width: 10px;
+		height: 10px;
+	}
+
+	.btn-sample-toggle.active .sample-switch-knob {
+		transform: translateX(10px);
+	}
+
+	.btn-clear-fields {
+		flex: 0.85;
+		padding: var(--space-xs) var(--space-sm);
+		font-size: var(--font-size-xs);
+		justify-content: center;
+		gap: var(--space-2xs);
+		min-width: 0;
+	}
+}
+
+

@@ -3,9 +3,32 @@
  * Single Responsibility: Common Application Footer & Academic Disclaimers.
  * Reusable across index.html, assignment front page, and project studio.
  */
+import { AnalyticsService } from "./analytics.service.js";
+
 export class IgnouFooter extends HTMLElement {
 	connectedCallback() {
 		this.render();
+		this.initVisitorCounter();
+	}
+
+	initVisitorCounter() {
+		const path = window.location.pathname.toLowerCase();
+		const page = path.includes("project")
+			? "project"
+			: path.includes("assignment")
+			? "assignment"
+			: path.includes("help")
+			? "help"
+			: path.includes("about")
+			? "about"
+			: "home";
+
+		AnalyticsService.trackVisit(page).then((res) => {
+			const badgeVal = this.querySelector("#visitorCountVal");
+			if (badgeVal && res && res.totalVisitors) {
+				badgeVal.textContent = Number(res.totalVisitors).toLocaleString();
+			}
+		});
 	}
 
 	render() {
@@ -23,6 +46,10 @@ export class IgnouFooter extends HTMLElement {
 					</p>
 				</div>
 				<div class="footer-col-badges">
+					<span class="visitor-counter-badge" id="globalVisitorBadge" title="Total Hub Visitors">
+						<span class="pulse-dot" aria-hidden="true"></span>
+						<span>Visits: <strong id="visitorCountVal">—</strong></span>
+					</span>
 					<span class="tech-badge">Vanilla ES6+</span>
 					<span class="tech-badge">Modular CSS Layers</span>
 					<span class="tech-badge">Pixel-Perfect 1:1 Print</span>

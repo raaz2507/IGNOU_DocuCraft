@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IGNOU Assignment Covers - Smart Studio</title>
+		<link rel="stylesheet" href="./css/assignment_covers.css" />
+		<!-- Dynamic Print Page Size Rule (Updated via JS) -->
+		<style id="dynamicPrintStyle">
+			@page {
+				size: A4 portrait;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Global Shared Application Navigation Header -->
+		<ignou-header active-page="assignment"></ignou-header>
+
+		<!-- Mobile Sticky View Toggle Bar (Floating Apple Sheet Pill pinned at bottom) -->
+		<div class="mobile-view-toggle-bar" id="mobileViewToggleBar">
+			<button type="button" class="mobile-sheet-toggle-btn" id="btnToggleMobileSheet" aria-label="Toggle Control Panel">
+				<span class="btn-icon">⚙️</span>
+				<span class="btn-text" data-i18n="sidebar.mobileToggleOpen">स्टूडियो कंट्रोल्स खोलें ⚙️</span>
+				<span class="btn-chevron" id="sheetChevron">▲</span>
+			</button>
+		</div>
+
+		<!-- Mobile Backdrop Scrim for Apple Bottom Sheet -->
+		<div class="mobile-sheet-backdrop" id="mobileSheetBackdrop"></div>
+
+		<!-- Main Workspace: Control Sidebar + Dynamic Canvas -->
+		<div class="app-workspace" id="appWorkspace">
+			<!-- =================================================================== -->
+			<!-- SMART CONTROL PANEL (LEFT SIDEBAR - 2.5D GLASS 2-TAB ARCHITECTURE)   -->
+			<!-- =================================================================== -->
+			<aside class="control-panel" id="controlPanel">
+				<!-- Apple Sheet Drag Handle (Mobile only) -->
+				<div class="sheet-drag-handle" aria-hidden="true"></div>
+
+				<!-- 1. Top Panel Header with Page Counter Badge & Mobile Close Button -->
+				<div class="panel-header">
+					<h2 data-i18n="sidebar.panelTitle">📑 Batch Cover Studio</h2>
+					<div class="header-actions">
+						<span class="badge-counter" id="badgeCounter">2 Pages Ready</span>
+						<button type="button" class="mobile-sheet-close-btn" id="btnCloseMobileSheet" aria-label="Close settings">✕</button>
+					</div>
+				</div>
+
+				<!-- 2. Scrollable Tab Viewport Containing the Two Organized Sections -->
+				<div class="panel-tab-viewport">
+					<!-- ======================================================= -->
+					<!-- TAB PANE 1: COURSES SELECTION & COVER DESIGN SETUP      -->
+					<!-- ======================================================= -->
+					<div class="panel-tab-pane active" id="paneCoursesDesign" role="tabpanel" aria-labelledby="tabBtnCoursesDesign">
+						<!-- Course Selection Section -->
+						<div class="collapsible-card">
+							<div class="collapsible-header open" id="accordionHeader">
+								<span class="collapsible-title">📚 Course Selection (Batch Print)</span>
+								<span class="accordion-arrow">▲</span>
+							</div>
+
+							<div class="collapsible-body open" id="accordionBody">
+								<!-- Semester Dropdown List -->
+								<div class="field-row">
+									<label for="semDropdown" data-i18n="coursesTab.filterSemesterLabel">Select Semester View:</label>
+									<select id="semDropdown" class="form-select">
+										<!-- Dynamically populated from CurriculumStore -->
+									</select>
+								</div>
+
+								<!-- Selection Helpers -->
+								<div class="action-mini-group">
+									<button type="button" class="mini-btn" id="btnSelectAll" data-i18n="coursesTab.btnSelectAll">✓ Select All</button>
+									<button type="button" class="mini-btn" id="btnInvert" data-i18n="coursesTab.btnInvert">⇄ Invert</button>
+									<button type="button" class="mini-btn" id="btnDeselectAll" data-i18n="coursesTab.btnDeselectAll">✕ Select None</button>
+								</div>
+
+								<!-- Full Unconstrained Course Groups with Dividers -->
+								<div class="courses-full-container" id="coursesFullContainer">
+									<!-- Dynamically rendered with semester headers & dividers -->
+								</div>
+							</div>
+						</div>
+
+						<!-- Front Page Design Template & Typography Setup -->
+						<div class="section-group">
+							<span class="section-label" data-i18n="coursesTab.coverDesignSection">🎨 Cover Design &amp; Print Setup</span>
+
+							<!-- 4 Distinct Design Templates Selector -->
+							<div class="field-row">
+								<label for="templateDesignSelect" data-i18n="coursesTab.templateSelectLabel">Cover Page Design Template:</label>
+								<select id="templateDesignSelect" class="form-select">
+									<!-- Dynamically populated from TEMPLATES_METADATA -->
+								</select>
+							</div>
+
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="handFontSelect" data-i18n="coursesTab.handFontLabel">Handwritten Font:</label>
+									<select id="handFontSelect" class="form-select">
+										<option value="'Kalam', cursive" selected>Kalam (Natural Pen)</option>
+										<option value="'Caveat', cursive">Caveat (Smooth Ballpoint)</option>
+										<option value="'Patrick Hand', cursive">Patrick Hand (Neat Student)</option>
+										<option value="'Indie Flower', cursive">Indie Flower (Casual)</option>
+										<option value="'Segoe Print', cursive">Segoe Print (System)</option>
+									</select>
+								</div>
+								<div class="field-row">
+									<label for="templateFontSelect" data-i18n="coursesTab.templateFontLabel">Template Font:</label>
+									<select id="templateFontSelect" class="form-select">
+										<option value="academic-serif" selected>EB Garamond (Royal)</option>
+										<option value="times">Times New Roman (IGNOU)</option>
+										<option value="cinzel">Cinzel (University)</option>
+										<option value="modern-sans">Montserrat (Modern)</option>
+									</select>
+								</div>
+							</div>
+
+							<!-- Printable Paper Size Option -->
+							<div class="field-row">
+								<label for="pageSizeSelect" data-i18n="coursesTab.paperSizeLabel">📄 Printable Paper Size:</label>
+								<select id="pageSizeSelect" class="form-select">
+									<option value="a4" selected>A4 Portrait (210 × 297 mm) - Official IGNOU</option>
+									<option value="letter">US Letter (8.5 × 11 in / 216 × 279 mm)</option>
+									<option value="legal">US Legal (8.5 × 14 in / 216 × 356 mm)</option>
+									<option value="a5">A5 Booklet (148 × 210 mm)</option>
+								</select>
+							</div>
+
+							<div class="field-row">
+								<label>Pen Ink Color:</label>
+								<div class="color-palette" id="colorPalette">
+									<div class="color-pill active" data-color="#0038a8">
+										<span class="color-dot dot-royal-blue"></span>
+										Royal Blue
+									</div>
+									<div class="color-pill" data-color="#0a47a4">
+										<span class="color-dot dot-pilot-blue"></span>
+										Pilot Blue
+									</div>
+									<div class="color-pill" data-color="#0b2545">
+										<span class="color-dot dot-navy-blue"></span>
+										Navy Blue
+									</div>
+									<div class="color-pill" data-color="#1a1a1a">
+										<span class="color-dot dot-black-ink"></span>
+										Black Ink
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ======================================================= -->
+					<!-- TAB PANE 2: STUDENT BIO & SIGNATURE                     -->
+					<!-- ======================================================= -->
+					<div class="panel-tab-pane" id="paneStudentBio" role="tabpanel" aria-labelledby="tabBtnStudentBio">
+						<!-- Student Credentials (Persistent in LocalStorage) -->
+						<div class="section-group">
+							<span class="section-label" data-i18n="sidebar.tabBio">👤 Student Information (Shared Across Pages)</span>
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputEnrolment" data-i18n="form.enrolment">Enrolment No.:</label>
+									<input type="text" id="inputEnrolment" class="form-input" data-field="Enrolment" />
+								</div>
+								<div class="field-row">
+									<label for="inputName" data-i18n="form.name">Student Name:</label>
+									<input type="text" id="inputName" class="form-input" data-field="Name" />
+								</div>
+							</div>
+
+							<div class="field-row">
+								<label for="inputAddress1" data-i18n="form.address1">Address (Line 1):</label>
+								<input type="text" id="inputAddress1" class="form-input" data-field="Address1" />
+							</div>
+							<div class="field-row">
+								<label for="inputAddress2" data-i18n="form.address2">Address (Line 2):</label>
+								<input type="text" id="inputAddress2" class="form-input" data-field="Address2" />
+							</div>
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputProgrammeCode" data-i18n="form.programmeCode">Programme Code:</label>
+									<input type="text" id="inputProgrammeCode" class="form-input" value="MCA_NEW" data-field="ProgrammeCode" />
+								</div>
+								<div class="field-row">
+									<label for="inputProgramme" data-i18n="form.programme">Programme Title:</label>
+									<input type="text" id="inputProgramme" class="form-input" value="Master of Computer Applications" data-field="Programme" />
+								</div>
+							</div>
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputStudyCentreCode" data-i18n="form.studyCentreCode">Study Centre Code:</label>
+									<input type="text" id="inputStudyCentreCode" class="form-input" data-field="StudyCentreCode" placeholder="e.g. 2906" />
+								</div>
+								<div class="field-row">
+									<label for="inputStudyCentreName" data-i18n="form.studyCentreName">Study Centre Name:</label>
+									<input type="text" id="inputStudyCentreName" class="form-input" data-field="StudyCentreName" placeholder="e.g. SGTB Khalsa College" />
+								</div>
+							</div>
+							<div class="field-row">
+								<label for="inputStudyCentreAddress1">Study Centre Address (Line 1):</label>
+								<input type="text" id="inputStudyCentreAddress1" class="form-input" data-field="StudyCentreAddress1" placeholder="e.g. University Enclave" />
+							</div>
+							<div class="field-row">
+								<label for="inputStudyCentreAddress2">Study Centre Address (Line 2):</label>
+								<input type="text" id="inputStudyCentreAddress2" class="form-input" data-field="StudyCentreAddress2" placeholder="e.g. Delhi - 110007" />
+							</div>
+							<div class="two-cols">
+								<div class="field-row">
+									<label for="inputPhone" data-i18n="form.phone">Phone No.:</label>
+									<input type="text" id="inputPhone" class="form-input" data-field="Phone" />
+								</div>
+								<div class="field-row">
+									<label for="inputEmail" data-i18n="form.email">Email ID:</label>
+									<input type="email" id="inputEmail" class="form-input" data-field="Email" />
+								</div>
+							</div>
+
+							<div class="field-row">
+								<label for="inputDate" data-i18n="form.date">Date of Submission:</label>
+								<div class="date-input-group">
+									<input type="text" id="inputDate" class="form-input date-field-input" data-field="Date" />
+									<button type="button" class="mini-btn btn-today-date" id="btnTodayDate" title="Click to fill current date">📅 Today</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- Dedicated Signature Section (Auto-Crop, Transparent WebP, Multiplier Scale) -->
+						<div class="section-group">
+							<span class="section-label" data-i18n="signatureTab.uploadHeading">✍️ Student Signature (Image / Blank)</span>
+							<div class="field-row">
+								<label for="sigFileInput" data-i18n="signatureTab.uploadHeading">Upload Signature Image (Photo/Scan):</label>
+								<input type="file" id="sigFileInput" accept="image/*" class="form-input file-input" />
+								<span class="form-hint">*White/grey paper is auto-removed (transparent) and cropped to WebP. Leave empty to sign with pen.</span>
+							</div>
+
+							<!-- Signature Preview & Multiplier Scale Box -->
+							<div id="sigPreviewContainer" class="sig-preview-card">
+								<div class="sig-preview-header">
+									<span class="sig-preview-title" data-i18n="signatureTab.uploadHeading">Signature Preview:</span>
+									<button type="button" id="btnRemoveSig" class="btn-remove-sig" data-i18n="signatureTab.removeBtn">🗑️ Remove</button>
+								</div>
+
+								<!-- Checkerboard background for transparency preview -->
+								<div class="sig-canvas-checkerboard">
+									<img id="sigPreviewImg" class="sig-preview-img" src="" alt="Signature Preview" />
+								</div>
+
+								<!-- Proportional Multiplier Scale Slider -->
+								<div class="sig-slider-box">
+									<div class="sig-slider-labels">
+										<span data-i18n="signatureTab.scaleLabel">Proportional Scale Multiplier:</span>
+										<span id="sigScaleValue" class="badge-scale">1.00× (100%)</span>
+									</div>
+									<input type="range" id="sigScaleSlider" class="sig-range-slider" min="0.5" max="2.0" step="0.05" value="1.0" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 3. Bottom Docked 2.5D Segmented Navigation Tabs -->
+				<nav class="panel-segmented-nav" aria-label="Control Panel Navigation">
+					<button type="button" class="panel-tab-btn active" id="tabBtnCoursesDesign" data-tab="paneCoursesDesign">
+						<span class="tab-icon">📚</span>
+						<span class="tab-label" data-i18n="sidebar.tabCourses">विषय एवं डिज़ाइन</span>
+					</button>
+					<button type="button" class="panel-tab-btn" id="tabBtnStudentBio" data-tab="paneStudentBio">
+						<span class="tab-icon">👤</span>
+						<span class="tab-label" data-i18n="sidebar.tabBio">छात्र बायो व साइन</span>
+					</button>
+				</nav>
+			</aside>
+
+		<!-- =================================================================== -->
+		<!-- STAGE COLUMN: ACTION BAR + 3D COVERFLOW PLAYING CARDS DECK          -->
+		<!-- =================================================================== -->
+		<div class="deck-stage-column" id="deckStageColumn">
+			<!-- Stage Top Action Bar (Batch Print + Sample Guide Toggle + Clear) -->
+			<section class="stage-action-bar" id="stageActionBar" aria-label="Studio Actions">
+				<button type="button" class="btn-print-batch" id="btnPrint">
+					<span class="btn-icon">🖨️</span>
+					<span class="btn-label desktop-label" data-i18n="actions.printAll">Print All Selected Covers (Batch PDF)</span>
+					<span class="btn-label mobile-label" data-i18n="actions.printShort">Print All</span>
+				</button>
+				<div class="stage-action-subgroup">
+					<button type="button" class="btn-sample-toggle" id="btnToggleSample" aria-pressed="false" data-i18n-attr="title:actions.sampleGuide">
+						<span class="sample-icon">✨</span>
+						<span class="sample-label desktop-label" data-i18n="actions.sampleGuide">सैंपल गाइड</span>
+						<span class="sample-label mobile-label" data-i18n="actions.sampleShort">सैंपल</span>
+						<span class="sample-switch-pill" aria-hidden="true"><span class="sample-switch-knob"></span></span>
+					</button>
+					<button type="button" class="btn-clear-fields" id="btnClear" data-i18n-attr="title:actions.clearFields">
+						<span class="clear-icon">🗑️</span>
+						<span class="clear-label desktop-label" data-i18n="actions.clearFields">Clear All Fields</span>
+						<span class="clear-label mobile-label" data-i18n="actions.clearShort">Clear</span>
+					</button>
+				</div>
+			</section>
+
+			<!-- 3D COVERFLOW PLAYING CARD DECK PREVIEW STAGE -->
+			<section class="deck-3d-stage" id="deckStage" aria-label="3D Coverflow Preview">
+				<!-- Stage Header: Active Course Info & Status Pill + View Switcher & Fullscreen Trigger -->
+				<div class="deck-stage-header">
+					<div class="deck-header-info">
+						<span class="deck-active-code" id="deckActiveCode">MCSL-228</span>
+						<span class="deck-active-title" id="deckActiveTitle">Web Technologies Lab</span>
+					</div>
+
+					<div class="deck-stage-header-actions">
+						<!-- Dual-Mode Stage Switcher: 3D Deck vs 1:1 Flat Sheet -->
+						<div class="deck-view-segmented-switch" role="group" aria-label="Deck View Mode">
+							<button type="button" class="deck-mode-btn active" id="btnModeDeck" data-mode="deck" data-i18n-attr="title:deck.modeDeck">
+								<span class="mode-icon">🎴</span>
+								<span class="mode-text" data-i18n="deck.modeDeck">3D डेक</span>
+							</button>
+							<button type="button" class="deck-mode-btn" id="btnModeSheet" data-mode="sheet" data-i18n-attr="title:deck.modeSheet">
+								<span class="mode-icon">📄</span>
+								<span class="mode-text" data-i18n="deck.modeSheet">1:1 शीट</span>
+							</button>
+						</div>
+
+						<!-- Fullscreen Lightbox Trigger Button -->
+						<button type="button" class="btn-lightbox-trigger" id="btnTriggerLightbox" data-i18n-attr="title:deck.fullscreen">
+							<span class="trigger-icon">⛶</span>
+							<span class="trigger-text" data-i18n="deck.fullscreen">फुलस्क्रीन</span>
+						</button>
+
+						<span class="deck-counter-badge" id="deckCounterBadge">Page 1 of 2</span>
+					</div>
+				</div>
+
+				<!-- 3D Perspective Viewport -->
+				<div class="deck-3d-viewport" id="deckViewport">
+					<button type="button" class="deck-arrow-btn deck-arrow-prev" id="btnDeckPrev" aria-label="Previous Cover">‹</button>
+					<button type="button" class="deck-arrow-btn deck-arrow-next" id="btnDeckNext" aria-label="Next Cover">›</button>
+
+					<!-- Fanned 3D Cards Container -->
+					<div class="deck-fanned-container" id="pagesContainer">
+						<!-- Individual A4 Sheets as 3D Cards rendered dynamically by FrontPageStudioApp -->
+					</div>
+				</div>
+
+				<!-- Stage Footer: Interactive Navigation Dots & Tactile Hint -->
+				<div class="deck-stage-footer">
+					<div class="deck-dots-container" id="deckDotsContainer"></div>
+					<span class="deck-hint-text" data-i18n="deck.hintText">💡 Click side cards or use ◀ / ▶ arrow keys to fan through covers</span>
+				</div>
+			</section>
+		</div>
+		</div>
+
+		<!-- =================================================================== -->
+		<!-- FULLSCREEN A4 INSPECT LIGHTBOX MODAL OVERLAY (PDF READER STYLE)     -->
+		<!-- =================================================================== -->
+		<div class="stage-lightbox-modal" id="stageLightboxModal" role="dialog" aria-modal="true" aria-label="Cover Fullscreen Inspector" hidden>
+			<div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+
+			<!-- Floating Top-Right Exit Button -->
+			<button type="button" class="lightbox-float-close-btn" id="btnCloseLightbox" aria-label="Close Lightbox (Esc)">
+				<span class="close-icon">✕</span>
+				<span class="close-tip">Esc</span>
+			</button>
+
+			<!-- Fullscreen Canvas Viewport (Pannable & Zoomable via Mouse Wheel / Touch Pinch) -->
+			<div class="lightbox-viewport" id="lightboxViewport">
+				<div class="lightbox-sheet-host" id="lightboxSheetHost">
+					<!-- Dynamically populated with active A4 sheet by FrontPageStudioApp -->
+				</div>
+			</div>
+
+			<!-- Floating Bottom PDF Navigation Bar (2.5D Translucent Glass Capsule) -->
+			<nav class="lightbox-bottom-navbar" id="lightboxBottomNavbar" aria-label="PDF Lightbox Controls">
+				<!-- Course Info Badge -->
+				<div class="lb-nav-info">
+					<span class="lb-nav-code" id="lightboxActiveCode">MCSL-228</span>
+					<span class="lb-nav-title" id="lightboxActiveTitle">Web Technologies Lab</span>
+				</div>
+
+				<div class="lb-nav-divider"></div>
+
+				<!-- Page Navigation -->
+				<div class="lb-nav-paging">
+					<button type="button" class="lb-nav-btn" id="btnLightboxPrev" aria-label="Previous Cover Page" title="Previous Cover (◀)">‹</button>
+					<span class="lb-nav-badge" id="lightboxPageBadge">Page 1 of 2</span>
+					<button type="button" class="lb-nav-btn" id="btnLightboxNext" aria-label="Next Cover Page" title="Next Cover (▶)">›</button>
+				</div>
+
+				<div class="lb-nav-divider"></div>
+
+				<!-- Zoom Controls (Mouse Wheel / Touch Pinch / Buttons) -->
+				<div class="lb-nav-zoom">
+					<button type="button" class="lb-nav-btn lb-btn-zoom" id="btnLightboxZoomOut" aria-label="Zoom Out" title="Zoom Out (Mouse Wheel Down)">−</button>
+					<button type="button" class="lb-zoom-level-btn" id="btnLightboxZoomReset" title="Click to reset zoom (100%)">
+						<span id="lightboxZoomPercent">100%</span>
+					</button>
+					<button type="button" class="lb-nav-btn lb-btn-zoom" id="btnLightboxZoomIn" aria-label="Zoom In" title="Zoom In (Mouse Wheel Up)">+</button>
+				</div>
+			</nav>
+		</div>
+
+		<!-- Global Shared Application Footer -->
+		<ignou-footer></ignou-footer>
+
+		<!-- =================================================================== -->
+		<!-- MODERN OOP JAVASCRIPT ARCHITECTURE (ES6+ CLASSES & COMPONENTS)     -->
+		<!-- =================================================================== -->
+		<script type="module" src="./js/shared/header.component.js"></script>
+		<script type="module" src="./js/shared/footer.component.js"></script>
+		<script type="module" src="./js/assignment_covers/assignment_covers_studio.js"></script>
+	</body>
+</html>
