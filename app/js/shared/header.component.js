@@ -62,8 +62,13 @@ export class IgnouHeader extends HTMLElement {
 			<div class="header-inner">
 				<div class="header-brand-zone">
 					<a href="./index.html" class="brand-group">
-						<div class="brand-logo-badge">
-							<span class="icon-brand-logo" aria-hidden="true"></span>
+						<div class="brand-logo-badge" aria-hidden="true">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+								<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+								<path d="M12 6v6"/>
+								<path d="M9 9h6"/>
+							</svg>
 						</div>
 						<div class="brand-text">
 							<span class="brand-title">${I18nService.t("header.brandTitle")}</span>

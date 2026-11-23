@@ -13,6 +13,7 @@ import { PROJECT_DOCUMENTS } from "../../data/project_programmes.js";
 import { ProjectDocRegistry } from "./templates/project_doc_registry.js";
 import { DeckStageController } from "../shared/deck_controller.js";
 import { StageLightboxModal } from "../shared/lightbox_modal.js";
+import { AnalyticsService } from "../shared/analytics.service.js";
 
 export class ProjectSynopsisStudioApp {
 	#dom = {};
@@ -49,7 +50,12 @@ export class ProjectSynopsisStudioApp {
 			btnToggleMobileSheet: document.getElementById("btnToggleMobileSheet"),
 			btnCloseMobileSheet: document.getElementById("btnCloseMobileSheet"),
 			mobileSheetBackdrop: document.getElementById("mobileSheetBackdrop"),
+			sheetChevron: document.getElementById("sheetChevron"),
 			controlPanel: document.getElementById("controlPanel"),
+			secCoverDecoration: document.getElementById("secCoverDecoration"),
+			selectCoverBorder: document.getElementById("selectCoverBorder"),
+			selectCoverWatermark: document.getElementById("selectCoverWatermark"),
+			selectCoverTone: document.getElementById("selectCoverTone"),
 			accordionHeader: document.getElementById("accordionHeader"),
 			accordionBody: document.getElementById("accordionBody"),
 			btnTriggerLightbox: document.getElementById("btnTriggerLightbox"),
@@ -130,6 +136,37 @@ export class ProjectSynopsisStudioApp {
 			});
 		}
 
+		// Cover Page Decoration Selectors (Border, Watermark, Paper Tone)
+		if (this.#dom.selectCoverBorder) {
+			const savedBorder = StorageService.get("project_cover_border", "single");
+			this.#dom.selectCoverBorder.value = savedBorder;
+			this.#dom.selectCoverBorder.addEventListener("change", (e) => {
+				const borderVal = e.target.value;
+				StorageService.set("project_cover_border", borderVal);
+				this.#applyCoverDecorations();
+			});
+		}
+
+		if (this.#dom.selectCoverWatermark) {
+			const savedWatermark = StorageService.get("project_cover_watermark", "off");
+			this.#dom.selectCoverWatermark.value = savedWatermark;
+			this.#dom.selectCoverWatermark.addEventListener("change", (e) => {
+				const wmVal = e.target.value;
+				StorageService.set("project_cover_watermark", wmVal);
+				this.#applyCoverDecorations();
+			});
+		}
+
+		if (this.#dom.selectCoverTone) {
+			const savedTone = StorageService.get("project_cover_tone", "white");
+			this.#dom.selectCoverTone.value = savedTone;
+			this.#dom.selectCoverTone.addEventListener("change", (e) => {
+				const toneVal = e.target.value;
+				StorageService.set("project_cover_tone", toneVal);
+				this.#applyCoverDecorations();
+			});
+		}
+
 		// Mobile Sheet Toggle
 		if (this.#dom.btnToggleMobileSheet) {
 			this.#dom.btnToggleMobileSheet.addEventListener("click", () => this.#toggleMobileSheet());
@@ -144,6 +181,11 @@ export class ProjectSynopsisStudioApp {
 		// Print button
 		if (this.#dom.btnPrint) {
 			this.#dom.btnPrint.addEventListener("click", () => {
+				const selectedDocs = this.docSelector?.checkedDocKeys || StorageService.get("project_selected_docs", []);
+				const docKeys = Array.from(selectedDocs);
+				if (docKeys.length > 0) {
+					AnalyticsService.trackSynopsisPrint(docKeys);
+				}
 				window.print();
 			});
 		}
@@ -173,6 +215,17 @@ export class ProjectSynopsisStudioApp {
 			this.projectForm.updateSampleToggleButtonUI();
 			this.projectForm.syncAllFields();
 		});
+
+		// Keyboard Esc to Close Mobile Sheet or Lightbox
+		window.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") {
+				if (this.lightboxModal?.isOpen) {
+					this.lightboxModal.close();
+					return;
+				}
+				this.#toggleMobileSheet(false);
+			}
+		});
 	}
 
 	#switchTab(tabKey) {
@@ -193,12 +246,20 @@ export class ProjectSynopsisStudioApp {
 		if (this.#dom.paneStudentBio) this.#dom.paneStudentBio.classList.toggle("active", isStudent);
 	}
 
-	#toggleMobileSheet(forceState = null) {
-		if (!this.#dom.controlPanel) return;
-		const shouldOpen = forceState !== null ? forceState : !this.#dom.controlPanel.classList.contains("open");
-		this.#dom.controlPanel.classList.toggle("open", shouldOpen);
-		if (this.#dom.mobileSheetBackdrop) {
-			this.#dom.mobileSheetBackdrop.classList.toggle("open", shouldOpen);
+	#toggleMobileSheet(open = null) {
+		const isCurrentlyOpen = this.#dom.controlPanel?.classList.contains("mobile-sheet-open");
+		const shouldOpen = open !== null ? open : !isCurrentlyOpen;
+
+		if (shouldOpen) {
+			this.#dom.controlPanel?.classList.add("mobile-sheet-open");
+			this.#dom.mobileSheetBackdrop?.classList.add("active");
+			if (this.#dom.sheetChevron) this.#dom.sheetChevron.textContent = "▼";
+			document.body.classList.add("mobile-sheet-locked");
+		} else {
+			this.#dom.controlPanel?.classList.remove("mobile-sheet-open");
+			this.#dom.mobileSheetBackdrop?.classList.remove("active");
+			if (this.#dom.sheetChevron) this.#dom.sheetChevron.textContent = "▲";
+			document.body.classList.remove("mobile-sheet-locked");
 		}
 	}
 
@@ -208,6 +269,13 @@ export class ProjectSynopsisStudioApp {
 
 		const prog = this.docSelector.selectedProgramme;
 		const checkedKeys = this.docSelector.checkedDocKeys;
+
+		// Show Cover Page Decoration section ONLY when Cover Page (Annexure XI) is selected
+		if (this.#dom.secCoverDecoration) {
+			const isCoverSelected = checkedKeys.has("project_cover");
+			this.#dom.secCoverDecoration.style.display = isCoverSelected ? "" : "none";
+		}
+
 		const sigData = {
 			hasSig: Boolean(this.projectForm.signatureData),
 			sigSrc: this.projectForm.signatureData || "",
@@ -247,9 +315,32 @@ export class ProjectSynopsisStudioApp {
 
 		this.#dom.projectPagesContainer.innerHTML = htmlBuffer;
 		this.projectForm.syncAllFields();
+		this.#applyCoverDecorations();
 		if (this.deckController) {
 			this.deckController.refresh();
 		}
+	}
+
+	#applyCoverDecorations() {
+		const borderVal = StorageService.get("project_cover_border", "single");
+		const wmVal = StorageService.get("project_cover_watermark", "off");
+		const toneVal = StorageService.get("project_cover_tone", "white");
+
+		if (this.#dom.selectCoverBorder) {
+			this.#dom.selectCoverBorder.value = borderVal;
+		}
+		if (this.#dom.selectCoverWatermark) {
+			this.#dom.selectCoverWatermark.value = wmVal;
+		}
+		if (this.#dom.selectCoverTone) {
+			this.#dom.selectCoverTone.value = toneVal;
+		}
+
+		document.querySelectorAll(".tpl-doc-project-cover").forEach((sheet) => {
+			sheet.setAttribute("data-border-style", borderVal);
+			sheet.setAttribute("data-watermark", wmVal);
+			sheet.setAttribute("data-paper-tone", toneVal);
+		});
 	}
 }
 

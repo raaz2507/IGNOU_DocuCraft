@@ -16,6 +16,8 @@
 
 		/* Single Clean Outer Border Frame Matching Official Specification */
 		& .cover-border-frame {
+			position: relative;
+			overflow: hidden;
 			width: 100%;
 			height: 100%;
 			border: 1.4px solid #000000;
@@ -23,10 +25,63 @@
 			display: flex;
 			flex-direction: column;
 			box-sizing: border-box;
+			transition: border 0.15s ease;
+		}
+
+		/* Option A: Official Double Border (University Classic) */
+		&[data-border-style="double"] .cover-border-frame {
+			border: 4px double #000000;
+		}
+
+		/* Option B: Executive Single Border (Modern Minimal - Default) */
+		&[data-border-style="single"] .cover-border-frame {
+			border: 1.4px solid #000000;
+		}
+
+		/* Option C: Clean Borderless (Binding Frame) */
+		&[data-border-style="none"] .cover-border-frame {
+			border: 1.4px solid transparent;
+		}
+
+		/* Optional Center Watermark Seal */
+		& .cover-watermark-seal {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 320px;
+			height: 320px;
+			pointer-events: none;
+			opacity: 0.055;
+			filter: grayscale(100%);
+			z-index: 0;
+			user-select: none;
+
+			& .watermark-img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+
+		&[data-watermark="on"] .cover-watermark-seal {
+			display: block;
+		}
+
+		/* Background Paper Tone Options */
+		&[data-paper-tone="white"] {
+			background: #ffffff;
+		}
+
+		&[data-paper-tone="ivory"] {
+			background: #fcfbf8;
 		}
 
 		/* Header Section: Graceful Arched University Title */
 		& .cover-hdr {
+			position: relative;
+			z-index: 2;
 			margin-top: 2mm;
 			margin-bottom: 2mm;
 			flex-shrink: 0;
@@ -54,6 +109,8 @@
 
 		/* Main Cover Body: 3 Distinct Academic Zones */
 		& .cover-body {
+			position: relative;
+			z-index: 2;
 			flex: 1;
 			display: flex;
 			flex-direction: column;
@@ -123,6 +180,7 @@
 						color: #000000;
 						margin-bottom: 2mm;
 						letter-spacing: 0.3px;
+						text-transform: capitalize;
 					}
 
 					& .cover-enrolment-row {
@@ -156,6 +214,7 @@
 						font-weight: 700;
 						color: #000000;
 						letter-spacing: 0.3px;
+						text-transform: capitalize;
 					}
 				}
 			}

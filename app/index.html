@@ -3,7 +3,31 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>IGNOU Doc Automation Hub - Smart Workspace</title>
+		<title>IGNOU DocuCraft - Smart Student Workspace</title>
+		<meta name="description" content="IGNOU छात्रों के लिए स्मार्ट टूल: असाइनमेंट फ्रंट पेज और MCA MCSP-232 सिनॉप्सिस 1 क्लिक में तैयार और A4 PDF प्रिंट करें।" />
+
+		<!-- Open Graph / WhatsApp / Telegram Social Preview Cards -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="IGNOU DocuCraft" />
+		<meta property="og:url" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/" />
+		<meta property="og:title" content="IGNOU DocuCraft — Smart Academic Workspace" />
+		<meta property="og:description" content="IGNOU छात्रों के लिए स्मार्ट टूल: असाइनमेंट फ्रंट पेज और MCA MCSP-232 सिनॉप्सिस 1 क्लिक में तैयार और A4 PDF प्रिंट करें।" />
+		<meta property="og:image" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/assets/quic_link.jpg" />
+		<meta property="og:image:secure_url" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/assets/quic_link.jpg" />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="634" />
+		<meta property="og:image:alt" content="IGNOU DocuCraft Preview Card" />
+
+		<!-- Twitter / X Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/" />
+		<meta name="twitter:title" content="IGNOU DocuCraft — Smart Academic Workspace" />
+		<meta name="twitter:description" content="IGNOU छात्रों के लिए स्मार्ट टूल: असाइनमेंट फ्रंट पेज और MCA MCSP-232 सिनॉप्सिस 1 क्लिक में तैयार और A4 PDF प्रिंट करें।" />
+		<meta name="twitter:image" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/assets/quic_link.jpg" />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="./assets/IGNOU_logo.svg" />
 		<link rel="stylesheet" href="./css/index.css" />
 	</head>
 	<body>
@@ -91,10 +115,41 @@
 								<span data-i18n="home.helpStep3">Click <strong>'Print All Selected Covers'</strong> to export unified, margin-free A4 PDF sheets directly.</span>
 							</li>
 						</ol>
-						<p class="hub-help-note">
-							<span data-i18n="home.helpNoteCompliant">SOCIS / IGNOU Guidelines Compliant</span>
-							<span data-i18n="home.helpNoteHandbook">Detailed handbook coming soon</span>
-						</p>
+
+						<!-- Official Guidelines & Video Tutorial Hub (Way 3 Implementation) -->
+						<div class="hub-resources-group">
+							<!-- 1. Video Tutorial Card with Thumbnail & Play Button -->
+							<div class="hub-video-preview-card" id="btnOpenVideoModal" role="button" tabindex="0" title="Click to Watch Tutorial in Fullscreen Lightbox">
+								<div class="video-thumb-container">
+									<img src="" alt="Tutorial Video Thumbnail" class="video-thumb-img" id="homeVideoThumbImg" />
+									<div class="video-thumb-overlay">
+										<div class="video-play-pulse">
+											<span class="video-play-icon">▶</span>
+										</div>
+										<span class="video-thumb-badge">📺 How to Use (16:9 HD)</span>
+									</div>
+								</div>
+								<div class="video-thumb-caption">
+									<span class="video-caption-title">How to Use IGNOU DocuCraft</span>
+									<span class="video-caption-sub">Step-by-step complete studio walkthrough</span>
+								</div>
+							</div>
+
+							<!-- 2. Official IGNOU Guidelines PDF Button -->
+							<a href="" target="_blank" rel="noopener noreferrer" class="hub-official-pdf-btn" id="linkOfficialPdf" title="Open Official MCSP-232 Guidelines (IGNOU Webservices)">
+								<span class="pdf-icon">📄</span>
+								<div class="pdf-text-group">
+									<span class="pdf-btn-title">Official MCSP-232 Project Guidelines</span>
+									<span class="pdf-btn-sub">IGNOU SOCIS Official Curriculum PDF ↗</span>
+								</div>
+							</a>
+
+							<!-- Compliance Note -->
+							<div class="hub-help-note">
+								<span data-i18n="home.helpNoteCompliant">SOCIS / IGNOU Guidelines Compliant</span>
+								<span class="hub-status-badge">Official 2025</span>
+							</div>
+						</div>
 					</section>
 				</div>
 			</div>
@@ -135,6 +190,28 @@
 				</a>
 			</div>
 		</main>
+
+		<!-- Video Lightbox Modal (Way 3 Theater Player) -->
+		<div class="video-lightbox-modal" id="homeVideoModal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+			<div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+			<div class="video-modal-dialog">
+				<div class="video-modal-header">
+					<div class="modal-hdr-title">
+						<span class="modal-icon">📺</span>
+						<span>How to Use IGNOU DocuCraft — Complete Tutorial</span>
+					</div>
+					<div class="modal-hdr-actions">
+						<a href="" target="_blank" rel="noopener noreferrer" class="btn-watch-youtube-external" id="btnModalWatchYoutube" title="Open directly on YouTube">
+							<span>Watch on YouTube ↗</span>
+						</a>
+						<button type="button" class="btn-close-video-modal" id="btnCloseVideoModal" aria-label="Close video player">✕</button>
+					</div>
+				</div>
+				<div class="video-modal-player-wrap">
+					<iframe id="homeModalVideoIframe" src="" title="IGNOU DocuCraft Video Guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
 
 		<!-- Global Shared Application Footer -->
 		<ignou-footer></ignou-footer>

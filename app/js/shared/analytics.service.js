@@ -5,11 +5,11 @@
  * Fails gracefully offline or when endpoint is unconfigured. Zero UI code.
  */
 import { StorageService } from "./storage.service.js";
+import { APP_CONFIG } from "../../config.js";
 
 export class AnalyticsService {
-	// Google Apps Script Web App Deployment URL
-	// Replace with your active Google Apps Script Web App Exec URL:
-	static #API_ENDPOINT = ""; 
+	// Loaded dynamically from external app/config.js (Zero hardcoded URLs in JS logic)
+	static #API_ENDPOINT = APP_CONFIG?.googleSheetScriptUrl || ""; 
 
 	static #SESSION_VISITED_KEY = "ignou_hub_session_visited";
 
@@ -30,8 +30,8 @@ export class AnalyticsService {
 			sessionStorage.setItem(this.#SESSION_VISITED_KEY, "true");
 		}
 
-		// Local fallback count so the badge always displays a clean live number
-		let localCount = StorageService.get("analytics_visitors_count", 1420);
+		// Authentic local count starting from 1
+		let localCount = StorageService.get("analytics_visitors_count", 1);
 		if (isNewSession) {
 			localCount += 1;
 			StorageService.set("analytics_visitors_count", localCount);
@@ -68,23 +68,48 @@ export class AnalyticsService {
 	}
 
 	/**
-	 * Tracks when a user prints an assignment cover or project document
+	 * Tracks when user prints specific MCA Project Synopsis documents
+	 * @param {string[]} docKeys - Array of document IDs (e.g. ['doc_proforma', 'doc_originality'])
 	 */
-	static async trackPrint(documentType = "assignment_covers") {
+	static async trackSynopsisPrint(docKeys = []) {
+		if (!Array.isArray(docKeys) || docKeys.length === 0) return;
 		if (!this.#API_ENDPOINT) return;
 
 		try {
 			const query = new URLSearchParams({
-				action: "print",
-				docType: documentType,
+				action: "print_synopsis",
+				docs: docKeys.join(","),
 			});
 
 			await fetch(`${this.#API_ENDPOINT}?${query.toString()}`, {
 				method: "GET",
-				mode: "no-cors", // Fire and forget
+				mode: "no-cors",
 			});
 		} catch (err) {
-			console.warn("AnalyticsService print tracking skipped:", err.message);
+			console.warn("AnalyticsService synopsis print tracking skipped:", err.message);
+		}
+	}
+
+	/**
+	 * Tracks when user prints specific Assignment Course Covers
+	 * @param {string[]} courseCodes - Array of course codes (e.g. ['MCSL-228', 'MCS-211'])
+	 */
+	static async trackAssignmentPrint(courseCodes = []) {
+		if (!Array.isArray(courseCodes) || courseCodes.length === 0) return;
+		if (!this.#API_ENDPOINT) return;
+
+		try {
+			const query = new URLSearchParams({
+				action: "print_assignment",
+				courses: courseCodes.join(","),
+			});
+
+			await fetch(`${this.#API_ENDPOINT}?${query.toString()}`, {
+				method: "GET",
+				mode: "no-cors",
+			});
+		} catch (err) {
+			console.warn("AnalyticsService assignment print tracking skipped:", err.message);
 		}
 	}
 

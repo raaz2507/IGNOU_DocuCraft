@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>IGNOU Help & User Guide - स्मार्ट सहायता केंद्र</title>
+		<title>IGNOU DocuCraft - Help & User Guide</title>
 		<link rel="stylesheet" href="./css/help.css" />
 		<script type="module" src="./js/shared/header.component.js"></script>
 		<script type="module" src="./js/shared/footer.component.js"></script>
@@ -18,49 +18,94 @@
 			<!-- Hero Zone -->
 			<header class="help-hero-zone">
 				<span class="hero-badge">
-					<span>💡</span> <span>IGNOU User Documentation & Support</span>
+					<span>💡</span> <span data-i18n="help.heroBadge">IGNOU DocuCraft User Documentation</span>
 				</span>
-				<h1 class="hero-title">IGNOU Help & Step-by-Step User Guide</h1>
-				<p class="hero-subtitle">
+				<h1 class="hero-title" data-i18n="help.heroTitle">IGNOU DocuCraft - Help & Step-by-Step User Guide</h1>
+				<p class="hero-subtitle" data-i18n="help.heroSubtitle">
 					Assignment front pages और MCA project synopsis के official formats, accurate print settings, और data management के आसान नियम एक ही जगह।
 				</p>
 
 				<!-- Quick Navigation Pills -->
 				<nav class="help-quick-pills" aria-label="Help Quick Navigation">
-					<a href="#sec-quickstart" class="jump-pill">🚀 Quickstart (3 Steps)</a>
-					<a href="#sec-assignment" class="jump-pill">📑 Assignment Covers</a>
-					<a href="#sec-project" class="jump-pill">🎓 Project Synopsis (MCSP-232)</a>
-					<a href="#sec-print" class="jump-pill">🖨️ Zero-Margin Print Guide</a>
-					<a href="#sec-backup" class="jump-pill">💾 Backup & Restore</a>
-					<a href="#sec-faq" class="jump-pill">❓ FAQs & Solutions</a>
+					<a href="#sec-video" class="jump-pill jump-pill-video" data-i18n="help.pillVideo">📺 Video Guide</a>
+					<a href="#sec-quickstart" class="jump-pill" data-i18n="help.pillQuickstart">🚀 Quickstart (3 Steps)</a>
+					<a href="#sec-assignment" class="jump-pill" data-i18n="help.pillAssignment">📑 Assignment Covers</a>
+					<a href="#sec-project" class="jump-pill" data-i18n="help.pillProject">🎓 Project Synopsis (MCSP-232)</a>
+					<a href="#sec-print" class="jump-pill" data-i18n="help.pillPrint">🖨️ Zero-Margin Print Guide</a>
+					<a href="#sec-backup" class="jump-pill" data-i18n="help.pillBackup">💾 Backup & Restore</a>
+					<a href="#sec-faq" class="jump-pill" data-i18n="help.pillFaq">❓ FAQs & Solutions</a>
 				</nav>
 			</header>
+
+			<!-- Section 0: How to Use Video Tutorial -->
+			<section class="help-section-card video-guide-section" id="sec-video">
+				<div class="sec-header">
+					<div class="sec-icon-badge">📺</div>
+					<div class="sec-title-group">
+						<h2 data-i18n="help.videoTitle">How to Use This Web App (वीडियो ट्यूटोरियल)</h2>
+						<p data-i18n="help.videoSub">IGNOU DocuCraft पर असाइनमेंट कवर्स और MCA प्रोजेक्ट सिनॉप्सिस तैयार करने का पूरा वीडियो गाइड।</p>
+					</div>
+				</div>
+
+				<div class="video-guide-layout">
+					<div class="video-player-container">
+						<iframe 
+							id="howToUseVideoIframe"
+							src="https://www.youtube.com/embed/yffcim-EVwI" 
+							title="How to Use IGNOU DocuCraft" 
+							loading="lazy"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+							allowfullscreen>
+						</iframe>
+					</div>
+					<div class="video-meta-box">
+						<div class="video-meta-info">
+							<h3 data-i18n="help.videoPointsHeading">💡 वीडियो में क्या-क्या सीखेंगे:</h3>
+							<ul class="video-points-list">
+								<li data-i18n="help.videoPoint1">विद्यार्थी प्रोफ़ाइल (Enrolment, Name, Centre) एक बार भरना और ऑटो-सेव होना।</li>
+								<li data-i18n="help.videoPoint2">सेमेस्टर के अनुसार असाइनमेंट कवर्स चुनना और 3D डेक में प्रीव्यू देखना।</li>
+								<li data-i18n="help.videoPoint3">MCA प्रोजेक्ट सिनॉप्सिस के चारों प्रपत्र (Annexure II, Originality आदि) तैयार करना।</li>
+								<li data-i18n="help.videoPoint4">हस्ताक्षर अपलोड / ड्रा करना और बिना मार्जिन के 1:1 आधिकारिक प्रिंट निकालना।</li>
+							</ul>
+						</div>
+						<div class="video-actions">
+							<a id="howToUseDirectLink" href="https://www.youtube.com/watch?v=yffcim-EVwI" target="_blank" rel="noopener noreferrer" class="yt-watch-btn">
+								<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+								</svg>
+								<span data-i18n="help.videoWatchBtn">YouTube पर देखें (Watch on YouTube) ↗</span>
+							</a>
+							<span class="video-config-hint" data-i18n="help.videoConfigHint">🔧 यह वीडियो लिंक app/config.js से लोड हो रहा है।</span>
+						</div>
+					</div>
+				</div>
+			</section>
 
 			<!-- Section 1: 3-Step Quickstart -->
 			<section class="help-section-card" id="sec-quickstart">
 				<div class="sec-header">
 					<div class="sec-icon-badge">🚀</div>
 					<div class="sec-title-group">
-						<h2>आसान 3 Steps में तैयार करें</h2>
-						<p>नए विद्यार्थियों के लिए quick setup — सिर्फ 2 मिनट में submission-ready दस्तावेज़ तैयार करें।</p>
+						<h2 data-i18n="help.quickstartTitle">आसान 3 Steps में तैयार करें</h2>
+						<p data-i18n="help.quickstartSub">नए विद्यार्थियों के लिए quick setup — सिर्फ 2 मिनट में submission-ready दस्तावेज़ तैयार करें।</p>
 					</div>
 				</div>
 
 				<div class="quickstart-steps-grid">
 					<div class="step-card">
-						<span class="step-num-pill">01</span>
-						<h3>Profile Details भरें</h3>
-						<p>अपना Enrolment No, Full Name, Mobile, Email और Study Centre code एक बार enter करें। Browser इस data को automatically याद रखेगा, बार-बार type करने की ज़रूरत नहीं पड़ेगी।</p>
+						<span class="step-num-pill" data-i18n="help.step1Num">01</span>
+						<h3 data-i18n="help.step1Title">Profile Details भरें</h3>
+						<p data-i18n="help.step1Desc">अपना Enrolment No, Full Name, Mobile, Email और Study Centre code एक बार enter करें। Browser इस data को automatically याद रखेगा, बार-बार type करने की ज़रूरत नहीं पड़ेगी।</p>
 					</div>
 					<div class="step-card">
-						<span class="step-num-pill">02</span>
-						<h3>Subjects या Documents चुनें</h3>
-						<p>Assignment Covers studio में अपना semester सेलेक्ट करके courses टिक करें। Project Synopsis studio में ज़रूरी documents (Annexure II, Originality Certificate, Cover Page) चुनें।</p>
+						<span class="step-num-pill" data-i18n="help.step2Num">02</span>
+						<h3 data-i18n="help.step2Title">Subjects या Documents चुनें</h3>
+						<p data-i18n="help.step2Desc">Assignment Covers studio में अपना semester सेलेक्ट करके courses टिक करें। Project Synopsis studio में ज़रूरी documents (Annexure II, Originality Certificate, Cover Page) चुनें।</p>
 					</div>
 					<div class="step-card">
-						<span class="step-num-pill">03</span>
-						<h3>1-Click Print & PDF Save करें</h3>
-						<p>"Print All" बटन दबाएं। Print window में 'Save as PDF' चुनें और बिना border कटे 100% सटीक A4 sheets डाउनलोड करें।</p>
+						<span class="step-num-pill" data-i18n="help.step3Num">03</span>
+						<h3 data-i18n="help.step3Title">1-Click Print & PDF Save करें</h3>
+						<p data-i18n="help.step3Desc">'Print All' बटन दबाएं। Print window में 'Save as PDF' चुनें और बिना border कटे 100% सटीक A4 sheets डाउनलोड करें।</p>
 					</div>
 				</div>
 			</section>
@@ -70,27 +115,27 @@
 				<div class="sec-header">
 					<div class="sec-icon-badge">📑</div>
 					<div class="sec-title-group">
-						<h2>Assignment Covers Studio Guide</h2>
-						<p>प्रत्येक semester के असाइनमेंट्स के लिए official submission front page कैसे बनाएं।</p>
+						<h2 data-i18n="help.assignmentTitle">Assignment Covers Studio Guide</h2>
+						<p data-i18n="help.assignmentSub">प्रत्येक semester के असाइनमेंट्स के लिए official submission front page कैसे बनाएं।</p>
 					</div>
 				</div>
 
 				<div class="help-feature-grid">
 					<div class="feature-mini-card">
-						<span class="mini-title">📚 Semester & Course Selection</span>
-						<span class="mini-desc">MCA_NEW के semester 1 से 4 तक के सभी theoretical और practical lab courses पहले से जुड़े हैं। Dropdown से semester बदलें और Select All या individual checkbox का उपयोग करें।</span>
+						<span class="mini-title" data-i18n="help.assignCard1Title">📚 Semester & Course Selection</span>
+						<span class="mini-desc" data-i18n="help.assignCard1Desc">MCA_NEW के semester 1 से 4 तक के सभी theoretical और practical lab courses पहले से जुड़े हैं। Dropdown से semester बदलें और Select All या individual checkbox का उपयोग करें।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">🎨 Template Styles (Designs)</span>
-						<span class="mini-desc">Classic (आधिकारिक IGNOU double-border), Modern Academic Serif, Gazette, या Portfolio शैलियों में से चुनें। लेआउट तुरंत live sheet पर अपडेट होता है।</span>
+						<span class="mini-title" data-i18n="help.assignCard2Title">🎨 Template Styles (Designs)</span>
+						<span class="mini-desc" data-i18n="help.assignCard2Desc">Classic (आधिकारिक IGNOU double-border), Modern Academic Serif, Gazette, या Portfolio शैलियों में से चुनें। लेआउट तुरंत live sheet पर अपडेट होता है।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">🖋️ Ballpoint Pen Inks</span>
-						<span class="mini-desc">असली हाथ से लिखी लिखावट के लिए Royal Blue (#0038a8), Pilot Blue, और Deep Black इंक उपलब्ध हैं। Handwriting font स्टाइल भी बदल सकते हैं।</span>
+						<span class="mini-title" data-i18n="help.assignCard3Title">🖋️ Ballpoint Pen Inks</span>
+						<span class="mini-desc" data-i18n="help.assignCard3Desc">असली हाथ से लिखी लिखावट के लिए Royal Blue (#0038a8), Pilot Blue, और Deep Black इंक उपलब्ध हैं। Handwriting font स्टाइल भी बदल सकते हैं।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">✍️ Signature Upload & Transparent Auto-Crop</span>
-						<span class="mini-desc">कागज़ पर sign करके मोबाइल से photo अपलोड करें। हमारा processor सफेद background को automatically हटाकर transparent WebP बना देता है। Zoom slider से साइज भी एडजस्ट करें।</span>
+						<span class="mini-title" data-i18n="help.assignCard4Title">✍️ Signature Upload & Transparent Auto-Crop</span>
+						<span class="mini-desc" data-i18n="help.assignCard4Desc">कागज़ पर sign करके मोबाइल से photo अपलोड करें। हमारा processor सफेद background को automatically हटाकर transparent WebP बना देता है। Zoom slider से साइज भी एडजस्ट करें।</span>
 					</div>
 				</div>
 			</section>
@@ -100,27 +145,27 @@
 				<div class="sec-header">
 					<div class="sec-icon-badge">🎓</div>
 					<div class="sec-title-group">
-						<h2>MCA Project Synopsis Kit (MCSP-232 Guidelines)</h2>
-						<p>SOCIS / IGNOU handbook के अनुसार MCA Final Semester project proposal कैसे तैयार करें।</p>
+						<h2 data-i18n="help.projectTitle">MCA Project Synopsis Kit (MCSP-232 Guidelines)</h2>
+						<p data-i18n="help.projectSub">SOCIS / IGNOU handbook के अनुसार MCA Final Semester project proposal कैसे तैयार करें।</p>
 					</div>
 				</div>
 
 				<div class="help-feature-grid">
 					<div class="feature-mini-card">
-						<span class="mini-title">📑 4 Mandatory Official Documents</span>
-						<span class="mini-desc">किट में 4 ज़रूरी forms हैं: (1) Annexure II Proforma Approval, (2) Project Trainee Request Letter, (3) Annexure X Certificate of Originality, और (4) Annexure XI Project Cover Page।</span>
+						<span class="mini-title" data-i18n="help.projectCard1Title">📑 4 Mandatory Official Documents</span>
+						<span class="mini-desc" data-i18n="help.projectCard1Desc">किट में 4 ज़रूरी forms हैं: (1) Annexure II Proforma Approval, (2) Project Trainee Request Letter, (3) Annexure X Certificate of Originality, और (4) Annexure XI Project Cover Page।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">👨‍🏫 Guide Eligibility & 5-Student Rule</span>
-						<span class="mini-desc">Guide का Computer Science / IT में Ph.D, M.Tech, BE/B.Tech, MCA, या M.Sc होना अनिवार्य है। नोट: एक गाइड एक समय पर 5 से अधिक IGNOU MCA students को गाइड नहीं कर सकते।</span>
+						<span class="mini-title" data-i18n="help.projectCard2Title">👨‍🏫 Guide Eligibility & 5-Student Rule</span>
+						<span class="mini-desc" data-i18n="help.projectCard2Desc">Guide का Computer Science / IT में Ph.D, M.Tech, BE/B.Tech, MCA, या M.Sc होना अनिवार्य है। नोट: एक गाइड एक समय पर 5 से अधिक IGNOU MCA students को गाइड नहीं कर सकते।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">💻 Section VIII Approved Tech Stack</span>
-						<span class="mini-desc">Guidelines के अनुसार Front-end, Back-end और Database software का उपयोग करें। Quick-chips पर क्लिक करके Python, Django, React, MySQL, FastAPI जैसे टूल्स 1-click में जोड़ें।</span>
+						<span class="mini-title" data-i18n="help.projectCard3Title">💻 Section VIII Approved Tech Stack</span>
+						<span class="mini-desc" data-i18n="help.projectCard3Desc">Guidelines के अनुसार Front-end, Back-end और Database software का उपयोग करें। Quick-chips पर क्लिक करके Python, Django, React, MySQL, FastAPI जैसे टूल्स 1-click में जोड़ें।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">✍️ Student & Guide Dual Signature</span>
-						<span class="mini-desc">Student और Project Guide दोनों के signatures अलग-अलग upload और scale किए जा सकते हैं। Annexure II और Annexure X दोनों जगह signatures बिल्कुल सही बैठते हैं।</span>
+						<span class="mini-title" data-i18n="help.projectCard4Title">✍️ Student & Guide Dual Signature</span>
+						<span class="mini-desc" data-i18n="help.projectCard4Desc">Student और Project Guide दोनों के signatures अलग-अलग upload और scale किए जा सकते हैं। Annexure II और Annexure X दोनों जगह signatures बिल्कुल सही बैठते हैं।</span>
 					</div>
 				</div>
 			</section>
@@ -130,44 +175,44 @@
 				<div class="sec-header">
 					<div class="sec-icon-badge">🖨️</div>
 					<div class="sec-title-group">
-						<h2>Zero-Margin Print & PDF Export Guide</h2>
-						<p>प्रिंट निकालते समय पेज का बॉर्डर न कटे, इसके लिए browser की आवश्यक प्रिंट सेटिंग्स।</p>
+						<h2 data-i18n="help.printTitle">Zero-Margin Print & PDF Export Guide</h2>
+						<p data-i18n="help.printSub">प्रिंट निकालते समय पेज का बॉर्डर न कटे, इसके लिए browser की आवश्यक प्रिंट सेटिंग्स।</p>
 					</div>
 				</div>
 
 				<div class="print-checklist-box">
 					<div class="callout-title">
-						<span>⚠️</span> <span>सबसे महत्वपूर्ण: Print Dialog Settings चेक करें</span>
+						<span>⚠️</span> <span data-i18n="help.printAlertTitle">सबसे महत्वपूर्ण: Print Dialog Settings चेक करें</span>
 					</div>
-					<p style="margin: 0; font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+					<p data-i18n="help.printAlertIntro" style="margin: 0; font-size: 13px; color: var(--text-muted); line-height: 1.5;">
 						जब आप <strong>'Print All'</strong> बटन दबाते हैं और browser का print dialog खुलता है, तो 'More settings' पर क्लिक करें और इन सेटिंग्स को verify करें:
 					</p>
 
 					<div class="print-settings-table">
 						<div class="setting-item">
-							<span class="setting-key">1. Destination</span>
-							<span class="setting-val">Save as PDF</span>
-							<span class="setting-note">PDF सेव करके पेन ड्राइव में ले जाएं या सीधे प्रिंट करें।</span>
+							<span class="setting-key" data-i18n="help.printSet1Key">1. Destination</span>
+							<span class="setting-val" data-i18n="help.printSet1Val">Save as PDF</span>
+							<span class="setting-note" data-i18n="help.printSet1Note">PDF सेव करके पेन ड्राइव में ले जाएं या सीधे प्रिंट करें।</span>
 						</div>
 						<div class="setting-item">
-							<span class="setting-key">2. Paper Size</span>
-							<span class="setting-val">A4 (210 × 297 mm)</span>
-							<span class="setting-note">IGNOU submissions के लिए आधिकारिक मानक साइज़ A4 ही होता है।</span>
+							<span class="setting-key" data-i18n="help.printSet2Key">2. Paper Size</span>
+							<span class="setting-val" data-i18n="help.printSet2Val">A4 (210 × 297 mm)</span>
+							<span class="setting-note" data-i18n="help.printSet2Note">IGNOU submissions के लिए आधिकारिक मानक साइज़ A4 ही होता है।</span>
 						</div>
 						<div class="setting-item">
-							<span class="setting-key">3. Margins (सबसे महत्वपूर्ण!)</span>
-							<span class="setting-val highlight-green">None (कोई मार्जिन नहीं)</span>
-							<span class="setting-note">अगर 'Default' रखेंगे तो बॉर्डर कट जाएगा। इसको 'None' पर सेट करें!</span>
+							<span class="setting-key" data-i18n="help.printSet3Key">3. Margins (सबसे महत्वपूर्ण!)</span>
+							<span class="setting-val highlight-green" data-i18n="help.printSet3Val">None (कोई मार्जिन नहीं)</span>
+							<span class="setting-note" data-i18n="help.printSet3Note">अगर 'Default' रखेंगे तो बॉर्डर कट जाएगा। इसको 'None' पर सेट करें!</span>
 						</div>
 						<div class="setting-item">
-							<span class="setting-key">4. Background Graphics</span>
-							<span class="setting-val highlight-green">ON (Checked ✓)</span>
-							<span class="setting-note">इसको चालू रखने से university logo और वाटरमार्क सही प्रिंट होंगे।</span>
+							<span class="setting-key" data-i18n="help.printSet4Key">4. Background Graphics</span>
+							<span class="setting-val highlight-green" data-i18n="help.printSet4Val">ON (Checked ✓)</span>
+							<span class="setting-note" data-i18n="help.printSet4Note">इसको चालू रखने से university logo और वाटरमार्क सही प्रिंट होंगे।</span>
 						</div>
 						<div class="setting-item">
-							<span class="setting-key">5. Headers & Footers</span>
-							<span class="setting-val highlight-red">OFF (Unchecked ✕)</span>
-							<span class="setting-note">इसको बंद रखें ताकि पेज के ऊपर-नीचे website URL या तारीख न छपे।</span>
+							<span class="setting-key" data-i18n="help.printSet5Key">5. Headers & Footers</span>
+							<span class="setting-val highlight-red" data-i18n="help.printSet5Val">OFF (Unchecked ✕)</span>
+							<span class="setting-note" data-i18n="help.printSet5Note">इसको बंद रखें ताकि पेज के ऊपर-नीचे website URL या तारीख न छपे।</span>
 						</div>
 					</div>
 				</div>
@@ -178,27 +223,27 @@
 				<div class="sec-header">
 					<div class="sec-icon-badge">💾</div>
 					<div class="sec-title-group">
-						<h2>Backup & Restore Guide (Data Safe & Private)</h2>
-						<p>डिवाइस बदलने पर या cyber cafe में अपना data 1 क्लिक में कैसे सुरक्षित रिकवर करें।</p>
+						<h2 data-i18n="help.backupTitle">Backup & Restore Guide (Data Safe & Private)</h2>
+						<p data-i18n="help.backupSub">डिवाइस बदलने पर या cyber cafe में अपना data 1 क्लिक में कैसे सुरक्षित रिकवर करें।</p>
 					</div>
 				</div>
 
 				<div class="help-feature-grid">
 					<div class="feature-mini-card">
-						<span class="mini-title">🔒 100% Client-Side & Private</span>
-						<span class="mini-desc">आपका कोई भी data किसी online server पर upload नहीं होता। सब कुछ आपके local browser में रहता है। Browser history clear होने पर data सुरक्षित रहे, इसलिए backup लें।</span>
+						<span class="mini-title" data-i18n="help.backupCard1Title">🔒 100% Client-Side & Private</span>
+						<span class="mini-desc" data-i18n="help.backupCard1Desc">आपका कोई भी data किसी online server पर upload नहीं होता। सब कुछ आपके local browser में रहता है। Browser history clear होने पर data सुरक्षित रहे, इसलिए backup लें।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">📥 Backup कैसे लें?</span>
-						<span class="mini-desc">Top-right header में <strong>'💾 Backup & Restore'</strong> बटन दबाएं और <strong>'Backup File Download करें'</strong> चुनें। एक सुरक्षित <code>.json</code> फ़ाइल डाउनलोड हो जाएगी।</span>
+						<span class="mini-title" data-i18n="help.backupCard2Title">📥 Backup कैसे लें?</span>
+						<span class="mini-desc" data-i18n="help.backupCard2Desc">Top-right header में <strong>'💾 Backup & Restore'</strong> बटन दबाएं और <strong>'Backup File Download करें'</strong> चुनें। एक सुरक्षित <code>.json</code> फ़ाइल डाउनलोड हो जाएगी।</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">📤 दूसरे Computer पर Restore कैसे करें?</span>
-						<span class="mini-desc">नए PC या मोबाइल पर वेबसाइट खोलें। Backup & Restore modal में अपनी JSON फ़ाइल upload करें। पूरा profile, project details और दोनों signatures तुरंत लोड हो जाएंगे!</span>
+						<span class="mini-title" data-i18n="help.backupCard3Title">📤 दूसरे Computer पर Restore कैसे करें?</span>
+						<span class="mini-desc" data-i18n="help.backupCard3Desc">नए PC या मोबाइल पर वेबसाइट खोलें। Backup & Restore modal में अपनी JSON फ़ाइल upload करें। पूरा profile, project details और दोनों signatures तुरंत लोड हो जाएंगे!</span>
 					</div>
 					<div class="feature-mini-card">
-						<span class="mini-title">⚡ Replace All vs Smart Merge</span>
-						<span class="mini-desc">Restore करते समय 'Replace All' से पूरा नया data लोड होता है। 'Smart Merge' से स्क्रीन पर भरी हुई डिटेल्स सुरक्षित रहती हैं और केवल खाली fields बैकअप से भरती हैं।</span>
+						<span class="mini-title" data-i18n="help.backupCard4Title">⚡ Replace All vs Smart Merge</span>
+						<span class="mini-desc" data-i18n="help.backupCard4Desc">Restore करते समय 'Replace All' से पूरा नया data लोड होता है। 'Smart Merge' से स्क्रीन पर भरी हुई डिटेल्स सुरक्षित रहती हैं और केवल खाली fields बैकअप से भरती हैं।</span>
 					</div>
 				</div>
 			</section>
@@ -208,8 +253,8 @@
 				<div class="sec-header">
 					<div class="sec-icon-badge">❓</div>
 					<div class="sec-title-group">
-						<h2>Frequently Asked Questions (अक्सर पूछे जाने वाले सवाल)</h2>
-						<p>सामान्य समस्याएं और उनके त्वरित समाधान — क्लिक करके उत्तर पढ़ें।</p>
+						<h2 data-i18n="help.faqTitle">Frequently Asked Questions (अक्सर पूछे जाने वाले सवाल)</h2>
+						<p data-i18n="help.faqSub">सामान्य समस्याएं और उनके त्वरित समाधान — क्लिक करके उत्तर पढ़ें।</p>
 					</div>
 				</div>
 
@@ -217,55 +262,55 @@
 					<!-- FAQ 1 -->
 					<div class="faq-item open">
 						<button type="button" class="faq-trigger-btn">
-							<span>क्या ये templates IGNOU study centre में officially स्वीकार होते हैं?</span>
+							<span data-i18n="help.faq1Q">क्या ये templates IGNOU study centre में officially स्वीकार होते हैं?</span>
 							<span class="faq-icon">▼</span>
 						</button>
 						<div class="faq-content">
-							<p>हाँ, 100%! ये सभी assignment covers और MCA MCSP-232 synopsis templates IGNOU SOCIS (School of Computer and Information Sciences) के आधिकारिक नियमों और handbook के आधार पर 1:1 स्केल पर तैयार किए गए हैं।</p>
+							<p data-i18n="help.faq1A">हाँ, 100%! ये सभी assignment covers और MCA MCSP-232 synopsis templates IGNOU SOCIS (School of Computer and Information Sciences) के आधिकारिक नियमों और handbook के आधार पर 1:1 स्केल पर तैयार किए गए हैं।</p>
 						</div>
 					</div>
 
 					<!-- FAQ 2 -->
 					<div class="faq-item">
 						<button type="button" class="faq-trigger-btn">
-							<span>Print preview में पेज का double-border क्यों कट रहा है?</span>
+							<span data-i18n="help.faq2Q">Print preview में पेज का double-border क्यों कट रहा है?</span>
 							<span class="faq-icon">▼</span>
 						</button>
 						<div class="faq-content">
-							<p>यह browser के default 0.4-inch margins के कारण होता है। Print dialog में 'More settings' पर क्लिक करके <strong>Margins: None</strong> सेट करें। इसके बाद बॉर्डर पेज के किनारों के साथ 100% सटीक प्रिंट होगा।</p>
+							<p data-i18n="help.faq2A">यह browser के default 0.4-inch margins के कारण होता है। Print dialog में 'More settings' पर क्लिक करके <strong>Margins: None</strong> सेट करें। इसके बाद बॉर्डर पेज के किनारों के साथ 100% सटीक प्रिंट होगा।</p>
 						</div>
 					</div>
 
 					<!-- FAQ 3 -->
 					<div class="faq-item">
 						<button type="button" class="faq-trigger-btn">
-							<span>Signature की photo अपलोड करने पर सफेद background कैसे हटाएं?</span>
+							<span data-i18n="help.faq3Q">Signature की photo अपलोड करने पर सफेद background कैसे हटाएं?</span>
 							<span class="faq-icon">▼</span>
 						</button>
 						<div class="faq-content">
-							<p>आपको अलग से photoshop या background remover की कोई आवश्यकता नहीं है! हमारा built-in Signature Processor फ़ोटो अपलोड होते ही सफेद कागज़ के बैकग्राउंड को transparent WebP में बदल देता है और डिजिटल इंक साइन बनाता है।</p>
+							<p data-i18n="help.faq3A">आपको अलग से photoshop या background remover की कोई आवश्यकता नहीं है! हमारा built-in Signature Processor फ़ोटो अपलोड होते ही सफेद कागज़ के बैकग्राउंड को transparent WebP में बदल देता है और डिजिटल इंक साइन बनाता है।</p>
 						</div>
 					</div>
 
 					<!-- FAQ 4 -->
 					<div class="faq-item">
 						<button type="button" class="faq-trigger-btn">
-							<span>Cyber cafe या दोस्त के लैपटॉप पर अपना data कैसे ट्रांसफर करें?</span>
+							<span data-i18n="help.faq4Q">Cyber cafe या दोस्त के लैपटॉप पर अपना data कैसे ट्रांसफर करें?</span>
 							<span class="faq-icon">▼</span>
 						</button>
 						<div class="faq-content">
-							<p>अपने घर के कंप्यूटर से 'Backup & Restore' बटन दबाकर JSON फ़ाइल डाउनलोड करें और अपने WhatsApp या Email पर सेव कर लें। कैफ़े में जाकर वेबसाइट खोलें और Restore में वही फ़ाइल चुनें — 2 सेकंड में आपका पूरा डेटा और हस्ताक्षर लोड हो जाएंगे।</p>
+							<p data-i18n="help.faq4A">अपने घर के कंप्यूटर से 'Backup & Restore' बटन दबाकर JSON फ़ाइल डाउनलोड करें और अपने WhatsApp या Email पर सेव कर लें। कैफ़े में जाकर वेबसाइट खोलें और Restore में वही फ़ाइल चुनें — 2 सेकंड में आपका पूरा डेटा और हस्ताक्षर लोड हो जाएंगे।</p>
 						</div>
 					</div>
 
 					<!-- FAQ 5 -->
 					<div class="faq-item">
 						<button type="button" class="faq-trigger-btn">
-							<span>क्या इंटरनेट बंद होने पर भी वेबसाइट काम करेगी?</span>
+							<span data-i18n="help.faq5Q">क्या इंटरनेट बंद होने पर भी वेबसाइट काम करेगी?</span>
 							<span class="faq-icon">▼</span>
 						</button>
 						<div class="faq-content">
-							<p>हाँ! एक बार ब्राउज़र में वेबसाइट लोड होने के बाद यह पूरी तरह offline (client-side) काम करती है। फ़ॉर्म भरने, लाइव प्रीव्यू देखने और PDF प्रिंट करने के लिए सक्रिय इंटरनेट की आवश्यकता नहीं होती।</p>
+							<p data-i18n="help.faq5A">हाँ! एक बार ब्राउज़र में वेबसाइट लोड होने के बाद यह पूरी तरह offline (client-side) काम करती है। फ़ॉर्म भरने, लाइव प्रीव्यू देखने और PDF प्रिंट करने के लिए सक्रिय इंटरनेट की आवश्यकता नहीं होती।</p>
 						</div>
 					</div>
 				</div>

@@ -3,6 +3,7 @@
  * Single Responsibility: Interactive FAQ accordions and smooth scrolling for help.html.
  */
 import { I18nService } from "../shared/i18n.service.js";
+import { APP_CONFIG, getYouTubeEmbedUrl } from "../../config.js";
 
 export class HelpApp {
 	constructor() {
@@ -13,6 +14,23 @@ export class HelpApp {
 		I18nService.init();
 		this.bindAccordion();
 		this.bindSmoothScroll();
+		this.hydrateVideoTutorial();
+	}
+
+	hydrateVideoTutorial() {
+		const videoUrl = APP_CONFIG?.videos?.howToUseUrl;
+		if (!videoUrl) return;
+
+		const embedUrl = getYouTubeEmbedUrl(videoUrl);
+		const iframe = document.getElementById("howToUseVideoIframe");
+		if (iframe && embedUrl) {
+			iframe.src = embedUrl;
+		}
+
+		const directLink = document.getElementById("howToUseDirectLink");
+		if (directLink) {
+			directLink.href = videoUrl;
+		}
 	}
 
 	bindAccordion() {

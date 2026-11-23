@@ -4,6 +4,7 @@
  * Single Responsibility: Print page dimensions, CSS print rules, and print trigger lifecycle.
  */
 import { StorageService } from "../shared/storage.service.js";
+import { AnalyticsService } from "../shared/analytics.service.js";
 
 export class PrintEngine {
 	static PAPER_CONFIGS = {
@@ -70,6 +71,10 @@ export class PrintEngine {
 	}
 
 	print() {
+		const courses = StorageService.get("checkedCodes", []);
+		if (Array.isArray(courses) && courses.length > 0) {
+			AnalyticsService.trackAssignmentPrint(courses);
+		}
 		window.print();
 	}
 }

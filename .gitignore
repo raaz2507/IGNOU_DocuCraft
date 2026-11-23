@@ -1,1 +1,48 @@
+# =============================================================================
+# IGNOU DocuCraft - .gitignore Configuration
+# =============================================================================
+
+# 1. Project Scratch & Temporary Reference Assets
 temprary_working_dir/
+temporary_working_dir/
+scratch/
+*.tmp
+*.bak
+
+# 2. IDE & Editor Artifacts
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# 3. Operating System Specific Files
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+
+# 4. Logs & Telemetry
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 5. Environment & Node Defaults (Future-proofing)
+.env
+.env.local
+.env.*.local
+node_modules/
+dist/
+.cache/

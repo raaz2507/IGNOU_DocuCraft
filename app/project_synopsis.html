@@ -3,7 +3,23 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>IGNOU Project Synopsis Kit - Smart Studio</title>
+		<title>IGNOU DocuCraft - MCA Project Synopsis Studio</title>
+		<meta name="description" content="IGNOU छात्रों के लिए स्मार्ट टूल: असाइनमेंट फ्रंट पेज और MCA MCSP-232 सिनॉप्सिस 1 क्लिक में तैयार और A4 PDF प्रिंट करें।" />
+
+		<!-- Open Graph / WhatsApp / Telegram Social Preview Cards -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="IGNOU DocuCraft" />
+		<meta property="og:url" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/project_synopsis.html" />
+		<meta property="og:title" content="IGNOU DocuCraft — MCA Project Synopsis Studio" />
+		<meta property="og:description" content="IGNOU छात्रों के लिए स्मार्ट टूल: असाइनमेंट फ्रंट पेज और MCA MCSP-232 सिनॉप्सिस 1 क्लिक में तैयार और A4 PDF प्रिंट करें।" />
+		<meta property="og:image" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/assets/quic_link.jpg" />
+		<meta property="og:image:secure_url" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/assets/quic_link.jpg" />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="634" />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="./assets/IGNOU_logo.svg" />
 		<link rel="stylesheet" href="./css/project_synopsis.css" />
 		<style id="dynamicPrintStyle">
 			@page {
@@ -77,6 +93,40 @@
 								</div>
 							</div>
 						</div>
+
+						<!-- Section: 🎨 Cover Page Decoration & Design (Annexure XI) -->
+						<div class="section-group sec-cover-decoration" id="secCoverDecoration">
+							<span class="section-label" data-i18n="coverDeco.sectionTitle">🎨 Cover Page Decoration (Annexure XI)</span>
+
+							<!-- 1. Border Frame Style -->
+							<div class="field-row">
+								<label for="selectCoverBorder" data-i18n="coverDeco.borderLabel">Border Frame:</label>
+								<select id="selectCoverBorder" class="form-select">
+									<option value="single" data-i18n="coverDeco.borderSingle">Option B: Executive Single Border (Standard Fine Line)</option>
+									<option value="double" data-i18n="coverDeco.borderDouble">Option A: Official Double Border (Classic Academic)</option>
+									<option value="none" data-i18n="coverDeco.borderNone">Option C: Clean Borderless (For Spiral / Hard Binding)</option>
+								</select>
+							</div>
+
+							<!-- 2. Watermark Seal Option -->
+							<div class="field-row" style="margin-top: 10px;">
+								<label for="selectCoverWatermark" data-i18n="coverDeco.watermarkLabel">Center Watermark Seal:</label>
+								<select id="selectCoverWatermark" class="form-select">
+									<option value="off" data-i18n="coverDeco.watermarkOff">Off (Clean Pure White)</option>
+									<option value="on" data-i18n="coverDeco.watermarkOn">On (Official IGNOU Center Seal - 5.5% Opacity ⭐)</option>
+								</select>
+							</div>
+
+							<!-- 3. Paper Tone -->
+							<div class="field-row" style="margin-top: 10px;">
+								<label for="selectCoverTone" data-i18n="coverDeco.toneLabel">Paper Background Tone:</label>
+								<select id="selectCoverTone" class="form-select">
+									<option value="white" data-i18n="coverDeco.toneWhite">Standard Pure White (Official Standard)</option>
+									<option value="ivory" data-i18n="coverDeco.toneIvory">Subtle Ivory / Cream (Soft Digital Tone)</option>
+								</select>
+								<span class="form-hint" data-i18n="coverDeco.hint">*All these decoration options apply instantly to Annexure XI (Project Report Cover).</span>
+							</div>
+						</div>
 					</div>
 
 					<!-- ======================================================= -->
@@ -105,33 +155,129 @@
 								
 								<!-- Quick Tech Stack Chips from Official Section VIII -->
 								<div class="tech-stack-chips-group">
-									<span class="tech-chips-label">Quick Add (Section VIII):</span>
-									<div class="tech-chips-list">
-										<button type="button" class="tech-chip" data-tech="Python">Python</button>
-										<button type="button" class="tech-chip" data-tech="Django">Django</button>
-										<button type="button" class="tech-chip" data-tech="ReactJS">ReactJS</button>
-										<button type="button" class="tech-chip" data-tech="PostgreSQL">PostgreSQL</button>
-										<button type="button" class="tech-chip" data-tech="MySQL">MySQL</button>
-										<button type="button" class="tech-chip" data-tech="Flutter">Flutter</button>
-										<button type="button" class="tech-chip" data-tech="Java">Java</button>
-										<button type="button" class="tech-chip" data-tech="FastAPI">FastAPI</button>
+									<div class="tech-chips-header-row">
+										<span class="tech-chips-label">⚡ Quick Select Tech Stack (Section VIII Approved):</span>
+										<span class="tech-chips-hint">*Click to add or remove [✓]</span>
+									</div>
+
+									<!-- Category 1: Frontend & Mobile -->
+									<div class="tech-category-block">
+										<span class="tech-category-title">🎨 Frontend / GUI &amp; Mobile:</span>
+										<div class="tech-chips-list">
+											<button type="button" class="tech-chip" data-tech="ReactJS" aria-checked="false"><span class="chip-icon">+</span>ReactJS</button>
+											<button type="button" class="tech-chip" data-tech="Flutter" aria-checked="false"><span class="chip-icon">+</span>Flutter</button>
+											<button type="button" class="tech-chip" data-tech="Vue.js" aria-checked="false"><span class="chip-icon">+</span>Vue.js</button>
+											<button type="button" class="tech-chip" data-tech="Angular" aria-checked="false"><span class="chip-icon">+</span>Angular</button>
+											<button type="button" class="tech-chip" data-tech="HTML5/CSS3" aria-checked="false"><span class="chip-icon">+</span>HTML5/CSS3</button>
+											<button type="button" class="tech-chip" data-tech="Bootstrap" aria-checked="false"><span class="chip-icon">+</span>Bootstrap</button>
+											<button type="button" class="tech-chip" data-tech="Tailwind CSS" aria-checked="false"><span class="chip-icon">+</span>Tailwind CSS</button>
+											<button type="button" class="tech-chip" data-tech="TypeScript" aria-checked="false"><span class="chip-icon">+</span>TypeScript</button>
+											<button type="button" class="tech-chip" data-tech="JavaScript" aria-checked="false"><span class="chip-icon">+</span>JavaScript</button>
+											<button type="button" class="tech-chip" data-tech="Ionic" aria-checked="false"><span class="chip-icon">+</span>Ionic</button>
+											<button type="button" class="tech-chip" data-tech="Android" aria-checked="false"><span class="chip-icon">+</span>Android</button>
+										</div>
+									</div>
+
+									<!-- Category 2: Backend & Languages -->
+									<div class="tech-category-block">
+										<span class="tech-category-title">⚙️ Backend, Frameworks &amp; Languages:</span>
+										<div class="tech-chips-list">
+											<button type="button" class="tech-chip" data-tech="Python" aria-checked="false"><span class="chip-icon">+</span>Python</button>
+											<button type="button" class="tech-chip" data-tech="Django" aria-checked="false"><span class="chip-icon">+</span>Django</button>
+											<button type="button" class="tech-chip" data-tech="FastAPI" aria-checked="false"><span class="chip-icon">+</span>FastAPI</button>
+											<button type="button" class="tech-chip" data-tech="Java" aria-checked="false"><span class="chip-icon">+</span>Java</button>
+											<button type="button" class="tech-chip" data-tech="Spring Boot" aria-checked="false"><span class="chip-icon">+</span>Spring Boot</button>
+											<button type="button" class="tech-chip" data-tech="Node.js" aria-checked="false"><span class="chip-icon">+</span>Node.js</button>
+											<button type="button" class="tech-chip" data-tech="Express.js" aria-checked="false"><span class="chip-icon">+</span>Express.js</button>
+											<button type="button" class="tech-chip" data-tech="PHP" aria-checked="false"><span class="chip-icon">+</span>PHP</button>
+											<button type="button" class="tech-chip" data-tech="C# / .NET" aria-checked="false"><span class="chip-icon">+</span>C# / .NET</button>
+										</div>
+									</div>
+
+									<!-- Category 3: Databases & Storage -->
+									<div class="tech-category-block">
+										<span class="tech-category-title">🗄️ Databases (RDBMS / NoSQL &amp; Cloud):</span>
+										<div class="tech-chips-list">
+											<button type="button" class="tech-chip" data-tech="MySQL" aria-checked="false"><span class="chip-icon">+</span>MySQL</button>
+											<button type="button" class="tech-chip" data-tech="PostgreSQL" aria-checked="false"><span class="chip-icon">+</span>PostgreSQL</button>
+											<button type="button" class="tech-chip" data-tech="MongoDB" aria-checked="false"><span class="chip-icon">+</span>MongoDB</button>
+											<button type="button" class="tech-chip" data-tech="SQLite" aria-checked="false"><span class="chip-icon">+</span>SQLite</button>
+											<button type="button" class="tech-chip" data-tech="Oracle" aria-checked="false"><span class="chip-icon">+</span>Oracle</button>
+											<button type="button" class="tech-chip" data-tech="SQL Server" aria-checked="false"><span class="chip-icon">+</span>SQL Server</button>
+											<button type="button" class="tech-chip" data-tech="Firebase" aria-checked="false"><span class="chip-icon">+</span>Firebase</button>
+										</div>
+									</div>
+
+									<!-- Category 4: AI, ML & Data Science -->
+									<div class="tech-category-block">
+										<span class="tech-category-title">🤖 AI, ML &amp; Data Science (Latest Tech):</span>
+										<div class="tech-chips-list">
+											<button type="button" class="tech-chip" data-tech="Scikit-learn" aria-checked="false"><span class="chip-icon">+</span>Scikit-learn</button>
+											<button type="button" class="tech-chip" data-tech="TensorFlow" aria-checked="false"><span class="chip-icon">+</span>TensorFlow</button>
+											<button type="button" class="tech-chip" data-tech="PyTorch" aria-checked="false"><span class="chip-icon">+</span>PyTorch</button>
+											<button type="button" class="tech-chip" data-tech="OpenCV" aria-checked="false"><span class="chip-icon">+</span>OpenCV</button>
+											<button type="button" class="tech-chip" data-tech="Pandas" aria-checked="false"><span class="chip-icon">+</span>Pandas</button>
+											<button type="button" class="tech-chip" data-tech="NumPy" aria-checked="false"><span class="chip-icon">+</span>NumPy</button>
+										</div>
 									</div>
 								</div>
 
 								<!-- Section VIII Collapsible Guidelines Info Box -->
 								<div class="section-guidelines-card" id="section8GuideCard" style="display:none;">
 									<div class="guidelines-card-hdr">
-										<strong>Section VIII: Software &amp; Broad Areas Summary</strong>
-										<button type="button" class="btn-close-card" id="btnCloseSection8Guide">✕</button>
+										<strong>VIII SOFTWARE &amp; BROAD AREAS (Page 18)</strong>
+										<button type="button" class="btn-close-card" id="btnCloseSection8Guide" title="Close guidelines">✕</button>
 									</div>
-									<p class="guide-lead">Official IGNOU Handbook Permitted Categories (Page 18):</p>
-									<ul class="guide-cats-list">
-										<li><strong>Frontend/GUI:</strong> ReactJS, Flutter, Vue.js, Angular, HTML5, TypeScript, Ionic, etc.</li>
-										<li><strong>Backend/RDBMS:</strong> MySQL, PostgreSQL, Oracle, MongoDB, SQL Server, etc.</li>
-										<li><strong>Languages:</strong> Python, Java, C#, PHP, etc.</li>
-									</ul>
-									<div class="guide-warning-box">
-										⚠️ <strong>Strict Restrictions (IGNOU Rule):</strong> Projects developed using legacy packages like <em>FoxPro, Visual FoxPro, Dbase III plus, MS-Access</em> are strictly not allowed and will be rejected.
+
+									<div class="guidelines-card-scroll">
+										<table class="card-sec8-table">
+											<tbody>
+												<tr>
+													<th>FRONT END / GUI Tools</th>
+													<td>Jbuilder , NetBeans, Eclipse, JavaScript, ReactJS, AngularJS, Flutter, Vue.js, Bootstrap, Ionic, HTML5, Boilerplate, Npm, Meteor, Elm, TypeScript, Grunt Backbone.js, Sencha Ext JS etc.</td>
+												</tr>
+												<tr>
+													<th>RDBMS/BACK END</th>
+													<td>Oracle, Ingres, Sybase, Progress, SQL Plus, Versant, MySQL, SQL Server, DB2, NoSQL databases</td>
+												</tr>
+												<tr>
+													<th>LANGUAGES</th>
+													<td>Python, Java, C#, etc.</td>
+												</tr>
+												<tr>
+													<th>.NET Platform</th>
+													<td>VB.Net, C#. Net, Visual C#. Net, ASP.Net</td>
+												</tr>
+												<tr>
+													<th>UNIX INTERNALS</th>
+													<td>Device Drivers, RPC, Threads, Socket programming</td>
+												</tr>
+												<tr>
+													<th>ARCHITECTURAL CONCEPTS</th>
+													<td>CORBA, TUXEDO, MQ SERIES</td>
+												</tr>
+												<tr>
+													<th>INTERNET TECHNOLOGIES</th>
+													<td>DHTML, Java script, VB Script, Perl &amp; CGI script, Java, Active X, RMI, CORBA, SWING, JSP, ASP, XML, EJB, Java Beans, Servlets, Visual Age for JAVA, UML, VRML, WML, Vignette, EDA, Broadvision, Ariba, iPlanet, ATG, BigTalk, CSS, XSL, Oracle ASP server, AWT, J2EE, LDAP, ColdFusion, Haskell 98, PHP,NetBeans</td>
+												</tr>
+												<tr>
+													<th>NETWORK/WIRELESS TECHNOLOGIES</th>
+													<td>Blue Tooth, 3G, ISDN, EDGE</td>
+												</tr>
+												<tr>
+													<th>APPLICATION AREAS</th>
+													<td>Financial / Insurance / Manufacturing / Multimedia / Computer Graphics / Instructional Design/ Database Management System/ Internet / Intranet / Computer Networking-Communication Software development/ ECommerce/ ERP/ MRP/ TCP-IP programming / Routing protocols programming/ Socket programming.</td>
+												</tr>
+											</tbody>
+										</table>
+
+										<!-- Official Mandatory Restrictions Note Box -->
+										<div class="card-note-box">
+											<strong>NOTE:</strong>
+											<p>(i) <em>Projects should not be developed using the old packages like Dbase III plus, Foxpro, Visual Foxpro and MS-Access. Also, projects should not be developed using the combination of Visual Basic as the front end and MS-Access as the back end. Latest versions of the software are to be used. The project work should compulsorily include the software development. Physical installations or configuring the LAN/WAN or theoretical projects or study of the systems, which doesn't involve software development, are strictly not allowed.</em></p>
+											<p>(ii) <em>C/ C++ languages should not be used for any Information Management Systems Project, for example, Hospital / Reservation / Library / School / College Management Systems etc..</em></p>
+											<p>(iii) <em>Students can also develop applications using tools/languages/software not listed above, if they are part of Latest Technologies. Use the latest versions of the software packages for the project development.</em></p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -185,7 +331,7 @@
 							<!-- Q3: Name and Address of the Guide (2 Address Lines) -->
 							<div class="field-row">
 								<label for="inputGuideName">3. Name of the Guide:</label>
-								<input type="text" id="inputGuideName" class="form-input" data-field="GuideName" placeholder="e.g. Dr. Rajesh Kumar Sharma" />
+								<input type="text" id="inputGuideName" class="form-input" data-field="GuideName" placeholder="e.g. Anjali sharma" />
 							</div>
 							<div class="field-row">
 								<label for="inputGuideAddress1">Address of the Guide (Line 1):</label>
@@ -334,12 +480,12 @@
 
 							<div class="two-cols">
 								<div class="field-row">
-									<label for="inputRegionalCentre">Regional Centre Name:</label>
-									<input type="text" id="inputRegionalCentre" class="form-input" data-field="RegionalCentre" placeholder="e.g. Delhi-3" />
-								</div>
-								<div class="field-row">
 									<label for="inputRegionalCentreCode">RC Code:</label>
 									<input type="text" id="inputRegionalCentreCode" class="form-input" data-field="RegionalCentreCode" placeholder="e.g. 38" />
+								</div>
+								<div class="field-row">
+									<label for="inputRegionalCentre">Regional Centre Name:</label>
+									<input type="text" id="inputRegionalCentre" class="form-input" data-field="RegionalCentre" placeholder="e.g. Delhi-3" />
 								</div>
 							</div>
 						</div>

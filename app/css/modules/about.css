@@ -190,11 +190,24 @@
 		background: var(--bg-1);
 		border: 1.5px solid var(--panel-border);
 		border-radius: var(--radius-xl);
-		padding: var(--space-xl);
+		padding: var(--space-2xl);
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-lg);
-		max-width: 680px;
+		gap: var(--space-xl);
+		width: 100%;
+		box-sizing: border-box;
+
+		& .feedback-top-grid {
+			display: grid;
+			grid-template-columns: 1fr 1.2fr;
+			gap: var(--space-2xl);
+			align-items: flex-start;
+
+			@media (max-width: 768px) {
+				grid-template-columns: 1fr;
+				gap: var(--space-lg);
+			}
+		}
 
 		& .form-row {
 			display: flex;
@@ -217,11 +230,13 @@
 				background: var(--panel-bg);
 				border: 1px solid var(--panel-border);
 				border-radius: var(--radius-lg);
-				padding: 10px 14px;
+				padding: 11px 16px;
 				font-size: var(--font-size-sm);
 				color: var(--text-main);
 				font-family: inherit;
 				outline: none;
+				width: 100%;
+				box-sizing: border-box;
 				transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 
 				&:focus {
@@ -232,7 +247,8 @@
 
 			& textarea {
 				resize: vertical;
-				min-height: 90px;
+				min-height: 110px;
+				line-height: 1.5;
 			}
 		}
 

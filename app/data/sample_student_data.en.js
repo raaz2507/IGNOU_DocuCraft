@@ -71,8 +71,8 @@ export const SAMPLE_STUDENT_PROFILE_EN = Object.freeze({
 		placeholder: "e.g. Web Technologies & Machine Learning",
 	},
 	GuideName: {
-		value: "Dr. Rajesh Kumar Sharma",
-		placeholder: "e.g. Dr. Rajesh Kumar Sharma",
+		value: "Anjali sharma",
+		placeholder: "e.g. Anjali sharma",
 	},
 	GuideDesignation: {
 		value: "Associate Professor, Dept. of CS",

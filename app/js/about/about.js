@@ -17,28 +17,32 @@ export class AboutApp {
 		I18nService.init();
 		this.bindStarRating();
 		this.bindFeedbackSubmit();
+
+		window.addEventListener("app:localeChanged", () => {
+			this.updateRatingBadge(this.#currentRating);
+		});
+	}
+
+	getRatingLabel(val) {
+		return I18nService.t(`about.rating${val}`) || `${val} / 5`;
+	}
+
+	updateRatingBadge(val) {
+		const ratingText = document.getElementById("ratingTextBadge");
+		if (ratingText) {
+			ratingText.textContent = this.getRatingLabel(val);
+		}
 	}
 
 	bindStarRating() {
 		const starBtns = document.querySelectorAll(".star-rating-selector .star-btn");
-		const ratingText = document.getElementById("ratingTextBadge");
-
-		const ratingLabels = {
-			1: "1 / 5 (सुधार की ज़रूरत)",
-			2: "2 / 5 (औसत)",
-			3: "3 / 5 (अच्छा)",
-			4: "4 / 5 (बहुत बढ़िया)",
-			5: "5 / 5 (उत्कृष्ट! ⭐)",
-		};
 
 		const updateStarsUI = (val) => {
 			starBtns.forEach((btn) => {
 				const starVal = Number(btn.dataset.val);
 				btn.classList.toggle("active", starVal <= val);
 			});
-			if (ratingText) {
-				ratingText.textContent = ratingLabels[val] || `${val} / 5`;
-			}
+			this.updateRatingBadge(val);
 		};
 
 		starBtns.forEach((btn) => {
@@ -83,14 +87,14 @@ export class AboutApp {
 			if (!message) {
 				if (alertBox) {
 					alertBox.className = "feedback-alert active alert-error";
-					alertBox.textContent = "कृपया अपना सुझाव या संदेश दर्ज करें।";
+					alertBox.textContent = I18nService.t("about.alertEmpty");
 				}
 				return;
 			}
 
 			if (btnSubmit) {
 				btnSubmit.disabled = true;
-				btnSubmit.textContent = "भेज रहे हैं...";
+				btnSubmit.textContent = I18nService.locale === "hi" ? "भेज रहे हैं..." : "Submitting...";
 			}
 
 			try {
@@ -102,7 +106,7 @@ export class AboutApp {
 
 				if (alertBox) {
 					alertBox.className = "feedback-alert active alert-success";
-					alertBox.textContent = "धन्यवाद! आपका सुझाव और रेटिंग सफलतापूर्वक प्राप्त हो गई।";
+					alertBox.textContent = I18nService.t("about.alertSuccess");
 				}
 
 				if (msgInput) msgInput.value = "";
@@ -110,12 +114,12 @@ export class AboutApp {
 			} catch (err) {
 				if (alertBox) {
 					alertBox.className = "feedback-alert active alert-error";
-					alertBox.textContent = "सुझाव भेजने में त्रुटि हुई। कृपया पुनः प्रयास करें।";
+					alertBox.textContent = I18nService.locale === "hi" ? "सुझाव भेजने में त्रुटि हुई। कृपया पुनः प्रयास करें।" : "Failed to submit feedback. Please try again.";
 				}
 			} finally {
 				if (btnSubmit) {
 					btnSubmit.disabled = false;
-					btnSubmit.textContent = "सुझाव भेजें (Submit Feedback)";
+					btnSubmit.textContent = I18nService.t("about.btnSubmit");
 				}
 			}
 		});

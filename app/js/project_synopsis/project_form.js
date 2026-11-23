@@ -205,31 +205,8 @@ export class ProjectForm {
 			});
 		});
 
-		// Section VIII Tech Stack Quick Chips
-		document.querySelectorAll(".tech-chip").forEach((chip) => {
-			chip.addEventListener("click", () => {
-				const tech = chip.getAttribute("data-tech");
-				const softwareInput = document.getElementById("inputProjectSoftware");
-				if (!softwareInput || !tech) return;
-
-				const currentVal = softwareInput.value.trim();
-				let updatedVal;
-				if (!currentVal) {
-					updatedVal = tech;
-				} else {
-					const existingItems = currentVal.split(",").map((s) => s.trim().toLowerCase());
-					if (existingItems.includes(tech.toLowerCase())) {
-						return; // Avoid duplicates
-					}
-					updatedVal = `${currentVal}, ${tech}`;
-				}
-
-				softwareInput.value = updatedVal;
-				StorageService.set("field_ProjectSoftware", updatedVal);
-				this.#syncToDOM("ProjectSoftware", updatedVal);
-				if (this.#onChangeCallback) this.#onChangeCallback("ProjectSoftware", updatedVal);
-			});
-		});
+		// Section VIII Tech Stack Quick Chips (Interactive 2-Way Checkbox Toggle)
+		this.#initTechChips();
 
 		// Section VIII Guidelines Card Toggle
 		const btnToggleGuide = document.getElementById("btnToggleSection8Guide");
@@ -424,12 +401,26 @@ export class ProjectForm {
 		const trimmed = (userVal || "").trim();
 		const isGhost = trimmed === "" && this.#isSampleGhostActive;
 		const profile = I18nService.getSampleProfile();
-		const displayVal = trimmed !== "" ? userVal : (isGhost ? profile[fieldName]?.value || "" : "");
+		let displayVal = trimmed !== "" ? userVal : (isGhost ? profile[fieldName]?.value || "" : "");
+
+		// Auto-Clean & Title Case formatting for Student Name and Guide Name
+		if (fieldName === "Name" || fieldName === "GuideName") {
+			displayVal = this.#toTitleCase(displayVal);
+		}
 
 		document.querySelectorAll(".val-" + fieldName).forEach((el) => {
 			el.textContent = displayVal;
 			el.classList.toggle("is-ghost-sample", isGhost);
 		});
+	}
+
+	#toTitleCase(str) {
+		if (!str) return "";
+		return str
+			.trim()
+			.replace(/\s+/g, " ")
+			.toLowerCase()
+			.replace(/(?:^|\s|-|\.)\S/g, (char) => char.toUpperCase());
 	}
 
 	#syncProjectSoftware(val) {
@@ -519,6 +510,65 @@ export class ProjectForm {
 		});
 	}
 
+	#initTechChips() {
+		const softwareInput = document.getElementById("inputProjectSoftware");
+		if (!softwareInput) return;
+
+		// Listen to user typing in input to reactively sync chips
+		softwareInput.addEventListener("input", () => {
+			this.#updateTechChipsUI(softwareInput.value);
+		});
+
+		document.querySelectorAll(".tech-chip").forEach((chip) => {
+			chip.addEventListener("click", () => {
+				const tech = chip.getAttribute("data-tech");
+				if (!tech) return;
+
+				const currentVal = softwareInput.value.trim();
+				// Split by comma, trim, filter out empty
+				let items = currentVal ? currentVal.split(",").map((s) => s.trim()).filter(Boolean) : [];
+
+				// Check if this tech is already included (case-insensitive)
+				const existingIndex = items.findIndex((item) => item.toLowerCase() === tech.toLowerCase());
+
+				if (existingIndex !== -1) {
+					// Uncheck / Remove
+					items.splice(existingIndex, 1);
+				} else {
+					// Check / Add
+					items.push(tech);
+				}
+
+				const updatedVal = items.join(", ");
+				softwareInput.value = updatedVal;
+				StorageService.set("field_ProjectSoftware", updatedVal);
+				this.#syncToDOM("ProjectSoftware", updatedVal);
+				this.#updateTechChipsUI(updatedVal);
+				if (this.#onChangeCallback) this.#onChangeCallback("ProjectSoftware", updatedVal);
+			});
+		});
+
+		// Initial state sync
+		this.#updateTechChipsUI(softwareInput.value);
+	}
+
+	#updateTechChipsUI(val = "") {
+		const items = (val || "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+		document.querySelectorAll(".tech-chip").forEach((chip) => {
+			const tech = chip.getAttribute("data-tech");
+			if (!tech) return;
+
+			const isChecked = items.includes(tech.toLowerCase());
+			chip.classList.toggle("is-active", isChecked);
+			chip.setAttribute("aria-checked", isChecked ? "true" : "false");
+
+			const iconEl = chip.querySelector(".chip-icon");
+			if (iconEl) {
+				iconEl.textContent = isChecked ? "✓" : "+";
+			}
+		});
+	}
+
 	syncAllFields() {
 		const profile = I18nService.getSampleProfile();
 		this.#projectFields.forEach((fieldName) => {
@@ -544,6 +594,7 @@ export class ProjectForm {
 		const swInput = document.getElementById("inputProjectSoftware") || document.querySelector('[data-field="ProjectSoftware"]');
 		const swVal = swInput ? swInput.value : StorageService.get("field_ProjectSoftware", "");
 		this.#syncProjectSoftware(swVal);
+		this.#updateTechChipsUI(swVal);
 
 		// Sync Degree Checkboxes to Document Checkboxes
 		let activeDegrees = Array.from(document.querySelectorAll('input[name="GuideDegree"]:checked')).map((el) => el.value);

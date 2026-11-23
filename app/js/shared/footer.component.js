@@ -42,7 +42,7 @@ export class IgnouFooter extends HTMLElement {
 						All format layouts, rubrics, and guidelines follow the official curriculum standards of SOCIS / IGNOU.
 					</p>
 					<p class="footer-copy">
-						© ${year} IGNOU Doc Automation • Single Source of Truth Architecture
+						© ${year} IGNOU DocuCraft • Single Source of Truth Architecture
 					</p>
 				</div>
 				<div class="footer-col-badges">
