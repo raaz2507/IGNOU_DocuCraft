@@ -78,6 +78,13 @@ export const UI_HI = Object.freeze({
 		uploadHeading: "पारदर्शी हस्ताक्षर अपलोड करें (PNG/WebP/JPEG)",
 		removeBtn: "हस्ताक्षर हटाएं",
 		scaleLabel: "हस्ताक्षर का आकार",
+		includeOnDoc: "डॉक्यूमेंट पर सिग्नेचर जोड़ें",
+		includeGuideOnDoc: "गाइड सिग्नेचर जोड़ें",
+		statusIncluded: "प्रिंट में शामिल",
+		statusExcluded: "खाली (हाथ से पेन साइन)",
+		inkColor: "इंक रंग:",
+		inkBlue: "🔵 रॉयल ब्लू",
+		inkOriginal: "⚫ ओरिजिनल",
 	},
 	settingsTab: {
 		pageFormat: "पेज फॉर्मैट",
@@ -110,6 +117,7 @@ export const UI_HI = Object.freeze({
 		resetWarnTitle: "सावधानी:",
 		resetWarnDesc: "यह क्रिया ब्राउज़र से आपका छात्र प्रोफ़ाइल, प्रोजेक्ट डेटा, सेटिंग्स और दोनों हस्ताक्षर हमेशा के लिए हटा देगी। रीसेट करने से पहले बैकअप डाउनलोड कर लें!",
 		btnClearAll: "सारा डेटा साफ़ करें (Reset)",
+		confirmReset: "⚠️ क्या आप वाकई अपना सारा सहेजा हुआ डेटा, प्रोजेक्ट विवरण और हस्ताक्षर मिटाना चाहते हैं?\n\nयह क्रिया वापस नहीं ली जा सकती!",
 	},
 	home: {
 		badgeStandards: "SOCIS • आधिकारिक मानक",

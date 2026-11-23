@@ -5,7 +5,9 @@
  */
 import { StorageService } from "../shared/storage.service.js";
 import { I18nService } from "../shared/i18n.service.js";
-import { SignatureProcessor } from "../shared/signature.processor.js";
+import { SignatureUploaderController } from "../shared/signature_uploader_controller.js";
+import { DataManagerService } from "../shared/data_manager.service.js";
+import { DateUtils } from "../shared/date_utils.js";
 
 export class StudentBioForm {
 	#persistentFields = [
@@ -24,35 +26,59 @@ export class StudentBioForm {
 		"Date",
 	];
 	#isSampleGhostActive = false;
-	#signatureData = null;
-	#signatureScale = 1.0;
 	#dom = {};
 	#onFormChangeCallback = null;
+	sigCtrl = null;
 
 	constructor({ onFormChange } = {}) {
 		this.#onFormChangeCallback = onFormChange || null;
 		this.#isSampleGhostActive = StorageService.get("isSampleGhostActive", false);
-		this.#signatureData = StorageService.get("signature_webp", null);
-		this.#signatureScale = StorageService.get("signature_scale", 1.0);
 
 		this.#initDOM();
+		this.#initSignatureController();
 		this.#bindEvents();
 		this.restoreProfileData();
-		this.initSignatureState();
 		this.injectSamplePlaceholders();
 		this.updateSampleToggleButtonUI();
 	}
 
 	get signatureData() {
-		return this.#signatureData;
+		return this.sigCtrl?.data ?? null;
 	}
 
 	get signatureScale() {
-		return this.#signatureScale;
+		return this.sigCtrl?.scale ?? 1.0;
+	}
+
+	get isSignatureIncluded() {
+		return this.sigCtrl?.isIncluded ?? true;
 	}
 
 	get isSampleGhostActive() {
 		return this.#isSampleGhostActive;
+	}
+
+	#initSignatureController() {
+		this.sigCtrl = new SignatureUploaderController({
+			fileInput: this.#dom.sigFileInput,
+			previewContainer: this.#dom.sigPreviewContainer,
+			previewImg: this.#dom.sigPreviewImg,
+			removeBtn: this.#dom.btnRemoveSig,
+			scaleSlider: this.#dom.sigScaleSlider,
+			scaleValueBadge: this.#dom.sigScaleValue,
+			includeToggle: this.#dom.sigIncludeToggle,
+			includeStatusBadge: this.#dom.sigStatusBadge,
+			btnInkBlue: this.#dom.btnSigInkBlue,
+			btnInkOriginal: this.#dom.btnSigInkOriginal,
+			storageKey: "signature_webp",
+			scaleStorageKey: "signature_scale",
+			includeStorageKey: "signature_included",
+			inkStorageKey: "signature_ink_mode",
+			cssScaleVar: "--sig-scale",
+			onUpdate: (data, scale, isIncluded) => {
+				if (this.#onFormChangeCallback) this.#onFormChangeCallback("signature", data);
+			},
+		});
 	}
 
 	#initDOM() {
@@ -66,6 +92,10 @@ export class StudentBioForm {
 			btnRemoveSig: document.getElementById("btnRemoveSig"),
 			sigScaleSlider: document.getElementById("sigScaleSlider"),
 			sigScaleValue: document.getElementById("sigScaleValue"),
+			sigIncludeToggle: document.getElementById("sigIncludeCheckbox"),
+			sigStatusBadge: document.getElementById("sigStatusBadge"),
+			btnSigInkBlue: document.getElementById("btnSigInkBlue"),
+			btnSigInkOriginal: document.getElementById("btnSigInkOriginal"),
 		};
 	}
 
@@ -84,8 +114,7 @@ export class StudentBioForm {
 		// Quick "Today" Date Shortcut
 		if (this.#dom.btnTodayDate) {
 			this.#dom.btnTodayDate.addEventListener("click", () => {
-				const now = new Date();
-				const formatted = `${String(now.getDate()).padStart(2, "0")}/${String(now.getMonth() + 1).padStart(2, "0")}/${now.getFullYear()}`;
+				const formatted = DateUtils.getTodayFormatted();
 				const dateInput = document.getElementById("inputDate");
 				if (dateInput) {
 					dateInput.value = formatted;
@@ -105,39 +134,20 @@ export class StudentBioForm {
 			this.#dom.btnClear.addEventListener("click", () => this.clearAllData());
 		}
 
-		// Signature File Upload
-		if (this.#dom.sigFileInput) {
-			this.#dom.sigFileInput.addEventListener("change", (e) => {
-				const file = e.target.files && e.target.files[0];
-				if (file) this.#processSignatureImage(file);
-			});
-		}
-
-		// Remove Signature
-		if (this.#dom.btnRemoveSig) {
-			this.#dom.btnRemoveSig.addEventListener("click", () => this.#removeSignature());
-		}
-
-		// Signature Scale Multiplier Slider
-		if (this.#dom.sigScaleSlider) {
-			this.#dom.sigScaleSlider.addEventListener("input", (e) => {
-				this.setSignatureScale(e.target.value);
-			});
-		}
-
 		// Global Data Restored and Cleared Event Listeners
 		window.addEventListener("app:dataRestored", () => {
 			this.restoreProfileData();
-			this.initSignatureState();
 			this.syncDOMValues();
 		});
 
 		window.addEventListener("app:dataCleared", () => {
+			this.#isSampleGhostActive = false;
+			StorageService.set("isSampleGhostActive", false);
+			this.updateSampleToggleButtonUI();
 			this.#persistentFields.forEach((fieldName) => {
-				const input = document.getElementById("input" + fieldName);
+				const input = document.getElementById("input" + fieldName) || document.querySelector(`[data-field="${fieldName}"]`);
 				if (input) input.value = "";
 			});
-			this.#removeSignature();
 			this.syncDOMValues();
 		});
 	}
@@ -224,58 +234,8 @@ export class StudentBioForm {
 	}
 
 	clearAllData() {
-		if (!confirm("Are you sure you want to clear all student profile details?")) return;
-
-		this.#persistentFields.forEach((fieldName) => {
-			StorageService.remove("field_" + fieldName);
-			const input = document.getElementById("input" + fieldName);
-			if (input) input.value = "";
-		});
-
-		this.#removeSignature();
-		this.syncDOMValues();
-	}
-
-	initSignatureState() {
-		this.setSignatureScale(this.#signatureScale);
-		if (this.#signatureData && this.#dom.sigPreviewImg && this.#dom.sigPreviewContainer) {
-			this.#dom.sigPreviewImg.src = this.#signatureData;
-			this.#dom.sigPreviewContainer.classList.add("visible");
-		}
-	}
-
-	async #processSignatureImage(file) {
-		if (!file) return;
-		try {
-			const webpResult = await SignatureProcessor.process(file);
-			this.#signatureData = webpResult;
-			StorageService.set("signature_webp", webpResult);
-			if (this.#dom.sigPreviewImg) this.#dom.sigPreviewImg.src = webpResult;
-			if (this.#dom.sigPreviewContainer) this.#dom.sigPreviewContainer.classList.add("visible");
-			if (this.#onFormChangeCallback) this.#onFormChangeCallback("signature", webpResult);
-		} catch (err) {
-			console.error("Signature processing error:", err);
-		}
-	}
-
-	#removeSignature() {
-		this.#signatureData = null;
-		StorageService.remove("signature_webp");
-		if (this.#dom.sigFileInput) this.#dom.sigFileInput.value = "";
-		if (this.#dom.sigPreviewImg) this.#dom.sigPreviewImg.src = "";
-		if (this.#dom.sigPreviewContainer) this.#dom.sigPreviewContainer.classList.remove("visible");
-		if (this.#onFormChangeCallback) this.#onFormChangeCallback("signature", null);
-	}
-
-	setSignatureScale(scale) {
-		this.#signatureScale = parseFloat(scale) || 1.0;
-		StorageService.set("signature_scale", this.#signatureScale);
-		document.documentElement.style.setProperty("--sig-scale", this.#signatureScale.toFixed(2));
-		if (this.#dom.sigScaleValue) {
-			this.#dom.sigScaleValue.textContent = `${this.#signatureScale.toFixed(2)}× (${Math.round(this.#signatureScale * 100)}%)`;
-		}
-		if (this.#dom.sigScaleSlider) {
-			this.#dom.sigScaleSlider.value = this.#signatureScale;
-		}
+		const confirmMsg = I18nService.t("dataModal.confirmReset");
+		if (!confirm(confirmMsg)) return;
+		DataManagerService.clearAllData();
 	}
 }

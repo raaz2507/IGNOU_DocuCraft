@@ -193,18 +193,7 @@ export class ProjectSynopsisStudioApp {
 		// Clear fields
 		if (this.#dom.btnClear) {
 			this.#dom.btnClear.addEventListener("click", () => {
-				if (confirm("Are you sure you want to clear project & guide particulars?")) {
-					["ProjectTitle", "SubjectArea", "GuideName", "GuideDesignation", "GuideAddress", "GuideAddress1", "GuideAddress2", "GuideQualification", "GuideDegree", "GuideExperience", "ProjectSoftware", "FirstSubmission", "SubmissionDate", "GuideDate"].forEach((f) => {
-						StorageService.remove("field_" + f);
-						const input = document.getElementById("input" + f);
-						if (input) input.value = "";
-					});
-					const defaultDegRadio = document.querySelector('input[name="GuideDegree"][value="phd"]');
-					if (defaultDegRadio) defaultDegRadio.checked = true;
-					const defaultFirstRadio = document.querySelector('input[name="FirstSubmission"][value="yes"]');
-					if (defaultFirstRadio) defaultFirstRadio.checked = true;
-					this.projectForm.syncAllFields();
-				}
+				this.projectForm.clearAllData();
 			});
 		}
 
@@ -277,9 +266,9 @@ export class ProjectSynopsisStudioApp {
 		}
 
 		const sigData = {
-			hasSig: Boolean(this.projectForm.signatureData),
+			hasSig: Boolean(this.projectForm.signatureData && this.projectForm.isSignatureIncluded),
 			sigSrc: this.projectForm.signatureData || "",
-			hasGuideSig: Boolean(this.projectForm.guideSignatureData),
+			hasGuideSig: Boolean(this.projectForm.guideSignatureData && this.projectForm.isGuideSignatureIncluded),
 			guideSigSrc: this.projectForm.guideSignatureData || "",
 		};
 

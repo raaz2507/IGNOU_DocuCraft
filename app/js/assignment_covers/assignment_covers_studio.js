@@ -227,7 +227,7 @@ export class AssignmentCoversStudioApp {
 
 		const allCourses = CurriculumStore.getAllCourses();
 		const selectedCourses = allCourses.filter((c) => this.courseSelector.checkedCodes.has(c.code));
-		const hasSig = Boolean(this.bioForm.signatureData);
+		const hasSig = Boolean(this.bioForm.signatureData && this.bioForm.isSignatureIncluded);
 		const sigSrc = hasSig ? this.bioForm.signatureData : "";
 
 		if (selectedCourses.length === 0) {

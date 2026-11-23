@@ -78,6 +78,13 @@ export const UI_EN = Object.freeze({
 		uploadHeading: "Upload Transparent Signature (PNG/WebP/JPEG)",
 		removeBtn: "Remove Signature",
 		scaleLabel: "Signature Scale",
+		includeOnDoc: "Include Signature on Document",
+		includeGuideOnDoc: "Include Guide Signature",
+		statusIncluded: "Included on Sheet",
+		statusExcluded: "Blank (Sign with Pen)",
+		inkColor: "Ink Color:",
+		inkBlue: "🔵 Royal Blue",
+		inkOriginal: "⚫ Original",
 	},
 	settingsTab: {
 		pageFormat: "Page Format",
@@ -110,6 +117,7 @@ export const UI_EN = Object.freeze({
 		resetWarnTitle: "Caution:",
 		resetWarnDesc: "This will permanently delete all student profile, project data, and signatures stored in your browser. Download a backup first!",
 		btnClearAll: "Clear All Data (Reset)",
+		confirmReset: "⚠️ Are you sure you want to completely erase all saved profile data, project details, and signatures?\n\nThis action cannot be undone!",
 	},
 	home: {
 		badgeStandards: "SOCIS • Official Standards",

@@ -64,8 +64,14 @@ export class DataManagerService {
 		// Signatures & Scales
 		signature_webp: "signature",
 		guide_signature_webp: "signature",
+		signature_webp_raw: "signature",
+		guide_signature_webp_raw: "signature",
 		signature_scale: "scale",
 		guide_signature_scale: "scale",
+		signature_included: "boolean",
+		guide_signature_included: "boolean",
+		signature_ink_mode: "string",
+		guide_signature_ink_mode: "string",
 	});
 
 	/**

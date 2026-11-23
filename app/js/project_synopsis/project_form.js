@@ -6,6 +6,8 @@
 import { StorageService } from "../shared/storage.service.js";
 import { I18nService } from "../shared/i18n.service.js";
 import { SignatureUploaderController } from "../shared/signature_uploader_controller.js";
+import { DataManagerService } from "../shared/data_manager.service.js";
+import { DateUtils } from "../shared/date_utils.js";
 
 export class ProjectForm {
 	#projectFields = [
@@ -65,12 +67,20 @@ export class ProjectForm {
 		return this.studentSigCtrl?.scale ?? 1.0;
 	}
 
+	get isSignatureIncluded() {
+		return this.studentSigCtrl?.isIncluded ?? true;
+	}
+
 	get guideSignatureData() {
 		return this.guideSigCtrl?.data ?? null;
 	}
 
 	get guideSignatureScale() {
 		return this.guideSigCtrl?.scale ?? 1.0;
+	}
+
+	get isGuideSignatureIncluded() {
+		return this.guideSigCtrl?.isIncluded ?? true;
 	}
 
 	get isSampleGhostActive() {
@@ -92,12 +102,21 @@ export class ProjectForm {
 			btnRemoveSig: document.getElementById("btnRemoveSig"),
 			sigScaleSlider: document.getElementById("sigScaleSlider"),
 			sigScaleValue: document.getElementById("sigScaleValue"),
+			sigIncludeToggle: document.getElementById("sigIncludeCheckbox"),
+			sigStatusBadge: document.getElementById("sigStatusBadge"),
+			btnSigInkBlue: document.getElementById("btnSigInkBlue"),
+			btnSigInkOriginal: document.getElementById("btnSigInkOriginal"),
+
 			guideSigFileInput: document.getElementById("guideSigFileInput"),
 			guideSigPreviewContainer: document.getElementById("guideSigPreviewContainer"),
 			guideSigPreviewImg: document.getElementById("guideSigPreviewImg"),
 			btnRemoveGuideSig: document.getElementById("btnRemoveGuideSig"),
 			guideSigScaleSlider: document.getElementById("guideSigScaleSlider"),
 			guideSigScaleValue: document.getElementById("guideSigScaleValue"),
+			guideSigIncludeToggle: document.getElementById("guideSigIncludeCheckbox"),
+			guideSigStatusBadge: document.getElementById("guideSigStatusBadge"),
+			btnGuideSigInkBlue: document.getElementById("btnGuideSigInkBlue"),
+			btnGuideSigInkOriginal: document.getElementById("btnGuideSigInkOriginal"),
 		};
 	}
 
@@ -110,10 +129,16 @@ export class ProjectForm {
 			removeBtn: this.#dom.btnRemoveSig,
 			scaleSlider: this.#dom.sigScaleSlider,
 			scaleValueBadge: this.#dom.sigScaleValue,
+			includeToggle: this.#dom.sigIncludeToggle,
+			includeStatusBadge: this.#dom.sigStatusBadge,
+			btnInkBlue: this.#dom.btnSigInkBlue,
+			btnInkOriginal: this.#dom.btnSigInkOriginal,
 			storageKey: "signature_webp",
 			scaleStorageKey: "signature_scale",
+			includeStorageKey: "signature_included",
+			inkStorageKey: "signature_ink_mode",
 			cssScaleVar: "--sig-scale",
-			onUpdate: (data, scale) => {
+			onUpdate: (data, scale, isIncluded) => {
 				if (this.#onChangeCallback) this.#onChangeCallback("Signature", data);
 			},
 		});
@@ -126,10 +151,16 @@ export class ProjectForm {
 			removeBtn: this.#dom.btnRemoveGuideSig,
 			scaleSlider: this.#dom.guideSigScaleSlider,
 			scaleValueBadge: this.#dom.guideSigScaleValue,
+			includeToggle: this.#dom.guideSigIncludeToggle,
+			includeStatusBadge: this.#dom.guideSigStatusBadge,
+			btnInkBlue: this.#dom.btnGuideSigInkBlue,
+			btnInkOriginal: this.#dom.btnGuideSigInkOriginal,
 			storageKey: "guide_signature_webp",
 			scaleStorageKey: "guide_signature_scale",
+			includeStorageKey: "guide_signature_included",
+			inkStorageKey: "guide_signature_ink_mode",
 			cssScaleVar: "--guide-sig-scale",
-			onUpdate: (data, scale) => {
+			onUpdate: (data, scale, isIncluded) => {
 				if (this.#onChangeCallback) this.#onChangeCallback("GuideSignature", data);
 			},
 		});
@@ -234,8 +265,7 @@ export class ProjectForm {
 		// Quick "Today" shortcut for SubmissionDate
 		if (this.#dom.btnTodayDate) {
 			this.#dom.btnTodayDate.addEventListener("click", () => {
-				const now = new Date();
-				const formatted = `${String(now.getDate()).padStart(2, "0")}/${String(now.getMonth() + 1).padStart(2, "0")}/${now.getFullYear()}`;
+				const formatted = DateUtils.getTodayFormatted();
 				const dateInput = document.getElementById("inputSubmissionDate");
 				if (dateInput) {
 					dateInput.value = formatted;
@@ -264,10 +294,8 @@ export class ProjectForm {
 		// Calendar Date Picker for SubmissionDate
 		if (this.#dom.pickerSubmissionDate) {
 			this.#dom.pickerSubmissionDate.addEventListener("change", (e) => {
-				const val = e.target.value; // YYYY-MM-DD
-				if (!val) return;
-				const [year, month, day] = val.split("-");
-				const formatted = `${day}/${month}/${year}`;
+				const formatted = DateUtils.formatISODate(e.target.value);
+				if (!formatted) return;
 				const dateInput = document.getElementById("inputSubmissionDate");
 				if (dateInput) {
 					dateInput.value = formatted;
@@ -281,8 +309,7 @@ export class ProjectForm {
 		// Quick "Today" shortcut for GuideDate
 		if (this.#dom.btnTodayGuideDate) {
 			this.#dom.btnTodayGuideDate.addEventListener("click", () => {
-				const now = new Date();
-				const formatted = `${String(now.getDate()).padStart(2, "0")}/${String(now.getMonth() + 1).padStart(2, "0")}/${now.getFullYear()}`;
+				const formatted = DateUtils.getTodayFormatted();
 				const dateInput = document.getElementById("inputGuideDate");
 				if (dateInput) {
 					dateInput.value = formatted;
@@ -311,10 +338,8 @@ export class ProjectForm {
 		// Calendar Date Picker for GuideDate
 		if (this.#dom.pickerGuideDate) {
 			this.#dom.pickerGuideDate.addEventListener("change", (e) => {
-				const val = e.target.value; // YYYY-MM-DD
-				if (!val) return;
-				const [year, month, day] = val.split("-");
-				const formatted = `${day}/${month}/${year}`;
+				const formatted = DateUtils.formatISODate(e.target.value);
+				if (!formatted) return;
 				const dateInput = document.getElementById("inputGuideDate");
 				if (dateInput) {
 					dateInput.value = formatted;
@@ -350,6 +375,38 @@ export class ProjectForm {
 		this.#isSampleGhostActive = !this.#isSampleGhostActive;
 		StorageService.set("isSampleGhostActive", this.#isSampleGhostActive);
 		this.updateSampleToggleButtonUI();
+		this.syncAllFields();
+	}
+
+	clearAllData() {
+		const confirmMsg = I18nService.t("dataModal.confirmReset");
+		if (window.confirm(confirmMsg)) {
+			DataManagerService.clearAllData();
+		}
+	}
+
+	clearAll() {
+		this.#isSampleGhostActive = false;
+		StorageService.set("isSampleGhostActive", false);
+		this.updateSampleToggleButtonUI();
+
+		this.#projectFields.forEach((fieldName) => {
+			const input = document.getElementById("input" + fieldName) || document.querySelector(`[data-field="${fieldName}"]`);
+			if (input) input.value = "";
+		});
+
+		// Clear checkboxes and radio
+		document.querySelectorAll('input[name="GuideDegree"]').forEach((cb) => (cb.checked = false));
+		const firstYes = document.querySelector('input[name="FirstSubmission"][value="yes"]');
+		if (firstYes) firstYes.checked = true;
+
+		// Clear Tech Stack Chips
+		this.#updateTechChipsUI("");
+
+		// Remove signatures
+		this.studentSigCtrl?.remove();
+		this.guideSigCtrl?.remove();
+
 		this.syncAllFields();
 	}
 

@@ -20,7 +20,7 @@ export const APP_CONFIG = Object.freeze({
 	// 2. Video Tutorials & Help Links
 	videos: {
 		// Put any standard YouTube watch link or youtu.be short link here:
-		howToUseUrl: "https://www.youtube.com/watch?v=yffcim-EVwIFake",
+		howToUseUrl: "https://youtu.be/SGjaSTP-mbM",
 		
 		// Optional: Your YouTube Channel Link
 		channelUrl: "https://www.youtube.com",

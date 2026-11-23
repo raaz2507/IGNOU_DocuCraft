@@ -12,8 +12,8 @@
 		<meta property="og:url" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/project_synopsis.html" />
 		<meta property="og:title" content="IGNOU DocuCraft — MCA Project Synopsis Studio" />
 		<meta property="og:description" content="IGNOU छात्रों के लिए स्मार्ट टूल: असाइनमेंट फ्रंट पेज और MCA MCSP-232 सिनॉप्सिस 1 क्लिक में तैयार और A4 PDF प्रिंट करें।" />
-		<meta property="og:image" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/assets/quic_link.jpg" />
-		<meta property="og:image:secure_url" content="https://raaz2507.github.io/IGNOU_DocuCraft/app/assets/quic_link.jpg" />
+		<meta property="og:image" content="https://raw.githubusercontent.com/raaz2507/IGNOU_DocuCraft/main/app/assets/quic_link.jpg" />
+		<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/raaz2507/IGNOU_DocuCraft/main/app/assets/quic_link.jpg" />
 		<meta property="og:image:type" content="image/jpeg" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="634" />
@@ -390,15 +390,42 @@
 									<span class="sig-preview-title">Guide Signature Preview:</span>
 									<button type="button" id="btnRemoveGuideSig" class="btn-remove-sig">🗑️ Remove</button>
 								</div>
+
+								<!-- Guide Signature Inclusion Switch -->
+								<div class="sig-action-toolbar">
+									<label class="sig-include-switch" title="Toggle guide signature on printed document">
+										<input type="checkbox" id="guideSigIncludeCheckbox" class="sig-switch-input" checked />
+										<span class="sig-switch-track" aria-hidden="true"><span class="sig-switch-thumb"></span></span>
+										<span class="sig-switch-text" data-i18n="signatureTab.includeGuideOnDoc">गाइड सिग्नेचर जोड़ें</span>
+									</label>
+									<span class="sig-status-badge is-included" id="guideSigStatusBadge" data-i18n="signatureTab.statusIncluded">प्रिंट में शामिल</span>
+								</div>
+
 								<div class="sig-canvas-checkerboard">
 									<img id="guideSigPreviewImg" class="sig-preview-img" src="" alt="Guide Signature Preview" />
 								</div>
-								<div class="sig-scale-control">
-									<div class="scale-label-row">
-										<label for="guideSigScaleSlider">Guide Signature Size:</label>
-										<span id="guideSigScaleValue" class="scale-value-badge">1.00× (100%)</span>
+
+								<!-- Guide Signature Ink Color Switcher -->
+								<div class="sig-ink-toolbar">
+									<span class="sig-ink-label" data-i18n="signatureTab.inkColor">इंक रंग:</span>
+									<div class="sig-ink-pills" role="radiogroup" aria-label="Guide signature ink color">
+										<button type="button" class="btn-ink-pill" id="btnGuideSigInkBlue" data-ink="blue" aria-pressed="false">
+											<span class="ink-dot ink-dot-blue"></span>
+											<span data-i18n="signatureTab.inkBlue">🔵 रॉयल ब्लू</span>
+										</button>
+										<button type="button" class="btn-ink-pill active" id="btnGuideSigInkOriginal" data-ink="original" aria-pressed="true">
+											<span class="ink-dot ink-dot-orig"></span>
+											<span data-i18n="signatureTab.inkOriginal">⚫ ओरिजिनल</span>
+										</button>
 									</div>
-									<input type="range" id="guideSigScaleSlider" min="0.5" max="2.0" step="0.05" value="1.0" class="scale-slider" />
+								</div>
+
+								<div class="sig-slider-box">
+									<div class="sig-slider-labels">
+										<label for="guideSigScaleSlider">Guide Signature Size:</label>
+										<span id="guideSigScaleValue" class="badge-scale">1.00× (100%)</span>
+									</div>
+									<input type="range" id="guideSigScaleSlider" class="sig-range-slider" min="0.5" max="2.0" step="0.05" value="1.0" />
 								</div>
 							</div>
 
@@ -504,9 +531,36 @@
 									<span class="sig-preview-title">Signature Preview:</span>
 									<button type="button" id="btnRemoveSig" class="btn-remove-sig">🗑️ Remove</button>
 								</div>
+
+								<!-- Student Signature Inclusion Switch -->
+								<div class="sig-action-toolbar">
+									<label class="sig-include-switch" title="Toggle signature on printed document">
+										<input type="checkbox" id="sigIncludeCheckbox" class="sig-switch-input" checked />
+										<span class="sig-switch-track" aria-hidden="true"><span class="sig-switch-thumb"></span></span>
+										<span class="sig-switch-text" data-i18n="signatureTab.includeOnDoc">डॉक्यूमेंट पर सिग्नेचर जोड़ें</span>
+									</label>
+									<span class="sig-status-badge is-included" id="sigStatusBadge" data-i18n="signatureTab.statusIncluded">प्रिंट में शामिल</span>
+								</div>
+
 								<div class="sig-canvas-checkerboard">
 									<img id="sigPreviewImg" class="sig-preview-img" src="" alt="Signature Preview" />
 								</div>
+
+								<!-- Student Signature Ink Color Switcher -->
+								<div class="sig-ink-toolbar">
+									<span class="sig-ink-label" data-i18n="signatureTab.inkColor">इंक रंग:</span>
+									<div class="sig-ink-pills" role="radiogroup" aria-label="Signature ink color">
+										<button type="button" class="btn-ink-pill" id="btnSigInkBlue" data-ink="blue" aria-pressed="false">
+											<span class="ink-dot ink-dot-blue"></span>
+											<span data-i18n="signatureTab.inkBlue">🔵 रॉयल ब्लू</span>
+										</button>
+										<button type="button" class="btn-ink-pill active" id="btnSigInkOriginal" data-ink="original" aria-pressed="true">
+											<span class="ink-dot ink-dot-orig"></span>
+											<span data-i18n="signatureTab.inkOriginal">⚫ ओरिजिनल</span>
+										</button>
+									</div>
+								</div>
+
 								<div class="sig-slider-box">
 									<div class="sig-slider-labels">
 										<span>Proportional Scale Multiplier:</span>
@@ -551,16 +605,16 @@
 						<span class="btn-label mobile-label">Print Selected</span>
 					</button>
 					<div class="stage-action-subgroup">
-						<button type="button" class="btn-sample-toggle" id="btnToggleSample" aria-pressed="false" title="Toggle sample guide data">
+						<button type="button" class="btn-sample-toggle" id="btnToggleSample" aria-pressed="false" data-i18n-attr="title:actions.sampleGuide">
 							<span class="sample-icon">✨</span>
-							<span class="sample-label desktop-label">सैंपल गाइड</span>
-							<span class="sample-label mobile-label">सैंपल</span>
+							<span class="sample-label desktop-label" data-i18n="actions.sampleGuide">सैंपल गाइड</span>
+							<span class="sample-label mobile-label" data-i18n="actions.sampleShort">सैंपल</span>
 							<span class="sample-switch-pill" aria-hidden="true"><span class="sample-switch-knob"></span></span>
 						</button>
-						<button type="button" class="btn-clear-fields" id="btnClear" title="Clear project &amp; guide inputs">
+						<button type="button" class="btn-clear-fields" id="btnClear" data-i18n-attr="title:actions.clearFields">
 							<span class="clear-icon">🗑️</span>
-							<span class="clear-label desktop-label">Clear Project Fields</span>
-							<span class="clear-label mobile-label">Clear</span>
+							<span class="clear-label desktop-label" data-i18n="actions.clearFields">Clear All Fields</span>
+							<span class="clear-label mobile-label" data-i18n="actions.clearShort">Clear</span>
 						</button>
 					</div>
 				</section>

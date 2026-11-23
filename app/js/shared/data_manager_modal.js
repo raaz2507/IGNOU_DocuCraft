@@ -257,10 +257,7 @@ export class DataManagerModal {
 
 		// Clear All Data
 		this.#dom.btnClearAll.addEventListener("click", () => {
-			const confirmMsg = I18nService.locale === "hi"
-				? "⚠️ क्या आप वाकई अपना सारा सहेजा हुआ डेटा और हस्ताक्षर मिटाना चाहते हैं?\n\nयह क्रिया वापस नहीं ली जा सकती!"
-				: "⚠️ Are you sure you want to completely erase all saved profile data and signatures?\n\nThis action cannot be undone!";
-			
+			const confirmMsg = I18nService.t("dataModal.confirmReset");
 			if (window.confirm(confirmMsg)) {
 				DataManagerService.clearAllData();
 				this.#showAlert("✅ सारा डेटा सफलतापूर्वक साफ़ कर दिया गया।", "success");
