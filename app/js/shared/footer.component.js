@@ -3,7 +3,7 @@
  * Single Responsibility: Common Application Footer & Academic Disclaimers.
  * Reusable across index.html, assignment front page, and project studio.
  */
-import { AnalyticsService } from "./analytics.service.js";
+import { AnalyticsService, TELEMETRY_PAGES } from "./analytics.service.js";
 
 export class IgnouFooter extends HTMLElement {
 	connectedCallback() {
@@ -13,15 +13,22 @@ export class IgnouFooter extends HTMLElement {
 
 	initVisitorCounter() {
 		const path = window.location.pathname.toLowerCase();
+		
+		/**
+		 * STRICT TELEMETRY CONTRACT:
+		 * Maps local pathname to Google Sheet telemetry keys (TELEMETRY_PAGES).
+		 * Do not use custom strings here; always reference TELEMETRY_PAGES to prevent
+		 * creating duplicate/disconnected metric rows in the Google Sheet.
+		 */
 		const page = path.includes("project")
-			? "project"
+			? TELEMETRY_PAGES.PROJECT
 			: path.includes("assignment")
-			? "assignment"
+			? TELEMETRY_PAGES.ASSIGNMENT
 			: path.includes("help")
-			? "help"
+			? TELEMETRY_PAGES.HELP
 			: path.includes("about")
-			? "about"
-			: "home";
+			? TELEMETRY_PAGES.ABOUT
+			: TELEMETRY_PAGES.HOME;
 
 		AnalyticsService.trackVisit(page).then((res) => {
 			const badgeVal = this.querySelector("#visitorCountVal");

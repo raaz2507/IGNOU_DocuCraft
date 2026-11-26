@@ -113,6 +113,7 @@ export class AssignmentCoversStudioApp {
 			onPageSizeChange: () => {
 				this.#updateResponsiveScale();
 			},
+			getSelectedCourses: () => this.courseSelector?.checkedList || [],
 		});
 	}
 

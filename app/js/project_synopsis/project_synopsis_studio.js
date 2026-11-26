@@ -18,6 +18,7 @@ import { AnalyticsService } from "../shared/analytics.service.js";
 export class ProjectSynopsisStudioApp {
 	#dom = {};
 	#activeTab = "docSelection";
+	#isButtonPrintInProgress = false;
 	deckController = null;
 	lightboxModal = null;
 	docSelector = null;
@@ -178,17 +179,37 @@ export class ProjectSynopsisStudioApp {
 			this.#dom.mobileSheetBackdrop.addEventListener("click", () => this.#toggleMobileSheet(false));
 		}
 
-		// Print button
+		// Print button + Ctrl+P beforeprint tracking (guarded to avoid double-counting)
+		const trackSelectedSynopsisPrint = () => {
+			const selectedDocs = this.docSelector?.checkedDocKeys || StorageService.get("project_selected_docs", []);
+			const docKeyMap = new Map(PROJECT_DOCUMENTS.map((d) => [d.id, d.key]));
+			const docKeys = Array.from(selectedDocs)
+				.map((id) => docKeyMap.get(id) || id)
+				.filter(Boolean);
+			if (docKeys.length > 0) {
+				AnalyticsService.trackSynopsisPrint(docKeys);
+			}
+		};
+
 		if (this.#dom.btnPrint) {
 			this.#dom.btnPrint.addEventListener("click", () => {
-				const selectedDocs = this.docSelector?.checkedDocKeys || StorageService.get("project_selected_docs", []);
-				const docKeys = Array.from(selectedDocs);
-				if (docKeys.length > 0) {
-					AnalyticsService.trackSynopsisPrint(docKeys);
+				this.#isButtonPrintInProgress = true;
+				trackSelectedSynopsisPrint();
+				try {
+					window.print();
+				} finally {
+					setTimeout(() => {
+						this.#isButtonPrintInProgress = false;
+					}, 500);
 				}
-				window.print();
 			});
 		}
+
+		window.addEventListener("beforeprint", () => {
+			if (!this.#isButtonPrintInProgress) {
+				trackSelectedSynopsisPrint();
+			}
+		});
 
 		// Clear fields
 		if (this.#dom.btnClear) {

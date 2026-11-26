@@ -17,9 +17,12 @@ export class PrintEngine {
 	#pageSizeKey = "a4";
 	#dom = {};
 	#onPageSizeChangeCallback = null;
+	#getSelectedCoursesCallback = null;
+	#isButtonPrintInProgress = false;
 
-	constructor({ onPageSizeChange } = {}) {
+	constructor({ onPageSizeChange, getSelectedCourses } = {}) {
 		this.#onPageSizeChangeCallback = onPageSizeChange || null;
+		this.#getSelectedCoursesCallback = getSelectedCourses || null;
 		this.#pageSizeKey = StorageService.get("pageSizeKey", "a4");
 		this.#initDOM();
 		this.#bindEvents();
@@ -51,6 +54,12 @@ export class PrintEngine {
 		if (this.#dom.btnPrint) {
 			this.#dom.btnPrint.addEventListener("click", () => this.print());
 		}
+
+		window.addEventListener("beforeprint", () => {
+			if (!this.#isButtonPrintInProgress) {
+				this.#trackSelectedCourses();
+			}
+		});
 	}
 
 	applyPageSize(key) {
@@ -70,11 +79,25 @@ export class PrintEngine {
 		}
 	}
 
-	print() {
-		const courses = StorageService.get("checkedCodes", []);
+	#trackSelectedCourses() {
+		const liveCourses = this.#getSelectedCoursesCallback ? this.#getSelectedCoursesCallback() : null;
+		const courses = Array.isArray(liveCourses) && liveCourses.length > 0
+			? liveCourses
+			: StorageService.get("checkedCodes", []);
 		if (Array.isArray(courses) && courses.length > 0) {
 			AnalyticsService.trackAssignmentPrint(courses);
 		}
-		window.print();
+	}
+
+	print() {
+		this.#isButtonPrintInProgress = true;
+		this.#trackSelectedCourses();
+		try {
+			window.print();
+		} finally {
+			setTimeout(() => {
+				this.#isButtonPrintInProgress = false;
+			}, 500);
+		}
 	}
 }

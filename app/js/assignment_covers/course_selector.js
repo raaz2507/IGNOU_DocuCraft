@@ -21,6 +21,7 @@ export class CourseSelector {
 			this.#checkedCodes = new Set(savedCodes);
 		} else {
 			this.#checkedCodes = new Set(["MCSL-228", "MCSL-229"]);
+			StorageService.set("checkedCodes", Array.from(this.#checkedCodes));
 		}
 
 		this.#selectedSemView = StorageService.get("semView", "3");

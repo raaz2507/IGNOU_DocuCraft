@@ -31,8 +31,8 @@ function doGet(e) {
       sheet.appendRow(["Metric / Page", "Total Visits", "Description"]);
       sheet.appendRow(["total_visitors", 1, "Total site-wide unique sessions (Footer Badge)"]);
       sheet.appendRow(["page_home", 0, "Home page visits"]);
-      sheet.appendRow(["page_assignment_covers", 0, "Assignment covers studio visits"]);
-      sheet.appendRow(["page_project_synopsis", 0, "Project synopsis studio visits"]);
+      sheet.appendRow(["page_assignment", 0, "Assignment covers studio visits"]);
+      sheet.appendRow(["page_project", 0, "Project synopsis studio visits"]);
       sheet.appendRow(["page_help", 0, "Help guide page visits"]);
       sheet.appendRow(["page_about", 0, "About page visits"]);
       sheet.setFrozenRows(1);

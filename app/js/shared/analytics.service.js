@@ -7,6 +7,23 @@
 import { StorageService } from "./storage.service.js";
 import { APP_CONFIG } from "../../config.js";
 
+/**
+ * TELEMETRY PAGE KEYS — STRICT CONTRACT WITH GOOGLE SHEETS
+ * ⚠️ DO NOT CHANGE OR RENAME THESE KEYS!
+ * -------------------------------------------------------------
+ * These keys map 1:1 to metric rows in the Google Sheet: `page_${key}`.
+ * If someone renames 'project' -> 'project_synopsis' or 'assignment' -> 'assignment_covers',
+ * Google Apps Script will start writing to separate rows and the existing metrics
+ * will be stranded at 0. Always keep this frozen dictionary as the Single Source of Truth.
+ */
+export const TELEMETRY_PAGES = Object.freeze({
+	HOME: "home",             // Google Sheet: page_home
+	PROJECT: "project",       // Google Sheet: page_project (MCA Project Synopsis Studio)
+	ASSIGNMENT: "assignment", // Google Sheet: page_assignment (Assignment Covers Studio)
+	HELP: "help",             // Google Sheet: page_help
+	ABOUT: "about",           // Google Sheet: page_about
+});
+
 export class AnalyticsService {
 	// Loaded dynamically from external app/config.js (Zero hardcoded URLs in JS logic)
 	static #API_ENDPOINT = APP_CONFIG?.googleSheetScriptUrl || ""; 
@@ -68,26 +85,30 @@ export class AnalyticsService {
 	}
 
 	/**
+	 * Sends a fire-and-forget GET telemetry beacon with keepalive so window.print() does not abort it.
+	 */
+	static async #sendPrintBeacon(params, label) {
+		if (!this.#API_ENDPOINT) return;
+
+		try {
+			const query = new URLSearchParams(params);
+			await fetch(`${this.#API_ENDPOINT}?${query.toString()}`, {
+				method: "GET",
+				mode: "no-cors",
+				keepalive: true,
+			});
+		} catch (err) {
+			console.warn(`AnalyticsService ${label} print tracking skipped:`, err.message);
+		}
+	}
+
+	/**
 	 * Tracks when user prints specific MCA Project Synopsis documents
 	 * @param {string[]} docKeys - Array of document IDs (e.g. ['doc_proforma', 'doc_originality'])
 	 */
 	static async trackSynopsisPrint(docKeys = []) {
 		if (!Array.isArray(docKeys) || docKeys.length === 0) return;
-		if (!this.#API_ENDPOINT) return;
-
-		try {
-			const query = new URLSearchParams({
-				action: "print_synopsis",
-				docs: docKeys.join(","),
-			});
-
-			await fetch(`${this.#API_ENDPOINT}?${query.toString()}`, {
-				method: "GET",
-				mode: "no-cors",
-			});
-		} catch (err) {
-			console.warn("AnalyticsService synopsis print tracking skipped:", err.message);
-		}
+		await this.#sendPrintBeacon({ action: "print_synopsis", docs: docKeys.join(",") }, "synopsis");
 	}
 
 	/**
@@ -96,21 +117,7 @@ export class AnalyticsService {
 	 */
 	static async trackAssignmentPrint(courseCodes = []) {
 		if (!Array.isArray(courseCodes) || courseCodes.length === 0) return;
-		if (!this.#API_ENDPOINT) return;
-
-		try {
-			const query = new URLSearchParams({
-				action: "print_assignment",
-				courses: courseCodes.join(","),
-			});
-
-			await fetch(`${this.#API_ENDPOINT}?${query.toString()}`, {
-				method: "GET",
-				mode: "no-cors",
-			});
-		} catch (err) {
-			console.warn("AnalyticsService assignment print tracking skipped:", err.message);
-		}
+		await this.#sendPrintBeacon({ action: "print_assignment", courses: courseCodes.join(",") }, "assignment");
 	}
 
 	/**

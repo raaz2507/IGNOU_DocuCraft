@@ -28,7 +28,7 @@
 
 | 🎯 Action | 🔗 Direct Link |
 | :--- | :--- |
-| 🌐 **Live Web Application** | **[Launch IGNOU DocuCraft](https://raaz2507.github.io/IGNOU_DocuCraft/app/)** |
+| 🌐 **Live Web Application** | **[Launch IGNOU DocuCraft](https://raaz2507.github.io/IGNOU_DocuCraft/)** |
 | 📺 **YouTube Video Guide** | **[How to Use IGNOU DocuCraft (Step-by-Step)](https://www.youtube.com/watch?v=yffcim-EVwI)** |
 | 🎓 **Official Syllabus Guidelines** | **[SOCIS MCA (Revised) MCSP-232 Handbook](https://webservices.ignou.ac.in/assignments/Master-Degree/MCA_NEW/2025/MCSP%20232%20-%20Project%20Guidelines%20-%20MCA_NEW.pdf)** |
 
